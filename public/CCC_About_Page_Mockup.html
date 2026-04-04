@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Canopy Creative Co.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #CC4E00;
+      --brown: #3B1E08;
+      --cream: #FDF6EC;
+      --cream-dark: #F5EBD8;
+      --cream-mid: #FAF0E0;
+      --muted: #9A7A62;
+      --font-display: 'Libre Baskerville', Georgia, serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--brown);
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      background: rgba(253,246,236,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(59,30,8,0.08);
+      padding: 0 60px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--brown);
+      opacity: 0.6;
+    }
+
+    .nav-links a.active { opacity: 1; color: var(--orange); }
+
+    .nav-cta {
+      background: var(--orange);
+      color: var(--cream) !important;
+      opacity: 1 !important;
+      padding: 9px 20px;
+      border-radius: 3px;
+      font-weight: 600 !important;
+    }
+
+    /* PAGE HEADER */
+    .page-header {
+      background: var(--brown);
+      padding: 100px 60px 90px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 90% 10%, rgba(204,78,0,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 60% at 10% 90%, rgba(204,78,0,0.08) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .page-header-inner {
+      position: relative;
+      max-width: 960px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: end;
+    }
+
+    .page-header-left {}
+
+    .page-header-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .page-header-eyebrow::before {
+      content: '';
+      width: 28px;
+      height: 1.5px;
+      background: var(--orange);
+      opacity: 0.6;
+    }
+
+    .page-header h1 {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .page-header h1 em {
+      color: var(--orange);
+      font-style: italic;
+    }
+
+    .page-header-right {
+      padding-bottom: 8px;
+    }
+
+    .page-header-right p {
+      font-size: 17px;
+      color: rgba(253,246,236,0.65);
+      font-weight: 300;
+      line-height: 1.75;
+    }
+
+    /* PHOTO + INTRO SECTION */
+    .intro-section {
+      background: var(--cream);
+      padding: 100px 60px;
+    }
+
+    .intro-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .photo-block {
+      position: sticky;
+      top: 88px;
+    }
+
+    .photo-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: var(--cream-dark);
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      border: 2px dashed rgba(59,30,8,0.15);
+    }
+
+    .photo-placeholder-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(204,78,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .photo-placeholder p {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .photo-caption {
+      margin-top: 20px;
+    }
+
+    .photo-caption-name {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--brown);
+      margin-bottom: 4px;
+    }
+
+    .photo-caption-title {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    .photo-caption-cert {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--orange);
+      border: 1px solid rgba(204,78,0,0.3);
+      border-radius: 2px;
+      padding: 4px 10px;
+    }
+
+    /* CONTENT SECTIONS */
+    .content-block {
+      display: flex;
+      flex-direction: column;
+      gap: 64px;
+    }
+
+    .content-section {}
+
+    .content-section-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 16px;
+      opacity: 0.85;
+    }
+
+    .content-section h2 {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 700;
+      color: var(--brown);
+      line-height: 1.25;
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+    }
+
+    .content-section h2 em {
+      color: var(--orange);
+      font-style: italic;
+    }
+
+    .content-section p {
+      font-size: 16px;
+      color: var(--brown);
+      line-height: 1.85;
+      opacity: 0.82;
+      margin-bottom: 16px;
+    }
+
+    .content-section p:last-child { margin-bottom: 0; }
+
+    .content-divider {
+      height: 1px;
+      background: linear-gradient(to right, rgba(59,30,8,0.12), transparent);
+    }
+
+    /* PULL QUOTE */
+    .pull-quote {
+      background: var(--brown);
+      border-radius: 4px;
+      padding: 40px 44px;
+      position: relative;
+      overflow: hidden;
+      margin: 0;
+    }
+
+    .pull-quote::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--orange);
+    }
+
+    .pull-quote::after {
+      content: '\201C';
+      position: absolute;
+      top: -20px;
+      right: 32px;
+      font-family: var(--font-display);
+      font-size: 160px;
+      color: rgba(204,78,0,0.08);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .pull-quote p {
+      font-family: var(--font-display);
+      font-size: 19px;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.65;
+      opacity: 0.92;
+      margin-bottom: 0;
+      position: relative;
+    }
+
+    /* STATS ROW */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(59,30,8,0.1);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .stat-item {
+      background: var(--cream-dark);
+      padding: 28px 24px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--orange);
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      line-height: 1.4;
+    }
+
+    /* PERSONALITY SECTION */
+    .personality-section {
+      background: var(--cream-dark);
+      padding: 80px 60px;
+    }
+
+    .personality-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .personality-left h2 {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 700;
+      color: var(--brown);
+      line-height: 1.25;
+      margin-bottom: 20px;
+    }
+
+    .personality-left h2 em {
+      color: var(--orange);
+      font-style: italic;
+    }
+
+    .personality-left p {
+      font-size: 16px;
+      color: var(--brown);
+      line-height: 1.85;
+      opacity: 0.82;
+      margin-bottom: 16px;
+    }
+
+    .personality-left p:last-child { margin-bottom: 0; }
+
+    .personality-right {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .personality-card {
+      background: var(--cream);
+      border-radius: 4px;
+      padding: 24px 28px;
+      border-left: 3px solid var(--orange);
+    }
+
+    .personality-card-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 8px;
+      opacity: 0.8;
+    }
+
+    .personality-card p {
+      font-size: 14.5px;
+      color: var(--brown);
+      line-height: 1.65;
+      opacity: 0.78;
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+      background: var(--orange);
+      padding: 90px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 100% at 50% 0%, rgba(255,255,255,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .cta-inner {
+      position: relative;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .cta-section h2 {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 4vw, 40px);
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .cta-section p {
+      font-size: 17px;
+      color: rgba(253,246,236,0.75);
+      line-height: 1.7;
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+
+    .cta-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .cta-buttons a {
+      width: 260px;
+      text-align: center;
+    }
+
+    .btn-cream {
+      display: inline-block;
+      background: var(--cream);
+      color: var(--orange);
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 15px 32px;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-cream:hover { background: #f0e8d6; transform: translateY(-1px); }
+
+    .btn-outline-cream {
+      display: inline-block;
+      background: transparent;
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 15px 32px;
+      border: 1.5px solid rgba(253,246,236,0.4);
+      border-radius: 3px;
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+
+    .btn-outline-cream:hover {
+      border-color: rgba(253,246,236,0.85);
+      transform: translateY(-1px);
+    }
+
+    /* FOOTER */
+    footer {
+      background: #2a1506;
+      padding: 40px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--orange);
+      opacity: 0.85;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(253,246,236,0.3);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 12px;
+      color: rgba(253,246,236,0.3);
+      text-decoration: none;
+    }
+
+    .mockup-note {
+      background: #1a0d03;
+      color: rgba(253,246,236,0.25);
+      text-align: center;
+      padding: 14px 40px;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 860px) {
+      nav { padding: 0 24px; }
+      .page-header { padding: 80px 24px 60px; }
+      .page-header-inner { grid-template-columns: 1fr; gap: 32px; }
+      .intro-section { padding: 60px 24px; }
+      .intro-inner { grid-template-columns: 1fr; }
+      .photo-block { position: static; }
+      .stats-row { grid-template-columns: 1fr; }
+      .personality-section { padding: 60px 24px; }
+      .personality-inner { grid-template-columns: 1fr; gap: 40px; }
+      .cta-section { padding: 60px 24px; }
+      footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Canopy Creative Co.</div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#" class="active">About</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#" class="nav-cta">Book a call</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <section class="page-header">
+    <div class="page-header-inner">
+      <div class="page-header-left">
+        <p class="page-header-eyebrow">About</p>
+        <h1>From Fortune 500<br>to <em>your</em> back office.</h1>
+      </div>
+      <div class="page-header-right">
+        <p>The same rigor applied to billion-dollar compliance programs, now applied to the businesses that actually keep creative industries alive.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO + PHOTO -->
+  <section class="intro-section">
+    <div class="intro-inner">
+
+      <!-- PHOTO -->
+      <div class="photo-block">
+        <div class="photo-placeholder">
+          <div class="photo-placeholder-icon">📷</div>
+          <p>Photo of Dave<br>coming soon</p>
+        </div>
+        <div class="photo-caption">
+          <p class="photo-caption-name">Dave Altshul</p>
+          <p class="photo-caption-title">Founder, Canopy Creative Co.</p>
+        </div>
+      </div>
+
+      <!-- CONTENT -->
+      <div class="content-block">
+
+        <!-- SECTION 1 -->
+        <div class="content-section">
+          <p class="content-section-label">The Background</p>
+          <h2>Built at the highest level.<br><em>Applied where it matters.</em></h2>
+
+          <div class="stats-row">
+            <div class="stat-item">
+              <div class="stat-number">Fortune 500</div>
+              <div class="stat-label">Scale of organization<br>Dave operated in</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">35,000+</div>
+              <div class="stat-label">Employees in the global<br>organization he supported</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">$39B+</div>
+              <div class="stat-label">Annual revenue of<br>Warner Bros. Discovery</div>
+            </div>
+          </div>
+
+          <p style="margin-top: 28px;">Before Canopy Creative Co., Dave Altshul spent years operating at the highest levels of corporate finance and internal audit — building programs, leading teams, and solving complex operational problems for organizations that don't have room for error.</p>
+
+          <p>At Warner Bros. Discovery, a Fortune 500 global media and entertainment company with 35,000 employees, Dave served as the internal audit lead on the company's global SOX compliance program — playing a central role in transforming a manual, fragmented process into a streamlined, automated system that dramatically reduced the time and cost of the compliance cycle while improving the quality of the work. That meant redesigning testing architecture, sequencing delivery to minimize disruption to the business, building automation that eliminated hours of manual work, and making strategic scope decisions that ensured the program reflected exactly what was required and nothing more.</p>
+
+          <p>It was at Morningstar where Dave built the financial foundation that would define everything that came after — starting in a leadership development program with a rotation as a General Ledger Accountant before moving into Internal Audit.</p>
+        </div>
+
+        <div class="content-divider"></div>
+
+        <!-- PMP -->
+        <div class="content-section">
+          <p class="content-section-label">The Approach</p>
+          <h2>Systems thinking,<br><em>built in.</em></h2>
+
+          <p>He holds a Project Management Professional (PMP) certification — earned as a deliberate investment in understanding how systems integrate and implementations actually succeed. When you're helping a business select, implement, and build their operational infrastructure, how the pieces connect and in what order matters enormously. The PMP sharpened that. It shows up in every engagement.</p>
+
+          <div class="pull-quote">
+            <p>He approaches every engagement the way an architect approaches a building — foundation first. Before anything gets built or changed, he maps what exists, identifies what's missing, and determines what needs to happen in what order. Nothing gets patched. Everything gets built with intention.</p>
+          </div>
+        </div>
+
+        <div class="content-divider"></div>
+
+        <!-- THE MOVE -->
+        <div class="content-section">
+          <p class="content-section-label">The Move</p>
+          <h2>A decade in New York.<br><em>A deliberate next chapter.</em></h2>
+
+          <p>Dave spent the better part of a decade in New York City — living in Hell's Kitchen, learning from some of the best operators and creative minds the city has to offer, and building a career that looked impressive on paper but felt increasingly disconnected from the people it was supposed to serve.</p>
+
+          <p>That's the part that finally got to him. At the corporate level, the work was technically excellent but the humans it affected were abstract. He wanted to see the impact. He wanted to sit across from a business owner, solve a real problem, and watch it actually change something for them.</p>
+
+          <p>So he left. He and his husband relocated to Tampa, started building something new, and Canopy Creative Co. was born.</p>
+        </div>
+
+        <div class="content-divider"></div>
+
+        <!-- WHY CREATIVES -->
+        <div class="content-section">
+          <p class="content-section-label">Why Creative Businesses</p>
+          <h2>This isn't a niche<br><em>he picked off a list.</em></h2>
+
+          <p>Dave's entry into working with creative businesses wasn't accidental. His husband owns an interior design firm — and watching him navigate the back office chaos of a growing creative business up close showed Dave exactly how badly this space needed better support. The disorganized books. The software that doesn't talk to each other. The late nights trying to figure out cash flow on a gut feeling. The hours spent on admin that could have gone toward the actual work.</p>
+
+          <p>That inside perspective isn't a conflict. It's the whole point.</p>
+
+          <p>Today, Canopy Creative Co. works with interior design studios, creative agencies, artists, workrooms, entertainment companies, and the businesses that support them — across the United States. The back office problems are consistent. The chaos is familiar. And the solution always starts the same way: understand what's actually there before you touch anything.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PERSONALITY -->
+  <section class="personality-section">
+    <div class="personality-inner">
+      <div class="personality-left">
+        <p class="content-section-label">A Little More Dave</p>
+        <h2>The person<br>behind the <em>work.</em></h2>
+        <p>He moved from the Chicagoland suburbs to New York City at 24 with ambition and not much else — and spent years building a career in one of the world's most demanding professional environments. NYC teaches you how to move fast, think clearly, and never waste anyone's time. He tries to bring all three to every client engagement.</p>
+        <p>He lives in South Tampa with his husband and their dog August, who structures Dave's day with the kind of reliability most project plans can only aspire to.</p>
+      </div>
+      <div class="personality-right">
+        <div class="personality-card">
+          <p class="personality-card-label">Based in</p>
+          <p>South Tampa, Florida — working with creative businesses across the United States.</p>
+        </div>
+        <div class="personality-card">
+          <p class="personality-card-label">Background</p>
+          <p>Corporate finance, internal audit, SOX compliance, program management, and operational systems — at Fortune 500 scale.</p>
+        </div>
+        <div class="personality-card">
+          <p class="personality-card-label">Philosophy</p>
+          <p>Foundation first. Always. No patching, no shortcuts, no work that doesn't serve the whole.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <h2>Ready to work together?</h2>
+      <p>Whether you're just getting started or finally ready to get your back office in order, the first step is a conversation.</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn-cream">Book a discovery call</a>
+        <a href="#" class="btn-outline-cream">Send us a message</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Canopy Creative Co.</div>
+    <p class="footer-copy">© 2026 Canopy Creative Co. All rights reserved.</p>
+    <ul class="footer-links">
+      <li><a href="#">Services</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">Privacy Policy</a></li>
+    </ul>
+  </footer>
+
+  <div class="mockup-note">About Page Mockup — For reference only, not a live page</div>
+
+</body>
+</html>

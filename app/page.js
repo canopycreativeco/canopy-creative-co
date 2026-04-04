@@ -37,8 +37,7 @@ export default function HomePage() {
 
         <div className="relative max-w-[800px]">
           {/* Eyebrow */}
-          <p className="text-[11px] font-semibold tracking-[0.24em] uppercase text-orange mb-7 flex items-center gap-3">
-            <span className="w-8 h-[1.5px] bg-orange opacity-60 shrink-0" aria-hidden="true" />
+          <p className="text-[11px] font-semibold tracking-[0.24em] uppercase text-orange mb-7">
             Operations &amp; Finance Consulting for Creative Businesses
           </p>
 
@@ -49,7 +48,7 @@ export default function HomePage() {
           >
             Your back office,
             <br />
-            <em className="text-orange not-italic italic">finally</em> working
+            <em className="text-orange italic">finally</em> working
             <br />
             for you.
           </h1>
@@ -61,12 +60,12 @@ export default function HomePage() {
 
           {/* Buttons */}
           <div className="flex gap-[14px] flex-wrap">
-            <Link href="/contact" className={btnPrimary}>
+            <Link href="/contact" className={`${btnPrimary} w-[220px] text-center`}>
               Book a discovery call
             </Link>
             <Link
               href="/services"
-              className={`${btnGhost} border-cream/25 text-cream/75 hover:border-cream/60 hover:text-cream`}
+              className={`${btnGhost} border-cream/25 text-cream/75 hover:border-cream/60 hover:text-cream w-[220px] text-center`}
             >
               See our services
             </Link>
@@ -75,28 +74,32 @@ export default function HomePage() {
 
         {/* Scroll indicator */}
         <div
-          className="absolute bottom-9 left-[60px] flex items-center gap-[10px] text-[11px] font-medium tracking-[0.14em] uppercase max-md:left-6"
+          className="absolute bottom-9 left-[60px] text-[11px] font-medium tracking-[0.14em] uppercase max-md:left-6"
           style={{ color: 'rgba(253,246,236,0.3)' }}
         >
-          <span className="w-10 h-px" style={{ background: 'rgba(253,246,236,0.2)' }} aria-hidden="true" />
           Scroll to explore
         </div>
       </section>
 
       {/* ── POSITIONING STRIP ── */}
-      <div className="bg-orange py-5 px-[60px] flex items-center justify-center gap-12 flex-wrap max-md:px-6 max-md:gap-5">
-        {['Interior Design Studios', 'Creative Agencies', 'Artists & Makers', 'Independent Creatives', 'Creative Service Businesses'].map(
-          (label, i, arr) => (
-            <span key={label} className="flex items-center gap-12 max-md:gap-5">
-              <span className="text-[12px] font-semibold tracking-[0.18em] uppercase text-cream/90">
-                {label}
+      <div className="bg-orange py-5 px-[60px] flex flex-col items-center gap-3 max-md:px-6">
+        {[
+          ['Interior Design Studios', 'Creative Agencies', 'Artists & Makers'],
+          ['Independent Creatives', 'Creative Service Businesses'],
+        ].map((row, rowIdx) => (
+          <div key={rowIdx} className="flex items-center gap-10 flex-wrap justify-center max-md:gap-5">
+            {row.map((label, i) => (
+              <span key={label} className="flex items-center gap-10 max-md:gap-5">
+                <span className="text-[12px] font-semibold tracking-[0.18em] uppercase text-cream/90">
+                  {label}
+                </span>
+                {i < row.length - 1 && (
+                  <span className="w-1 h-1 rounded-full bg-cream/40 shrink-0" aria-hidden="true" />
+                )}
               </span>
-              {i < arr.length - 1 && (
-                <span className="w-1 h-1 rounded-full bg-cream/40 shrink-0" aria-hidden="true" />
-              )}
-            </span>
-          )
-        )}
+            ))}
+          </div>
+        ))}
       </div>
 
       {/* ── INTRO ── */}
@@ -113,7 +116,7 @@ export default function HomePage() {
             >
               Not your average
               <br />
-              <em className="text-orange italic">bookkeeping firm.</em>
+              <em className="text-orange italic">consulting firm.</em>
             </h2>
           </div>
 
@@ -216,7 +219,7 @@ export default function HomePage() {
             From first conversation to fully supported.
           </h2>
 
-          <div className="grid grid-cols-4 gap-0 relative max-md:grid-cols-2 max-md:gap-10">
+          <div className="grid grid-cols-3 gap-0 relative max-md:grid-cols-2 max-md:gap-10">
             {/* Connecting line (desktop only) */}
             <div
               className="absolute top-[22px] left-5 right-5 h-px pointer-events-none max-md:hidden"
@@ -232,16 +235,11 @@ export default function HomePage() {
               },
               {
                 n: '2',
-                title: 'Current-State Assessment',
-                body: "A paid, flat-fee review of your books and systems so we both have a clear picture before committing to anything.",
-              },
-              {
-                n: '3',
                 title: 'Scope & Agreement',
                 body: "We define exactly what we're doing together, agree on rates, and get everything in writing before work begins.",
               },
               {
-                n: '4',
+                n: '3',
                 title: 'Active Support',
                 body: 'Ongoing, on-demand work billed hourly and transparently — with room to expand as your business grows.',
               },
@@ -249,7 +247,7 @@ export default function HomePage() {
               <div key={n} className="pr-6 max-md:pr-0">
                 <div
                   className="w-11 h-11 rounded-full flex items-center justify-center font-serif text-[15px] font-bold text-orange mb-6 relative z-[1]"
-                  style={{ background: 'rgba(204,78,0,0.15)', border: '1.5px solid rgba(204,78,0,0.3)' }}
+                  style={{ background: '#3B1E08', border: '1.5px solid rgba(204,78,0,0.3)' }}
                 >
                   {n}
                 </div>
@@ -341,13 +339,13 @@ export default function HomePage() {
           <div className="flex gap-[14px] justify-center flex-wrap">
             <Link
               href="/contact"
-              className="inline-block bg-cream text-orange text-[14px] font-bold tracking-[0.04em] px-8 py-[15px] rounded-[3px] no-underline transition-all duration-200 hover:bg-[#f0e8d6] hover:-translate-y-px"
+              className="inline-block bg-cream text-orange text-[14px] font-bold tracking-[0.04em] px-8 py-[15px] rounded-[3px] no-underline transition-all duration-200 hover:bg-[#f0e8d6] hover:-translate-y-px w-[220px] text-center"
             >
               Book a discovery call
             </Link>
             <Link
               href="/contact"
-              className="inline-block bg-transparent text-cream text-[14px] font-semibold tracking-[0.04em] px-8 py-[15px] border-[1.5px] border-cream/40 rounded-[3px] no-underline transition-all duration-200 hover:border-cream/85 hover:-translate-y-px"
+              className="inline-block bg-transparent text-cream text-[14px] font-semibold tracking-[0.04em] px-8 py-[15px] border-[1.5px] border-cream/40 rounded-[3px] no-underline transition-all duration-200 hover:border-cream/85 hover:-translate-y-px w-[220px] text-center"
             >
               Send us a message
             </Link>

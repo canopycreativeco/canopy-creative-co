@@ -11,9 +11,9 @@ const tiers = [
     tag: 'Foundation',
     name: 'The Roots',
     descriptor:
-      "You didn't start your business to spend Sunday nights catching up on receipts — or troubleshooting software, or chasing down reports. The Roots covers the ongoing fundamentals that keep your business running day to day, so you can stay focused on the work that actually lights you up.",
+      <>You didn't start your business to spend Sunday nights catching up on receipts —<br />or troubleshooting software, or chasing down reports. The Roots covers the ongoing fundamentals that keep your business running day to day, so you can stay focused on the work that actually lights you up.</>,
     services: [
-      'Bookkeeping (transaction categorization and account reconciliation)',
+      'Bookkeeping: transaction categorization and account reconciliation',
       'Sales tax filing',
       'Payroll support',
       '1099 preparation and filing',
@@ -80,7 +80,12 @@ export default function ServicesPage() {
             className="text-[17px] font-light max-w-[560px] mx-auto leading-[1.7]"
             style={{ color: 'rgba(253,246,236,0.72)' }}
           >
-            Whether you're just getting started, growing faster than your systems can keep up, or ready to get serious about your numbers — Canopy Creative Co. works with creative businesses at every stage, across every part of the back office.
+            Whether you're just getting started, growing faster than your systems can keep up,
+            or ready to get serious about your numbers —
+            <br />
+            Canopy Creative Co. works with creative businesses at every stage,
+            <br />
+            across every part of the back office.
           </p>
         </div>
       </section>
@@ -174,13 +179,13 @@ export default function ServicesPage() {
           <div className="flex gap-4 justify-center flex-wrap">
             <Link
               href="/contact"
-              className="inline-block bg-orange text-cream text-[14px] font-semibold tracking-[0.04em] px-8 py-[15px] rounded-[3px] no-underline transition-all duration-200 hover:bg-[#b04400] hover:-translate-y-px"
+              className="inline-block bg-orange text-cream text-[14px] font-semibold tracking-[0.04em] px-8 py-[15px] rounded-[3px] no-underline transition-all duration-200 hover:bg-[#b04400] hover:-translate-y-px w-[220px] text-center"
             >
               Book a discovery call
             </Link>
             <Link
               href="/contact"
-              className="inline-block bg-transparent text-brown text-[14px] font-semibold tracking-[0.04em] px-8 py-[15px] border-[1.5px] border-brown rounded-[3px] no-underline transition-all duration-200 hover:bg-brown hover:text-cream hover:-translate-y-px"
+              className="inline-block bg-transparent text-brown text-[14px] font-semibold tracking-[0.04em] px-8 py-[15px] border-[1.5px] border-brown rounded-[3px] no-underline transition-all duration-200 hover:bg-brown hover:text-cream hover:-translate-y-px w-[220px] text-center"
             >
               Send us a message
             </Link>
