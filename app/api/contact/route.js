@@ -1,9 +1,11 @@
 import { Resend } from 'resend'
-import { google } from 'googleapis'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-// ── Google Sheets ─────────────────────────────────────────────────────────────
+const APPS_SCRIPT_URL =
+  'https://script.google.com/macros/s/AKfycbzsr3-ET6lFpBQpJbxTKHGRjB-x_DGx3pjE8cYpY3X-gxunYPB-btNDGgv2R7C84Oiknw/exec'
+
+// ── Google Sheets (via Apps Script) ──────────────────────────────────────────
 
 async function logToSheet(data) {
   const {
@@ -12,47 +14,36 @@ async function logToSheet(data) {
     accountingSoftware, accountingOther, howFound, referralName, otherSource, anythingElse,
   } = data
 
-  const auth = new google.auth.JWT({
-    email: process.env.GOOGLE_CLIENT_EMAIL,
-    key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-  })
-
-  const sheets = google.sheets({ version: 'v4', auth })
-
-  const accountingDisplay = accountingSoftware === 'Other' && accountingOther
+  const accountingSoftwareDisplay = accountingSoftware === 'Other' && accountingOther
     ? `Other — ${accountingOther}`
     : accountingSoftware
 
-  const howFoundDisplay = howFound === 'Referral' && referralName
+  const howDidYouFindUsDisplay = howFound === 'Referral' && referralName
     ? `Referral — thank: ${referralName}`
     : howFound === 'Other' && otherSource
       ? `Other — ${otherSource}`
       : howFound
 
-  const row = [
-    new Date().toISOString(),
-    name,
-    email,
-    phone,
-    businessName,
-    website,
-    instagram,
-    Array.isArray(states) ? states.join(', ') : states,
-    businessType,
-    helpWith,
-    accountingDisplay,
-    howFoundDisplay,
-    referralName,
-    otherSource,
-    anythingElse,
-  ]
-
-  await sheets.spreadsheets.values.append({
-    spreadsheetId: process.env.GOOGLE_SHEET_ID,
-    range: 'Sheet1!A:O',
-    valueInputOption: 'RAW',
-    requestBody: { values: [row] },
+  await fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      timestamp: new Date().toISOString(),
+      name,
+      email,
+      phone,
+      businessName,
+      businessWebsite: website,
+      businessInstagram: instagram,
+      states: Array.isArray(states) ? states.join(', ') : states,
+      businessType,
+      lookingForHelp: helpWith,
+      accountingSoftware: accountingSoftwareDisplay,
+      howDidYouFindUs: howDidYouFindUsDisplay,
+      referralName,
+      otherSource,
+      anythingElse,
+    }),
   })
 }
 
@@ -141,7 +132,7 @@ export async function POST(request) {
   try {
     const data = await request.json()
 
-    // Fire Sheets logging — don't await, don't let it block the response
+    // Fire Sheets logging — don't await, never blocks the response
     logToSheet(data).catch((err) => console.error('Sheets logging error:', err))
 
     const { error } = await resend.emails.send({
@@ -152,10 +143,7 @@ export async function POST(request) {
       replyTo: data.email,
     })
 
-    if (error) {
-      console.error('Resend error:', error)
-      return Response.json({ success: false, error: error.message })
-    }
+    if (error) console.error('Resend error:', error)
 
     return Response.json({ success: true })
   } catch (err) {
