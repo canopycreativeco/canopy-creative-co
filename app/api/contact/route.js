@@ -1,6 +1,62 @@
 import { Resend } from 'resend'
+import { google } from 'googleapis'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
+
+// ── Google Sheets ─────────────────────────────────────────────────────────────
+
+async function logToSheet(data) {
+  const {
+    name, email, phone, businessName, website, instagram,
+    states, businessType, helpWith,
+    accountingSoftware, accountingOther, howFound, referralName, otherSource, anythingElse,
+  } = data
+
+  const auth = new google.auth.JWT({
+    email: process.env.GOOGLE_CLIENT_EMAIL,
+    key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+  })
+
+  const sheets = google.sheets({ version: 'v4', auth })
+
+  const accountingDisplay = accountingSoftware === 'Other' && accountingOther
+    ? `Other — ${accountingOther}`
+    : accountingSoftware
+
+  const howFoundDisplay = howFound === 'Referral' && referralName
+    ? `Referral — thank: ${referralName}`
+    : howFound === 'Other' && otherSource
+      ? `Other — ${otherSource}`
+      : howFound
+
+  const row = [
+    new Date().toISOString(),
+    name,
+    email,
+    phone,
+    businessName,
+    website,
+    instagram,
+    Array.isArray(states) ? states.join(', ') : states,
+    businessType,
+    helpWith,
+    accountingDisplay,
+    howFoundDisplay,
+    referralName,
+    otherSource,
+    anythingElse,
+  ]
+
+  await sheets.spreadsheets.values.append({
+    spreadsheetId: process.env.GOOGLE_SHEET_ID,
+    range: 'Sheet1!A:O',
+    valueInputOption: 'RAW',
+    requestBody: { values: [row] },
+  })
+}
+
+// ── Email ─────────────────────────────────────────────────────────────────────
 
 function row(label, value) {
   if (!value || (Array.isArray(value) && value.length === 0)) return ''
@@ -41,7 +97,7 @@ function buildHtml(data) {
       ? `Other — ${otherSource}`
       : howFound
 
-  const body = `
+  return `
     <!DOCTYPE html>
     <html lang="en">
     <head><meta charset="UTF-8" /></head>
@@ -77,13 +133,16 @@ function buildHtml(data) {
       </div>
     </body>
     </html>`
-
-  return body
 }
+
+// ── Route handler ─────────────────────────────────────────────────────────────
 
 export async function POST(request) {
   try {
     const data = await request.json()
+
+    // Fire Sheets logging — don't await, don't let it block the response
+    logToSheet(data).catch((err) => console.error('Sheets logging error:', err))
 
     const { error } = await resend.emails.send({
       from: 'Canopy Creative Co. <onboarding@resend.dev>',
