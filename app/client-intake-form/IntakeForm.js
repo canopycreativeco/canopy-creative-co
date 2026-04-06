@@ -540,6 +540,12 @@ export default function IntakeForm() {
           Thank you for choosing Canopy Creative Co. This form helps us get everything in place
           before your onboarding call. All information is kept strictly confidential.
         </p>
+        <p className="flex items-start gap-1.5 text-[12px] leading-[1.6] mt-3" style={{ color: 'rgba(253,246,236,0.4)' }}>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-[13px] h-[13px] shrink-0 mt-[2px]">
+            <path fillRule="evenodd" d="M8 1a3.5 3.5 0 0 0-3.5 3.5V6H4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-.5V4.5A3.5 3.5 0 0 0 8 1Zm2 5V4.5a2 2 0 1 0-4 0V6h4Z" clipRule="evenodd" />
+          </svg>
+          <span>Submitted securely over an encrypted connection. Your information is shared only with the Canopy Creative Co team and is never sold or shared with third parties.</span>
+        </p>
       </div>
 
       {/* ── 1A: ABOUT YOUR BUSINESS (always shown) ── */}
