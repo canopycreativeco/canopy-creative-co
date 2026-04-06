@@ -18,7 +18,7 @@ const dmSans = DM_Sans({
 })
 
 export const metadata = {
-  title: 'Canopy Creative Co.',
+  title: 'Canopy Creative Co',
   description: 'Operations & Finance Consulting for Creative Businesses — wherever you are, we\'ve got you covered.',
 }
 

@@ -26,7 +26,7 @@ const ROOTS_SERVICES = [
 ]
 
 const CANOPY_SERVICES = [
-  { id: 'fpa',                 label: 'FP&A' },
+  { id: 'fpa',                 label: 'Financial planning & analysis' },
   { id: 'cash-flow',           label: 'Cash flow analysis' },
   { id: 'budgeting',           label: 'Budgeting & forecasting' },
   { id: 'project-profitability', label: 'Project & product profitability' },
@@ -268,7 +268,7 @@ function SoftwareBlock({ data, onChange }) {
 
 const INIT = {
   // About Your Business
-  legalBusinessName: '', ownerName: '', email: '', phone: '',
+  legalBusinessName: '', dba: '', ownerName: '', primaryBusinessEmail: '', primaryBusinessPhone: '',
   businessAddress: '', entityType: '', entityTypeOther: '',
   stateOfFormation: '', ein: '', fiscalYearEnd: '',
   hasTaxPreparer: '',
@@ -281,14 +281,13 @@ const INIT = {
   selectedServices: [], futureServices: '',
 
   // Accounting Software
-  accountingSoftware: '', accountsAccurate: '',
+  accountingSoftware: '', accountingSoftwareOther: '', accountingSoftwareEmail: '', accountingSoftwarePassword: '', accountingSoftwareNotes: '',
   qboPlan: '', qboBankFeeds: '', qboEmail: '', qboPassword: '',
 
   // Bank Accounts
   checkingAccounts: [{ ...BANK_T }],
   savingsAccounts:  [{ ...BANK_T }],
   creditCards:      [{ ...CC_T }],
-  taxAccount:       { institution: '', nickname: '', loginEmail: '', password: '' },
   accountsNotes: '',
 
   // Sales Tax
@@ -296,7 +295,7 @@ const INIT = {
   salesTaxSoftware: '', salesTaxNotes: '',
 
   // Payroll
-  payrollService: '', payrollFrequency: '', w2Employees: '',
+  payrollService: '', payrollServiceOther: '', payrollFrequency: '', payrollFrequencyOther: '', w2Employees: '',
   contractors1099: '', payrollEmail: '', payrollPassword: '', payrollNotes: '',
 
   // 1099
@@ -364,6 +363,10 @@ export default function IntakeForm() {
     setFields((f) => ({ ...f, [key]: [...f[key], { ...tmpl }] }))
   }
 
+  function ra(key, idx) {
+    setFields((f) => ({ ...f, [key]: f[key].filter((_, i) => i !== idx) }))
+  }
+
   function toggleService(id) {
     const s = fields.selectedServices
     sf('selectedServices', s.includes(id) ? s.filter((x) => x !== id) : [...s, id])
@@ -377,7 +380,8 @@ export default function IntakeForm() {
   // ── Conditional visibility ─────────────────────────────────────────────────
 
   const svcs = fields.selectedServices
-  const showBankAccounts   = ['txn-categorization','sales-tax-filing','1099-prep','fpa','cash-flow','budgeting'].some((s) => svcs.includes(s))
+  const showLegalSection   = ['txn-categorization','sales-tax-filing','payroll-support','1099-prep'].some((s) => svcs.includes(s))
+  const showBankAccounts   = ['txn-categorization','1099-prep','fpa','cash-flow','budgeting'].some((s) => svcs.includes(s))
   const showSalesTax       = svcs.includes('sales-tax-filing')
   const showPayroll        = svcs.includes('payroll-support')
   const show1099           = svcs.includes('1099-prep')
@@ -396,6 +400,17 @@ export default function IntakeForm() {
   // ── Submit ─────────────────────────────────────────────────────────────────
 
   async function handleSubmit() {
+    const missingFields = []
+    if (!fields.legalBusinessName.trim()) missingFields.push('Legal business name')
+    if (!fields.ownerName.trim()) missingFields.push('Owner / primary contact name')
+    if (!fields.primaryBusinessEmail.trim()) missingFields.push('Primary business email address')
+    if (fields.selectedServices.length === 0) missingFields.push('At least one service selection')
+
+    if (missingFields.length > 0) {
+      setSubmitError(`Please complete the following before submitting: ${missingFields.join(', ')}`)
+      return
+    }
+
     setLoading(true)
     setSubmitError('')
 
@@ -409,33 +424,37 @@ export default function IntakeForm() {
       timestamp:            new Date().toISOString(),
       businessName:         f.legalBusinessName || '',
       legalBusinessName:    f.legalBusinessName || '',
+      dba:                  f.dba || '',
       ownerName:            f.ownerName || '',
-      email:                f.email || '',
-      phone:                f.phone || '',
-      businessAddress:      f.businessAddress || '',
-      entityType:           f.entityType === 'Other' ? `Other — ${f.entityTypeOther}` : (f.entityType || ''),
-      stateOfFormation:     f.stateOfFormation || '',
-      ein:                  f.ein || '',
-      fiscalYearEnd:        f.fiscalYearEnd || '',
-      taxPreparer:          f.hasTaxPreparer === 'yes'
-        ? `${f.taxPreparer.name}, ${f.taxPreparer.firmName}, ${f.taxPreparer.email}, ${f.taxPreparer.phone}`
-        : (f.hasTaxPreparer || ''),
+      primaryBusinessEmail: f.primaryBusinessEmail || '',
+      primaryBusinessPhone: f.primaryBusinessPhone || '',
+      ...(showLegalSection ? {
+        businessAddress:    f.businessAddress || '',
+        entityType:         f.entityType === 'Other' ? `Other — ${f.entityTypeOther}` : (f.entityType || ''),
+        stateOfFormation:   f.stateOfFormation || '',
+        ein:                f.ein || '',
+        fiscalYearEnd:      f.fiscalYearEnd || '',
+        taxPreparer:        f.hasTaxPreparer === 'yes'
+          ? `${f.taxPreparer.name}, ${f.taxPreparer.firmName}, ${f.taxPreparer.email}, ${f.taxPreparer.phone}`
+          : (f.hasTaxPreparer || ''),
+      } : {}),
       additionalContacts:   serialize(f.additionalContacts.filter((c) => c.name), (c) => `${c.name} (${c.role}) — ${c.email}${c.phone ? ' / ' + c.phone : ''}`),
       selectedServices:     svcs.join(', ') || '',
       futureServices:       f.futureServices || '',
-      accountingSoftware:   f.accountingSoftware || '',
-      accountsAccurate:     f.accountsAccurate || '',
+      accountingSoftware:   f.accountingSoftware === 'Other' ? `Other — ${f.accountingSoftwareOther}` : (f.accountingSoftware || ''),
+      accountingSoftwareEmail: f.accountingSoftware && !['QuickBooks Desktop','Spreadsheets','None — starting from scratch'].includes(f.accountingSoftware) ? f.accountingSoftwareEmail : '',
+      accountingSoftwarePassword: f.accountingSoftware && !['QuickBooks Desktop','Spreadsheets','None — starting from scratch'].includes(f.accountingSoftware) ? f.accountingSoftwarePassword : '',
+      accountingSoftwareNotes: f.accountingSoftwareNotes || '',
       qboDetails:           showQBO ? `Plan: ${f.qboPlan} | Bank feeds: ${f.qboBankFeeds} | Login: ${f.qboEmail}` : '',
       checkingAccounts:     serialize(f.checkingAccounts.filter((a) => a.institution), (a) => `${a.institution}${a.nickname ? ' ('+a.nickname+')' : ''} | ${a.loginEmail}`),
       savingsAccounts:      serialize(f.savingsAccounts.filter((a) => a.institution), (a) => `${a.institution}${a.nickname ? ' ('+a.nickname+')' : ''} | ${a.loginEmail}`),
       creditCards:          serialize(f.creditCards.filter((a) => a.institution), (a) => `${a.institution}${a.nickname ? ' ('+a.nickname+')' : ''} last4:${a.lastFour} | ${a.loginEmail}`),
-      taxAccount:           f.taxAccount.institution ? `${f.taxAccount.institution} | ${f.taxAccount.loginEmail}` : '',
       accountsNotes:        f.accountsNotes || '',
       salesTaxStates:       serialize(f.salesTaxStates.filter((s) => s.state), (s) => `${s.state}: ID ${s.taxId}, ${s.frequency}`),
       salesTaxSoftware:     f.salesTaxSoftware || '',
       salesTaxNotes:        f.salesTaxNotes || '',
-      payrollService:       f.payrollService || '',
-      payrollFrequency:     f.payrollFrequency || '',
+      payrollService:       f.payrollService === 'Other' ? `Other — ${f.payrollServiceOther}` : (f.payrollService || ''),
+      payrollFrequency:     f.payrollFrequency === 'Other' ? `Other — ${f.payrollFrequencyOther}` : (f.payrollFrequency || ''),
       w2Employees:          f.w2Employees || '',
       contractors1099:      f.contractors1099 || '',
       payrollNotes:         f.payrollNotes || '',
@@ -505,124 +524,120 @@ export default function IntakeForm() {
         </p>
       </div>
 
-      {/* ── 1: ABOUT YOUR BUSINESS ── */}
+      {/* ── 1A: ABOUT YOUR BUSINESS (always shown) ── */}
       <SectionCard badge="Getting Started" title="About your business">
-
-        <NotePill>
-          We touched on some of this during our calls — but for this section, please make sure your
-          answers match your official legal documents exactly (including punctuation, spaces, and
-          capitalization). This information is used for tax filings, 1099s, and other compliance
-          work, so accuracy here really matters. When in doubt, refer to your EIN letter, articles
-          of organization, or any documents from your state registration.
-        </NotePill>
-
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="sm:col-span-2">
             <Lbl>Legal business name</Lbl>
             <input type="text" value={fields.legalBusinessName} onChange={(e) => sf('legalBusinessName', e.target.value)} className={inp} />
+          </div>
+          <div className="sm:col-span-2">
+            <Lbl opt>Doing Business As (DBA)</Lbl>
+            <Hint>Only if different from your legal business name</Hint>
+            <input type="text" value={fields.dba} onChange={(e) => sf('dba', e.target.value)} className={inp} />
           </div>
           <div>
             <Lbl>Owner / primary contact name</Lbl>
             <input type="text" value={fields.ownerName} onChange={(e) => sf('ownerName', e.target.value)} className={inp} />
           </div>
           <div>
-            <Lbl>Email address</Lbl>
-            <input type="email" value={fields.email} onChange={(e) => sf('email', e.target.value)} className={inp} />
+            <Lbl>Primary business email address</Lbl>
+            <input type="email" value={fields.primaryBusinessEmail} onChange={(e) => sf('primaryBusinessEmail', e.target.value)} className={inp} />
           </div>
           <div>
-            <Lbl>Phone number</Lbl>
-            <input type="tel" value={fields.phone} onChange={(e) => sf('phone', e.target.value)} placeholder="(555) 000-0000" className={inp} />
+            <Lbl>Primary business phone number</Lbl>
+            <input type="tel" value={fields.primaryBusinessPhone} onChange={(e) => sf('primaryBusinessPhone', e.target.value)} placeholder="(555) 000-0000" className={inp} />
           </div>
-          <div>
-            <Lbl>Business address</Lbl>
-            <input type="text" value={fields.businessAddress} onChange={(e) => sf('businessAddress', e.target.value)} className={inp} />
-          </div>
-          <div>
-            <Lbl>Entity type</Lbl>
-            <select value={fields.entityType} onChange={(e) => sf('entityType', e.target.value)} className={sel}>
-              <option value="">Select…</option>
-              {['Sole proprietorship','Single-member LLC','Multi-member LLC','S-Corp','C-Corp',
-                'LLC taxed as S-Corp','LLC taxed as C-Corp','Partnership','Other'].map((o) => (
-                <option key={o} value={o}>{o}</option>
-              ))}
-            </select>
-          </div>
-          {fields.entityType === 'Other' && (
-            <div>
-              <Lbl>Please specify entity type</Lbl>
-              <input type="text" value={fields.entityTypeOther} onChange={(e) => sf('entityTypeOther', e.target.value)} className={inp} />
-            </div>
-          )}
-          <div>
-            <Lbl>State of formation</Lbl>
-            <select value={fields.stateOfFormation} onChange={(e) => sf('stateOfFormation', e.target.value)} className={sel}>
-              <option value="">Select a state…</option>
-              {US_STATES.map((s) => <option key={s} value={s}>{s}</option>)}
-            </select>
-          </div>
-          <div>
-            <Lbl>EIN</Lbl>
-            <input type="text" value={fields.ein} onChange={(e) => sf('ein', e.target.value)} placeholder="XX-XXXXXXX" className={inp} />
-          </div>
-          <div>
-            <Lbl>Fiscal year end</Lbl>
-            <select value={fields.fiscalYearEnd} onChange={(e) => sf('fiscalYearEnd', e.target.value)} className={sel}>
-              <option value="">Select…</option>
-              {['December 31','March 31','June 30','September 30','Other'].map((o) => (
-                <option key={o} value={o}>{o}</option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        <Divider />
-
-        <div className="flex flex-col gap-3">
-          <div>
-            <Lbl>Do you currently have a tax preparer?</Lbl>
-            <Hint>Either a CPA or tax professional</Hint>
-          </div>
-          <div className="flex flex-col gap-2">
-            {[
-              { value: 'yes',           label: 'Yes' },
-              { value: 'no-recommend',  label: 'No — and I\'d like a recommendation' },
-              { value: 'no-ok',         label: 'No — and I\'m all set without one' },
-            ].map((opt) => (
-              <RadioPillRow
-                key={opt.value}
-                value={opt.value}
-                label={opt.label}
-                selected={fields.hasTaxPreparer === opt.value}
-                onSelect={(v) => sf('hasTaxPreparer', v)}
-              />
-            ))}
-          </div>
-
-          {fields.hasTaxPreparer === 'yes' && (
-            <SubCard>
-              <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted mb-3">Tax preparer details</p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <Lbl>Name</Lbl>
-                  <input type="text" value={fields.taxPreparer.name} onChange={(e) => sn('taxPreparer','name',e.target.value)} className={inp} />
-                </div>
-                <div>
-                  <Lbl>Firm name</Lbl>
-                  <input type="text" value={fields.taxPreparer.firmName} onChange={(e) => sn('taxPreparer','firmName',e.target.value)} className={inp} />
-                </div>
-                <div>
-                  <Lbl>Email</Lbl>
-                  <input type="email" value={fields.taxPreparer.email} onChange={(e) => sn('taxPreparer','email',e.target.value)} className={inp} />
-                </div>
-                <div>
-                  <Lbl>Phone</Lbl>
-                  <input type="tel" value={fields.taxPreparer.phone} onChange={(e) => sn('taxPreparer','phone',e.target.value)} className={inp} />
-                </div>
-              </div>
-            </SubCard>
-          )}
         </div>
       </SectionCard>
+
+      {/* ── 1B: LEGAL & TAX INFORMATION (conditional) ── */}
+      {showLegalSection && (
+        <SectionCard badge="Legal & Tax Information" title="Legal & tax information">
+          <NotePill>
+            We touched on some of this during our calls — but for this section, please make sure your
+            answers match your official legal documents exactly (including punctuation, spaces, and
+            capitalization). This information is used for tax filings, 1099s, and other compliance
+            work, so accuracy here really matters. When in doubt, refer to your EIN letter, articles
+            of organization, or any documents from your state registration.
+          </NotePill>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="sm:col-span-2">
+              <Lbl>Business address</Lbl>
+              <input type="text" value={fields.businessAddress} onChange={(e) => sf('businessAddress', e.target.value)} className={inp} />
+            </div>
+            <div>
+              <Lbl>Entity type</Lbl>
+              <select value={fields.entityType} onChange={(e) => sf('entityType', e.target.value)} className={sel}>
+                <option value="">Select…</option>
+                {['Sole proprietorship','Single-member LLC','Multi-member LLC','S-Corp','C-Corp',
+                  'LLC taxed as S-Corp','LLC taxed as C-Corp','Partnership','Other'].map((o) => (
+                  <option key={o} value={o}>{o}</option>
+                ))}
+              </select>
+            </div>
+            {fields.entityType === 'Other' && (
+              <div>
+                <Lbl>Please specify entity type</Lbl>
+                <input type="text" value={fields.entityTypeOther} onChange={(e) => sf('entityTypeOther', e.target.value)} className={inp} />
+              </div>
+            )}
+            <div>
+              <Lbl>State of formation</Lbl>
+              <select value={fields.stateOfFormation} onChange={(e) => sf('stateOfFormation', e.target.value)} className={sel}>
+                <option value="">Select a state…</option>
+                {US_STATES.map((s) => <option key={s} value={s}>{s}</option>)}
+              </select>
+            </div>
+            <div>
+              <Lbl>EIN</Lbl>
+              <input type="text" value={fields.ein} onChange={(e) => sf('ein', e.target.value)} placeholder="XX-XXXXXXX" className={inp} />
+            </div>
+            <div>
+              <Lbl>Fiscal year end</Lbl>
+              <select value={fields.fiscalYearEnd} onChange={(e) => sf('fiscalYearEnd', e.target.value)} className={sel}>
+                <option value="">Select…</option>
+                {['December 31','March 31','June 30','September 30','Other'].map((o) => (
+                  <option key={o} value={o}>{o}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <Divider />
+          <div className="flex flex-col gap-3">
+            <div>
+              <Lbl>Do you currently have a tax preparer?</Lbl>
+              <Hint>Either a CPA or tax professional</Hint>
+            </div>
+            <div className="flex flex-col gap-2">
+              {[
+                { value: 'yes',          label: 'Yes' },
+                { value: 'no-recommend', label: "No — and I'd like a recommendation" },
+                { value: 'no-ok',        label: "No — and I'm all set without one" },
+              ].map((opt) => (
+                <RadioPillRow
+                  key={opt.value}
+                  value={opt.value}
+                  label={opt.label}
+                  selected={fields.hasTaxPreparer === opt.value}
+                  onSelect={(v) => sf('hasTaxPreparer', v)}
+                />
+              ))}
+            </div>
+            {fields.hasTaxPreparer === 'yes' && (
+              <SubCard>
+                <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted mb-3">Tax preparer details</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div><Lbl>Name</Lbl><input type="text" value={fields.taxPreparer.name} onChange={(e) => sn('taxPreparer','name',e.target.value)} className={inp} /></div>
+                  <div><Lbl>Firm name</Lbl><input type="text" value={fields.taxPreparer.firmName} onChange={(e) => sn('taxPreparer','firmName',e.target.value)} className={inp} /></div>
+                  <div><Lbl>Email</Lbl><input type="email" value={fields.taxPreparer.email} onChange={(e) => sn('taxPreparer','email',e.target.value)} className={inp} /></div>
+                  <div><Lbl>Phone</Lbl><input type="tel" value={fields.taxPreparer.phone} onChange={(e) => sn('taxPreparer','phone',e.target.value)} className={inp} /></div>
+                </div>
+              </SubCard>
+            )}
+          </div>
+        </SectionCard>
+      )}
 
       {/* ── 2: ADDITIONAL CONTACTS ── */}
       <SectionCard
@@ -633,7 +648,20 @@ export default function IntakeForm() {
         <div className="flex flex-col gap-4">
           {fields.additionalContacts.map((c, i) => (
             <SubCard key={i}>
-              <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted mb-3">Contact {i + 1}</p>
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted">
+                  Contact {i + 1}
+                </p>
+                {i > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => ra('additionalContacts', i)}
+                    className="text-[11px] font-semibold text-orange border border-orange rounded-full px-3 py-1 hover:bg-orange hover:text-white transition-colors"
+                  >
+                    Remove
+                  </button>
+                )}
+              </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <Lbl>Name</Lbl>
@@ -718,18 +746,55 @@ export default function IntakeForm() {
             <Lbl>Accounting software</Lbl>
             <select value={fields.accountingSoftware} onChange={(e) => sf('accountingSoftware', e.target.value)} className={sel}>
               <option value="">Select…</option>
-              {['QuickBooks Online','QuickBooks Desktop','Xero','FreshBooks','Wave','None / spreadsheets','Other'].map((o) => (
+              {['QuickBooks Online','QuickBooks Desktop','Xero','FreshBooks','Wave','Spreadsheets','None — starting from scratch','Other'].map((o) => (
                 <option key={o} value={o}>{o}</option>
               ))}
             </select>
+            {fields.accountingSoftware === 'Other' && (
+              <div className="mt-3">
+                <Lbl>Please specify</Lbl>
+                <input type="text" value={fields.accountingSoftwareOther} onChange={(e) => sf('accountingSoftwareOther', e.target.value)} className={inp} />
+              </div>
+            )}
           </div>
-          <div>
-            <Lbl>Are your accounts complete and accurate?</Lbl>
-            <select value={fields.accountsAccurate} onChange={(e) => sf('accountsAccurate', e.target.value)} className={sel}>
-              <option value="">Select…</option>
-              {['Yes','No','Not sure'].map((o) => <option key={o} value={o}>{o}</option>)}
-            </select>
-          </div>
+          {['Xero', 'FreshBooks', 'Wave'].includes(fields.accountingSoftware) && (
+            <SubCard>
+              <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted mb-3">
+                {fields.accountingSoftware} access
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <Lbl>Login email</Lbl>
+                  <input type="email" value={fields.accountingSoftwareEmail} onChange={(e) => sf('accountingSoftwareEmail', e.target.value)} className={inp} />
+                </div>
+                <div>
+                  <Lbl>Password</Lbl>
+                  <input type="text" value={fields.accountingSoftwarePassword} onChange={(e) => sf('accountingSoftwarePassword', e.target.value)} className={inp} />
+                </div>
+              </div>
+            </SubCard>
+          )}
+
+          {fields.accountingSoftware === 'Other' && fields.accountingSoftwareOther && (
+            <SubCard>
+              <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted mb-3">
+                {fields.accountingSoftwareOther} access
+              </p>
+              <p className="text-[12px] text-muted italic mb-3">
+                If your software is cloud-based, please provide login credentials below. Skip this if it's desktop software or doesn't require a login.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <Lbl opt>Login email</Lbl>
+                  <input type="email" value={fields.accountingSoftwareEmail} onChange={(e) => sf('accountingSoftwareEmail', e.target.value)} className={inp} />
+                </div>
+                <div>
+                  <Lbl opt>Password</Lbl>
+                  <input type="text" value={fields.accountingSoftwarePassword} onChange={(e) => sf('accountingSoftwarePassword', e.target.value)} className={inp} />
+                </div>
+              </div>
+            </SubCard>
+          )}
 
           {showQBO && (
             <div className="flex flex-col gap-4">
@@ -752,6 +817,9 @@ export default function IntakeForm() {
               </div>
               <SubCard>
                 <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted mb-3">QuickBooks Online access</p>
+                <p className="text-[12px] text-muted italic mb-3">
+                  This information does not have to be provided if Canopy Creative Co has been added as an accounting firm on your account.
+                </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <Lbl>Login email</Lbl>
@@ -765,20 +833,42 @@ export default function IntakeForm() {
               </SubCard>
             </div>
           )}
+          <div>
+            <Lbl opt>Anything else your team should know about your accounting software?</Lbl>
+            <textarea value={fields.accountingSoftwareNotes} onChange={(e) => sf('accountingSoftwareNotes', e.target.value)} rows={3} className={ta} />
+          </div>
         </div>
       </SectionCard>
 
       {/* ── 5: BANK ACCOUNTS (conditional) ── */}
       {showBankAccounts && (
-        <SectionCard badge="Bank Access" title="Bank accounts">
+        <SectionCard badge="Bank Access" title="Business bank accounts">
           <div className="flex flex-col gap-6">
+            <NotePill>
+              Please provide login credentials for all business accounts. Quick tip before you fill this section out — most banks and financial institutions let you create a read-only sub-account under your primary login. It's a simple way to provide the access the Canopy Creative Co team needs while keeping your main credentials completely private. If you're setting up a read-only account, just make sure the username is something recognizable like "Your Business Name — Accounting" or "Your Business Name — Read Only" so it's easy to identify and unique to your business.
+              <br /><br />
+              Questions? Reach out to the Canopy Creative Co team anytime.
+            </NotePill>
 
             {/* Checking */}
             <div className="flex flex-col gap-3">
-              <p className="text-[13px] font-semibold text-brown">Checking accounts</p>
+              <p className="text-[13px] font-semibold text-brown">Business checking accounts</p>
               {fields.checkingAccounts.map((a, i) => (
                 <SubCard key={i}>
-                  <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted mb-3">Account {i + 1}</p>
+                  <div className="flex items-center justify-between mb-3">
+                    <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted">
+                      Business checking account {i + 1}
+                    </p>
+                    {i > 0 && (
+                      <button
+                        type="button"
+                        onClick={() => ra('checkingAccounts', i)}
+                        className="text-[11px] font-semibold text-orange border border-orange rounded-full px-3 py-1 hover:bg-orange hover:text-white transition-colors"
+                      >
+                        Remove
+                      </button>
+                    )}
+                  </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div><Lbl>Institution name</Lbl><input type="text" value={a.institution} onChange={(e) => ua('checkingAccounts',i,'institution',e.target.value)} className={inp} /></div>
                     <div><Lbl opt>Account nickname</Lbl><input type="text" value={a.nickname} onChange={(e) => ua('checkingAccounts',i,'nickname',e.target.value)} className={inp} /></div>
@@ -795,10 +885,23 @@ export default function IntakeForm() {
 
             {/* Savings */}
             <div className="flex flex-col gap-3">
-              <p className="text-[13px] font-semibold text-brown">Savings accounts</p>
+              <p className="text-[13px] font-semibold text-brown">Business savings accounts</p>
               {fields.savingsAccounts.map((a, i) => (
                 <SubCard key={i}>
-                  <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted mb-3">Account {i + 1}</p>
+                  <div className="flex items-center justify-between mb-3">
+                    <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted">
+                      Business savings account {i + 1}
+                    </p>
+                    {i > 0 && (
+                      <button
+                        type="button"
+                        onClick={() => ra('savingsAccounts', i)}
+                        className="text-[11px] font-semibold text-orange border border-orange rounded-full px-3 py-1 hover:bg-orange hover:text-white transition-colors"
+                      >
+                        Remove
+                      </button>
+                    )}
+                  </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div><Lbl>Institution name</Lbl><input type="text" value={a.institution} onChange={(e) => ua('savingsAccounts',i,'institution',e.target.value)} className={inp} /></div>
                     <div><Lbl opt>Account nickname</Lbl><input type="text" value={a.nickname} onChange={(e) => ua('savingsAccounts',i,'nickname',e.target.value)} className={inp} /></div>
@@ -815,10 +918,23 @@ export default function IntakeForm() {
 
             {/* Credit cards */}
             <div className="flex flex-col gap-3">
-              <p className="text-[13px] font-semibold text-brown">Credit cards</p>
+              <p className="text-[13px] font-semibold text-brown">Business credit cards</p>
               {fields.creditCards.map((a, i) => (
                 <SubCard key={i}>
-                  <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted mb-3">Card {i + 1}</p>
+                  <div className="flex items-center justify-between mb-3">
+                    <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted">
+                      Business credit card {i + 1}
+                    </p>
+                    {i > 0 && (
+                      <button
+                        type="button"
+                        onClick={() => ra('creditCards', i)}
+                        className="text-[11px] font-semibold text-orange border border-orange rounded-full px-3 py-1 hover:bg-orange hover:text-white transition-colors"
+                      >
+                        Remove
+                      </button>
+                    )}
+                  </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div><Lbl>Institution name</Lbl><input type="text" value={a.institution} onChange={(e) => ua('creditCards',i,'institution',e.target.value)} className={inp} /></div>
                     <div><Lbl opt>Card nickname</Lbl><input type="text" value={a.nickname} onChange={(e) => ua('creditCards',i,'nickname',e.target.value)} className={inp} /></div>
@@ -829,21 +945,6 @@ export default function IntakeForm() {
                 </SubCard>
               ))}
               <AddBtn onClick={() => aa('creditCards', CC_T)}>Add another credit card</AddBtn>
-            </div>
-
-            <Divider />
-
-            {/* Tax account */}
-            <div className="flex flex-col gap-3">
-              <p className="text-[13px] font-semibold text-brown">Tax accounts</p>
-              <SubCard>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div><Lbl>Institution name</Lbl><input type="text" value={fields.taxAccount.institution} onChange={(e) => sn('taxAccount','institution',e.target.value)} className={inp} /></div>
-                  <div><Lbl opt>Account nickname</Lbl><input type="text" value={fields.taxAccount.nickname} onChange={(e) => sn('taxAccount','nickname',e.target.value)} className={inp} /></div>
-                  <div><Lbl>Login / username email</Lbl><input type="text" value={fields.taxAccount.loginEmail} onChange={(e) => sn('taxAccount','loginEmail',e.target.value)} className={inp} /></div>
-                  <div><Lbl>Password</Lbl><input type="text" value={fields.taxAccount.password} onChange={(e) => sn('taxAccount','password',e.target.value)} className={inp} /></div>
-                </div>
-              </SubCard>
             </div>
 
             <div>
@@ -860,7 +961,20 @@ export default function IntakeForm() {
           <div className="flex flex-col gap-4">
             {fields.salesTaxStates.map((s, i) => (
               <SubCard key={i}>
-                <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted mb-3">State {i + 1}</p>
+                <div className="flex items-center justify-between mb-3">
+                  <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted">
+                    State {i + 1}
+                  </p>
+                  {i > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => ra('salesTaxStates', i)}
+                      className="text-[11px] font-semibold text-orange border border-orange rounded-full px-3 py-1 hover:bg-orange hover:text-white transition-colors"
+                    >
+                      Remove
+                    </button>
+                  )}
+                </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <Lbl>State</Lbl>
@@ -911,13 +1025,25 @@ export default function IntakeForm() {
                   <option value="">Select…</option>
                   {['QuickBooks Payroll','Gusto','ADP','Paychex','Rippling','Square Payroll','Other'].map((o) => <option key={o} value={o}>{o}</option>)}
                 </select>
+                {fields.payrollService === 'Other' && (
+                  <div className="mt-3">
+                    <Lbl>Please specify payroll service</Lbl>
+                    <input type="text" value={fields.payrollServiceOther} onChange={(e) => sf('payrollServiceOther', e.target.value)} className={inp} />
+                  </div>
+                )}
               </div>
               <div>
                 <Lbl>Pay frequency</Lbl>
                 <select value={fields.payrollFrequency} onChange={(e) => sf('payrollFrequency', e.target.value)} className={sel}>
                   <option value="">Select…</option>
-                  {['Weekly','Bi-weekly','Semi-monthly','Monthly'].map((o) => <option key={o} value={o}>{o}</option>)}
+                  {['Weekly','Bi-weekly','Semi-monthly','Monthly','Other'].map((o) => <option key={o} value={o}>{o}</option>)}
                 </select>
+                {fields.payrollFrequency === 'Other' && (
+                  <div className="mt-3">
+                    <Lbl>Please describe your pay frequency</Lbl>
+                    <input type="text" value={fields.payrollFrequencyOther} onChange={(e) => sf('payrollFrequencyOther', e.target.value)} className={inp} />
+                  </div>
+                )}
               </div>
               <div>
                 <Lbl>Number of W-2 employees</Lbl>
@@ -977,7 +1103,20 @@ export default function IntakeForm() {
           <div className="flex flex-col gap-4">
             {fields.ongoingSoftware.map((sw, i) => (
               <SubCard key={i}>
-                <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted mb-3">Software {i + 1}</p>
+                <div className="flex items-center justify-between mb-3">
+                  <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted">
+                    Software {i + 1}
+                  </p>
+                  {i > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => ra('ongoingSoftware', i)}
+                      className="text-[11px] font-semibold text-orange border border-orange rounded-full px-3 py-1 hover:bg-orange hover:text-white transition-colors"
+                    >
+                      Remove
+                    </button>
+                  )}
+                </div>
                 <SoftwareBlock data={sw} onChange={(sub, val) => ua('ongoingSoftware', i, sub, val)} />
               </SubCard>
             ))}
@@ -1087,7 +1226,20 @@ export default function IntakeForm() {
             <p className="text-[13px] font-semibold text-brown">Existing software access <span className="text-muted font-normal">(optional)</span></p>
             {fields.implementationSoftware.map((sw, i) => (
               <SubCard key={i}>
-                <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted mb-3">Software {i + 1}</p>
+                <div className="flex items-center justify-between mb-3">
+                  <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted">
+                    Software {i + 1}
+                  </p>
+                  {i > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => ra('implementationSoftware', i)}
+                      className="text-[11px] font-semibold text-orange border border-orange rounded-full px-3 py-1 hover:bg-orange hover:text-white transition-colors"
+                    >
+                      Remove
+                    </button>
+                  )}
+                </div>
                 <SoftwareBlock data={sw} onChange={(sub, val) => ua('implementationSoftware', i, sub, val)} />
               </SubCard>
             ))}
@@ -1119,6 +1271,15 @@ export default function IntakeForm() {
                     className="flex-1 border-0 border-b border-[#D1C4B8] rounded-none px-1 py-2 text-[14px] text-brown bg-transparent outline-none focus:border-orange transition-colors placeholder:text-[#C4A98A]"
                     placeholder="Describe the workflow…"
                   />
+                  {i > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => sf('workflows', fields.workflows.filter((_, wi) => wi !== i))}
+                      className="text-[11px] font-semibold text-orange border border-orange rounded-full px-3 py-1 hover:bg-orange hover:text-white transition-colors shrink-0"
+                    >
+                      Remove
+                    </button>
+                  )}
                 </div>
               ))}
             </div>
@@ -1254,7 +1415,7 @@ export default function IntakeForm() {
           Thank you for trusting us with your business.
         </h2>
         <p className="text-[13px] leading-[1.7] mb-8 max-w-[440px] mx-auto" style={{ color: 'rgba(253,246,236,0.65)' }}>
-          Once you submit, you'll be redirected to schedule your onboarding kickoff call with the Canopy Creative Co. team.
+          One click. Form submitted. Schedule your kickoff call. Let's get to work.
         </p>
         <div className="flex flex-col items-center gap-3">
           <button

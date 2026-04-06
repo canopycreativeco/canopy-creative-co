@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <footer className="bg-brown-dark px-[60px] py-10 flex items-center justify-between flex-wrap gap-5 max-md:px-6 max-md:flex-col max-md:items-start">
       <div className="font-serif text-[12px] font-bold tracking-[0.18em] uppercase text-orange/85">
-        Canopy Creative Co.
+        Canopy Creative Co
       </div>
 
       <p className="text-[12px] tracking-[0.04em] text-cream/30">

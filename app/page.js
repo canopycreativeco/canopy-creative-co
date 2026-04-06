@@ -124,7 +124,7 @@ export default function HomePage() {
           <div className="space-y-5">
             {[
               "Most creative business owners didn't start their business to manage spreadsheets, reconcile accounts, or figure out which software actually talks to each other. That's where we come in.",
-              'Canopy Creative Co. is an operations and finance consultancy built specifically for creative businesses. We cover the full back office — from keeping your books clean and your taxes filed, to building the systems and infrastructure that let you grow without the chaos.',
+              'Canopy Creative Co is an operations and finance consultancy built specifically for creative businesses. We cover the full back office — from keeping your books clean and your taxes filed, to building the systems and infrastructure that let you grow without the chaos.',
               'Hourly, on-demand, and always transparent. No bloated retainers, no mystery pricing, no surprise scope creep. Just the work your business actually needs.',
             ].map((text) => (
               <p key={text.slice(0, 20)} className="text-[16.5px] text-brown/80 leading-[1.8]">
@@ -312,7 +312,7 @@ export default function HomePage() {
               "Finally a company that doesn't make me feel like I'm just a number. I get exactly what I need, when I need it — nothing more, nothing less."
             </p>
             <p className="text-[13px] font-medium tracking-[0.04em]" style={{ color: 'rgba(253,246,236,0.4)' }}>
-              — A Canopy Creative Co. client
+              — A Canopy Creative Co client
             </p>
           </div>
         </div>

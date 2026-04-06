@@ -94,7 +94,7 @@ function buildHtml(data) {
     <head><meta charset="UTF-8" /></head>
     <body style="margin:0;padding:32px;background:#FDF6EC;">
       <div style="max-width:600px;margin:0 auto;background:#fff;border-radius:8px;padding:40px;border:1px solid #F5EBD8;">
-        <p style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#CC4E00;font-family:sans-serif;">Canopy Creative Co.</p>
+        <p style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#CC4E00;font-family:sans-serif;">Canopy Creative Co</p>
         <h1 style="margin:0 0 32px;font-size:22px;font-weight:700;color:#3B1E08;font-family:Georgia,serif;">New Contact Form Submission</h1>
 
         ${section('About You', [
@@ -136,7 +136,7 @@ export async function POST(request) {
     logToSheet(data).catch((err) => console.error('Sheets logging error:', err))
 
     const { error } = await resend.emails.send({
-      from: 'Canopy Creative Co. <onboarding@resend.dev>',
+      from: 'Canopy Creative Co <onboarding@resend.dev>',
       to: ['dave@canopycreativeco.com', 'hello@canopycreativeco.com'],
       subject: `New Contact Form Submission — ${data.businessName}`,
       html: buildHtml(data),

@@ -2,9 +2,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'About — Canopy Creative Co.',
+  title: 'About — Canopy Creative Co',
   description:
-    'From Fortune 500 to your back office. Meet Dave Altshul, founder of Canopy Creative Co.',
+    'From Fortune 500 to your back office. Meet Dave Altshul, founder of Canopy Creative Co',
 }
 
 export default function AboutPage() {
@@ -55,7 +55,7 @@ export default function AboutPage() {
             <div className="relative w-full aspect-[4/5] rounded-[4px] overflow-hidden">
               <Image
                 src="/dave.jpg.jpg"
-                alt="Dave Altshul, Founder of Canopy Creative Co."
+                alt="Dave Altshul, Founder of Canopy Creative Co"
                 fill
                 className="object-cover object-top"
               />
@@ -63,7 +63,7 @@ export default function AboutPage() {
             <div className="mt-5">
               <p className="font-serif text-[18px] font-bold text-brown mb-1">Dave Altshul</p>
               <p className="text-[13px] text-muted font-medium tracking-[0.04em]">
-                Founder, Canopy Creative Co.
+                Founder, Canopy Creative Co
               </p>
             </div>
           </div>
@@ -121,7 +121,7 @@ export default function AboutPage() {
               </div>
 
               <p className="text-[16px] text-brown leading-[1.85] mb-4" style={{ opacity: 0.82 }}>
-                Before Canopy Creative Co., Dave Altshul spent years operating at the highest levels
+                Before Canopy Creative Co, Dave Altshul spent years operating at the highest levels
                 of corporate finance and internal audit — building programs, leading teams, and
                 solving complex operational problems for organizations that don't have room for
                 error.
@@ -234,7 +234,7 @@ export default function AboutPage() {
               </p>
               <p className="text-[16px] text-brown leading-[1.85]" style={{ opacity: 0.82 }}>
                 So he left. He and his husband relocated to Tampa, started building something new,
-                and Canopy Creative Co. was born.
+                and Canopy Creative Co was born.
               </p>
             </div>
 
@@ -272,7 +272,7 @@ export default function AboutPage() {
                 That inside perspective isn't a conflict. It's the whole point.
               </p>
               <p className="text-[16px] text-brown leading-[1.85]" style={{ opacity: 0.82 }}>
-                Today, Canopy Creative Co. works with interior design studios, creative agencies,
+                Today, Canopy Creative Co works with interior design studios, creative agencies,
                 artists, workrooms, entertainment companies, and the businesses that support them —
                 across the United States. The back office problems are consistent. The chaos is
                 familiar. And the solution always starts the same way: understand what's actually

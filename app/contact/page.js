@@ -1,8 +1,8 @@
 import ContactForm from './ContactForm'
 
 export const metadata = {
-  title: 'Contact — Canopy Creative Co.',
-  description: "Get in touch with Canopy Creative Co. — let's figure out the right fit for your creative business.",
+  title: 'Contact — Canopy Creative Co',
+  description: "Get in touch with Canopy Creative Co — let's figure out the right fit for your creative business.",
 }
 
 export default function ContactPage() {

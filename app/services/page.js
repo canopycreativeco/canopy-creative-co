@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Services — Canopy Creative Co.',
+  title: 'Services — Canopy Creative Co',
   description: 'Operations and finance services for creative businesses — bookkeeping, advisory, and systems implementation.',
 }
 
@@ -83,7 +83,7 @@ export default function ServicesPage() {
             Whether you're just getting started, growing faster than your systems can keep up,
             or ready to get serious about your numbers —
             <br />
-            Canopy Creative Co. works with creative businesses at every stage,
+            Canopy Creative Co works with creative businesses at every stage,
             <br />
             across every part of the back office.
           </p>
