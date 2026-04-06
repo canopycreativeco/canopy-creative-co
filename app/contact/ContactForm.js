@@ -523,14 +523,22 @@ export default function ContactForm() {
 
       {/* ── SUBMIT ── */}
       <div>
-        <button
-          type="button"
-          onClick={handleSubmit}
-          disabled={loading}
-          className="w-full bg-orange text-cream font-sans font-semibold text-[16px] py-4 rounded-lg transition-colors duration-150 hover:bg-[#B34400] disabled:opacity-60 disabled:cursor-not-allowed"
-        >
-          {loading ? 'Sending…' : 'Schedule Call'}
-        </button>
+        {loading ? (
+          <div className="flex justify-center py-2">
+            <svg className="animate-spin" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="18" cy="18" r="15" stroke="rgba(204,78,0,0.2)" strokeWidth="3" />
+              <path d="M18 3a15 15 0 0 1 15 15" stroke="#CC4E00" strokeWidth="3" strokeLinecap="round" />
+            </svg>
+          </div>
+        ) : (
+          <button
+            type="button"
+            onClick={handleSubmit}
+            className="w-full bg-orange text-cream font-sans font-semibold text-[16px] py-4 rounded-lg transition-colors duration-150 hover:bg-[#B34400]"
+          >
+            Schedule Call
+          </button>
+        )}
 
         {submitError && (
           <p className="mt-4 text-[14px] text-red-600 leading-[1.6]">{submitError}</p>

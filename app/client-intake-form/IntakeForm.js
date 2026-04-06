@@ -54,13 +54,23 @@ const LAUNCH_ITEMS = [
 
 const SOCIAL_PLATFORMS = ['Instagram','Facebook','LinkedIn','TikTok','Pinterest','X (Twitter)','YouTube']
 const PLATFORM_PLACEHOLDERS = {
-  Instagram: '@yourinstagramhandle',
-  Facebook: 'Your page name or URL',
-  LinkedIn: 'linkedin.com/in/yourprofile',
-  TikTok: '@yourtiktokhandle',
-  Pinterest: '@yourpinteresthandle',
-  'X (Twitter)': '@yourtwitterhandle',
+  Instagram: 'yourinstagramhandle',
+  Facebook: 'yourpagename',
+  LinkedIn: 'yourprofile',
+  TikTok: 'yourtiktokhandle',
+  Pinterest: 'yourpinteresthandle',
+  'X (Twitter)': 'yourtwitterhandle',
   YouTube: 'Channel name or URL',
+}
+
+const PLATFORM_PREFIXES = {
+  Instagram: '@',
+  Facebook: '@',
+  LinkedIn: 'in/',
+  TikTok: '@',
+  Pinterest: '@',
+  'X (Twitter)': '@',
+  YouTube: '',
 }
 
 // ── Templates for repeatable blocks ──────────────────────────────────────────
@@ -1387,13 +1397,26 @@ export default function IntakeForm() {
               </div>
               {fields.socialPlatform && (
                 <div>
-                  <input
-                    type="text"
-                    value={fields.socialHandle}
-                    onChange={(e) => sf('socialHandle', e.target.value)}
-                    placeholder={PLATFORM_PLACEHOLDERS[fields.socialPlatform] || '@yourhandle'}
-                    className={inp}
-                  />
+                  {PLATFORM_PREFIXES[fields.socialPlatform] ? (
+                    <div className="flex items-center border border-[#D1C4B8] rounded-lg bg-white overflow-hidden transition-colors focus-within:border-orange">
+                      <span className="pl-3 pr-1 text-[14px] text-muted select-none">{PLATFORM_PREFIXES[fields.socialPlatform]}</span>
+                      <input
+                        type="text"
+                        value={fields.socialHandle}
+                        onChange={(e) => sf('socialHandle', e.target.value.replace(/^[@/]+/, ''))}
+                        placeholder={PLATFORM_PLACEHOLDERS[fields.socialPlatform] || 'yourhandle'}
+                        className="flex-1 bg-transparent py-2.5 pr-3 text-[14px] text-brown outline-none placeholder:text-[#C4A98A]"
+                      />
+                    </div>
+                  ) : (
+                    <input
+                      type="text"
+                      value={fields.socialHandle}
+                      onChange={(e) => sf('socialHandle', e.target.value)}
+                      placeholder={PLATFORM_PLACEHOLDERS[fields.socialPlatform] || 'Channel name or URL'}
+                      className={inp}
+                    />
+                  )}
                 </div>
               )}
             </div>
