@@ -38,6 +38,13 @@ const REFERRAL_OPTIONS = [
 const inputBase =
   'w-full bg-white border border-[#9A7A62] rounded-lg px-4 py-3 text-[15px] text-brown font-sans outline-none transition-colors duration-150 focus:border-orange placeholder:text-[#C4A98A]'
 
+function formatPhone(digits) {
+  const d = (digits || '').replace(/\D/g, '').slice(0, 10)
+  if (d.length <= 3) return d
+  if (d.length <= 6) return `(${d.slice(0, 3)}) ${d.slice(3)}`
+  return `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}`
+}
+
 function Label({ children, required }) {
   return (
     <label className="block text-[14px] font-medium text-brown mb-1">
@@ -305,8 +312,8 @@ export default function ContactForm() {
           <Label>Phone number</Label>
           <input
             type="tel"
-            value={fields.phone}
-            onChange={(e) => set('phone', e.target.value)}
+            value={formatPhone(fields.phone)}
+            onChange={(e) => set('phone', e.target.value.replace(/\D/g, '').slice(0, 10))}
             placeholder="(555) 000-0000"
             className={inputBase}
           />

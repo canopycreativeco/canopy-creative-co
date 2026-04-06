@@ -77,6 +77,13 @@ const inp  = 'w-full border border-[#D1C4B8] rounded-lg px-3 py-2.5 text-[14px] 
 const sel  = `${inp} appearance-none bg-[url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%239A7A62' d='M6 8L0 0h12z'/%3E%3C/svg%3E")] bg-no-repeat bg-[right_12px_center]`
 const ta   = `${inp} resize-none`
 
+function formatPhone(digits) {
+  const d = (digits || '').replace(/\D/g, '').slice(0, 10)
+  if (d.length <= 3) return d
+  if (d.length <= 6) return `(${d.slice(0, 3)}) ${d.slice(3)}`
+  return `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}`
+}
+
 // ── Helper components ─────────────────────────────────────────────────────────
 
 function Lbl({ children, opt }) {
@@ -546,7 +553,7 @@ export default function IntakeForm() {
           </div>
           <div>
             <Lbl>Primary business phone number</Lbl>
-            <input type="tel" value={fields.primaryBusinessPhone} onChange={(e) => sf('primaryBusinessPhone', e.target.value)} placeholder="(555) 000-0000" className={inp} />
+            <input type="tel" value={formatPhone(fields.primaryBusinessPhone)} onChange={(e) => sf('primaryBusinessPhone', e.target.value.replace(/\D/g, '').slice(0, 10))} placeholder="(555) 000-0000" className={inp} />
           </div>
         </div>
       </SectionCard>
