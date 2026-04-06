@@ -1417,14 +1417,37 @@ export default function IntakeForm() {
           One click. Form submitted. Schedule your kickoff call. Let's get to work.
         </p>
         <div className="flex flex-col items-center gap-3">
-          <button
-            type="button"
-            onClick={handleSubmit}
-            disabled={loading}
-            className="w-full sm:w-auto bg-white text-orange border border-orange text-[15px] font-semibold px-8 py-3.5 rounded-lg transition-colors duration-150 hover:bg-orange hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {loading ? 'Submitting…' : 'Schedule onboarding kickoff call →'}
-          </button>
+          {loading ? (
+            <div className="flex flex-col items-center gap-4">
+              <svg
+                className="animate-spin"
+                width="36"
+                height="36"
+                viewBox="0 0 36 36"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="18" cy="18" r="15" stroke="rgba(253,246,236,0.2)" strokeWidth="3" />
+                <path
+                  d="M18 3a15 15 0 0 1 15 15"
+                  stroke="#CC4E00"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                />
+              </svg>
+              <p className="text-[13px] leading-[1.7] max-w-[360px]" style={{ color: 'rgba(253,246,236,0.65)' }}>
+                Almost there! We're saving your response in the background — this can take up to a minute. Please don't close or refresh this page.
+              </p>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={handleSubmit}
+              className="w-full sm:w-auto bg-white text-orange border border-orange text-[15px] font-semibold px-8 py-3.5 rounded-lg transition-colors duration-150 hover:bg-orange hover:text-white"
+            >
+              Schedule onboarding kickoff call →
+            </button>
+          )}
           {submitError && (
             <p className="text-[13px] text-red-400 leading-[1.6] max-w-[400px]">{submitError}</p>
           )}
