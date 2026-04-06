@@ -541,7 +541,7 @@ export default function IntakeForm() {
           before your onboarding call. All information is kept strictly confidential.
         </p>
       </div>
-      <p className="flex items-center justify-center gap-1.5 text-[12px] leading-[1.6] text-center mt-3" style={{ color: 'rgba(253,246,236,0.6)' }}>
+      <p className="flex items-center justify-center gap-1.5 text-[12px] leading-[1.6] text-center mt-3" style={{ color: '#3B1E08', opacity: 0.55 }}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-[12px] h-[12px] shrink-0">
           <path fillRule="evenodd" d="M8 1a3.5 3.5 0 0 0-3.5 3.5V6H4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-.5V4.5A3.5 3.5 0 0 0 8 1Zm2 5V4.5a2 2 0 1 0-4 0V6h4Z" clipRule="evenodd" />
         </svg>
