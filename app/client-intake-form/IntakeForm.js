@@ -1436,7 +1436,7 @@ export default function IntakeForm() {
                 />
               </svg>
               <p className="text-[13px] leading-[1.7] max-w-[360px]" style={{ color: 'rgba(253,246,236,0.65)' }}>
-                Almost there! We're saving your response in the background — this can take up to a minute. Please don't close or refresh this page.
+                Almost there! We're saving your response in the background — this can take up to a minute.<br />Please don't close or refresh this page.
               </p>
             </div>
           ) : (
