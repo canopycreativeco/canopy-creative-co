@@ -33,21 +33,6 @@ const REFERRAL_OPTIONS = [
   'Other',
 ]
 
-const COUNTRIES = [
-  { code: 'US', dial: '+1',  flag: '🇺🇸', label: 'United States' },
-  { code: 'CA', dial: '+1',  flag: '🇨🇦', label: 'Canada' },
-  { code: 'GB', dial: '+44', flag: '🇬🇧', label: 'United Kingdom' },
-  { code: 'AU', dial: '+61', flag: '🇦🇺', label: 'Australia' },
-  { code: 'MX', dial: '+52', flag: '🇲🇽', label: 'Mexico' },
-  { code: 'FR', dial: '+33', flag: '🇫🇷', label: 'France' },
-  { code: 'DE', dial: '+49', flag: '🇩🇪', label: 'Germany' },
-  { code: 'IT', dial: '+39', flag: '🇮🇹', label: 'Italy' },
-  { code: 'ES', dial: '+34', flag: '🇪🇸', label: 'Spain' },
-  { code: 'BR', dial: '+55', flag: '🇧🇷', label: 'Brazil' },
-  { code: 'NZ', dial: '+64', flag: '🇳🇿', label: 'New Zealand' },
-  { code: 'JP', dial: '+81', flag: '🇯🇵', label: 'Japan' },
-]
-
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 const inputBase =
@@ -77,87 +62,6 @@ function SectionHeader({ children }) {
 function FieldError({ msg }) {
   if (!msg) return null
   return <p className="text-[12px] text-red-600 mt-1">{msg}</p>
-}
-
-function formatPhoneNumber(raw) {
-  const digits = raw.replace(/\D/g, '').slice(0, 10)
-  if (digits.length <= 3) return digits
-  if (digits.length <= 6) return `${digits.slice(0, 3)}-${digits.slice(3)}`
-  return `${digits.slice(0, 3)}-${digits.slice(3, 6)}-${digits.slice(6)}`
-}
-
-// ── Phone field ───────────────────────────────────────────────────────────────
-
-function PhoneField({ value, onChange }) {
-  const [selectedCode, setSelectedCode] = useState('US')
-  const [number, setNumber] = useState('')
-  const [open, setOpen] = useState(false)
-  const dropRef = useRef(null)
-
-  const country = COUNTRIES.find((c) => c.code === selectedCode) || COUNTRIES[0]
-
-  useEffect(() => {
-    function handleClick(e) {
-      if (dropRef.current && !dropRef.current.contains(e.target)) setOpen(false)
-    }
-    document.addEventListener('mousedown', handleClick)
-    return () => document.removeEventListener('mousedown', handleClick)
-  }, [])
-
-  function handleCountryChange(c) {
-    setSelectedCode(c.code)
-    setOpen(false)
-    setNumber('')
-    onChange('')
-  }
-
-  function handleNumberChange(e) {
-    const formatted = formatPhoneNumber(e.target.value)
-    setNumber(formatted)
-    onChange(formatted ? `${country.dial} ${formatted}` : '')
-  }
-
-  return (
-    <div className="flex items-stretch border border-[#9A7A62] rounded-lg bg-white focus-within:border-orange transition-colors duration-150">
-      <div ref={dropRef} className="relative flex-shrink-0">
-        <button
-          type="button"
-          onClick={() => setOpen((o) => !o)}
-          className="flex items-center gap-1.5 px-3 h-full border-r border-[#9A7A62]/40 hover:bg-[#FAF0E0] rounded-l-lg transition-colors"
-        >
-          <span className="text-[18px] leading-none">{country.flag}</span>
-          <span className="text-[14px] text-muted">{country.dial}</span>
-          <span className="text-[10px] text-muted">▾</span>
-        </button>
-        {open && (
-          <ul className="absolute z-50 top-full left-0 mt-1 w-56 bg-white border border-[#9A7A62]/40 rounded-lg shadow-lg max-h-52 overflow-y-auto">
-            {COUNTRIES.map((c) => (
-              <li key={c.code}>
-                <button
-                  type="button"
-                  onClick={() => handleCountryChange(c)}
-                  className={`w-full text-left px-3 py-2 text-[13px] flex items-center gap-2 hover:bg-cream transition-colors ${
-                    selectedCode === c.code ? 'text-orange font-medium' : 'text-brown'
-                  }`}
-                >
-                  <span className="text-[16px]">{c.flag}</span>
-                  <span className="flex-1">{c.label}</span>
-                  <span className="text-muted ml-auto">{c.dial}</span>
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-      <input
-        type="tel"
-        value={number}
-        onChange={handleNumberChange}
-        placeholder="___-___-____"
-        className="flex-1 px-4 py-3 text-[15px] text-brown bg-transparent outline-none placeholder:text-[#C4A98A]"
-      />
-    </div>
-  )
 }
 
 // ── State multi-select ────────────────────────────────────────────────────────
@@ -399,7 +303,13 @@ export default function ContactForm() {
         {/* Phone */}
         <div>
           <Label>Phone number</Label>
-          <PhoneField value={fields.phone} onChange={(v) => set('phone', v)} />
+          <input
+            type="tel"
+            value={fields.phone}
+            onChange={(e) => set('phone', e.target.value)}
+            placeholder="(555) 000-0000"
+            className={inputBase}
+          />
         </div>
       </div>
 
