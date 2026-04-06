@@ -555,11 +555,10 @@ export default function IntakeForm() {
       {showLegalSection && (
         <SectionCard badge="Legal & Tax Information" title="Legal & tax information">
           <NotePill>
-            We touched on some of this during our calls — but for this section, please make sure your
-            answers match your official legal documents exactly (including punctuation, spaces, and
-            capitalization). This information is used for tax filings, 1099s, and other compliance
-            work, so accuracy here really matters. When in doubt, refer to your EIN letter, articles
-            of organization, or any documents from your state registration.
+            Please make sure your answers match your official legal documents exactly. This information
+            is used for tax filings, 1099s, and other compliance work, so accuracy here really matters.
+            When in doubt, refer to your EIN letter, articles of organization, or any documents from
+            your state registration.
           </NotePill>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="sm:col-span-2">
