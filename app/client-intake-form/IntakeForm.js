@@ -551,93 +551,6 @@ export default function IntakeForm() {
         </div>
       </SectionCard>
 
-      {/* ── 1B: LEGAL & TAX INFORMATION (conditional) ── */}
-      {showLegalSection && (
-        <SectionCard badge="Legal & Tax Information" title="Legal & tax information">
-          <NotePill>
-            Please make sure your answers match your official legal documents exactly. This information
-            is used for tax filings, 1099s, and other compliance work, so accuracy here really matters.
-            When in doubt, refer to your EIN letter, articles of organization, or any documents from
-            your state registration.
-          </NotePill>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="sm:col-span-2">
-              <Lbl>Business address</Lbl>
-              <input type="text" value={fields.businessAddress} onChange={(e) => sf('businessAddress', e.target.value)} className={inp} />
-            </div>
-            <div>
-              <Lbl>Entity type</Lbl>
-              <select value={fields.entityType} onChange={(e) => sf('entityType', e.target.value)} className={sel}>
-                <option value="">Select…</option>
-                {['Sole proprietorship','Single-member LLC','Multi-member LLC','S-Corp','C-Corp',
-                  'LLC taxed as S-Corp','LLC taxed as C-Corp','Partnership','Other'].map((o) => (
-                  <option key={o} value={o}>{o}</option>
-                ))}
-              </select>
-            </div>
-            {fields.entityType === 'Other' && (
-              <div>
-                <Lbl>Please specify entity type</Lbl>
-                <input type="text" value={fields.entityTypeOther} onChange={(e) => sf('entityTypeOther', e.target.value)} className={inp} />
-              </div>
-            )}
-            <div>
-              <Lbl>State of formation</Lbl>
-              <select value={fields.stateOfFormation} onChange={(e) => sf('stateOfFormation', e.target.value)} className={sel}>
-                <option value="">Select a state…</option>
-                {US_STATES.map((s) => <option key={s} value={s}>{s}</option>)}
-              </select>
-            </div>
-            <div>
-              <Lbl>EIN</Lbl>
-              <input type="text" value={fields.ein} onChange={(e) => sf('ein', e.target.value)} placeholder="XX-XXXXXXX" className={inp} />
-            </div>
-            <div>
-              <Lbl>Fiscal year end</Lbl>
-              <select value={fields.fiscalYearEnd} onChange={(e) => sf('fiscalYearEnd', e.target.value)} className={sel}>
-                <option value="">Select…</option>
-                {['December 31','March 31','June 30','September 30','Other'].map((o) => (
-                  <option key={o} value={o}>{o}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-          <Divider />
-          <div className="flex flex-col gap-3">
-            <div>
-              <Lbl>Do you currently have a tax preparer?</Lbl>
-              <Hint>Either a CPA or tax professional</Hint>
-            </div>
-            <div className="flex flex-col gap-2">
-              {[
-                { value: 'yes',          label: 'Yes' },
-                { value: 'no-recommend', label: "No — and I'd like a recommendation" },
-                { value: 'no-ok',        label: "No — and I'm all set without one" },
-              ].map((opt) => (
-                <RadioPillRow
-                  key={opt.value}
-                  value={opt.value}
-                  label={opt.label}
-                  selected={fields.hasTaxPreparer === opt.value}
-                  onSelect={(v) => sf('hasTaxPreparer', v)}
-                />
-              ))}
-            </div>
-            {fields.hasTaxPreparer === 'yes' && (
-              <SubCard>
-                <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted mb-3">Tax preparer details</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div><Lbl>Name</Lbl><input type="text" value={fields.taxPreparer.name} onChange={(e) => sn('taxPreparer','name',e.target.value)} className={inp} /></div>
-                  <div><Lbl>Firm name</Lbl><input type="text" value={fields.taxPreparer.firmName} onChange={(e) => sn('taxPreparer','firmName',e.target.value)} className={inp} /></div>
-                  <div><Lbl>Email</Lbl><input type="email" value={fields.taxPreparer.email} onChange={(e) => sn('taxPreparer','email',e.target.value)} className={inp} /></div>
-                  <div><Lbl>Phone</Lbl><input type="tel" value={fields.taxPreparer.phone} onChange={(e) => sn('taxPreparer','phone',e.target.value)} className={inp} /></div>
-                </div>
-              </SubCard>
-            )}
-          </div>
-        </SectionCard>
-      )}
-
       {/* ── 2: ADDITIONAL CONTACTS ── */}
       <SectionCard
         badge="Your Team"
@@ -737,6 +650,93 @@ export default function IntakeForm() {
           </div>
         </div>
       </SectionCard>
+
+      {/* ── 1B: LEGAL & TAX INFORMATION (conditional) ── */}
+      {showLegalSection && (
+        <SectionCard badge="Legal & Tax Information" title="Legal & tax information">
+          <NotePill>
+            Please make sure your answers match your official legal documents exactly. This information
+            is used for tax filings, 1099s, and other compliance work, so accuracy here really matters.
+            When in doubt, refer to your EIN letter, articles of organization, or any documents from
+            your state registration.
+          </NotePill>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="sm:col-span-2">
+              <Lbl>Business address</Lbl>
+              <input type="text" value={fields.businessAddress} onChange={(e) => sf('businessAddress', e.target.value)} className={inp} />
+            </div>
+            <div>
+              <Lbl>Entity type</Lbl>
+              <select value={fields.entityType} onChange={(e) => sf('entityType', e.target.value)} className={sel}>
+                <option value="">Select…</option>
+                {['Sole proprietorship','Single-member LLC','Multi-member LLC','S-Corp','C-Corp',
+                  'LLC taxed as S-Corp','LLC taxed as C-Corp','Partnership','Other'].map((o) => (
+                  <option key={o} value={o}>{o}</option>
+                ))}
+              </select>
+            </div>
+            {fields.entityType === 'Other' && (
+              <div>
+                <Lbl>Please specify entity type</Lbl>
+                <input type="text" value={fields.entityTypeOther} onChange={(e) => sf('entityTypeOther', e.target.value)} className={inp} />
+              </div>
+            )}
+            <div>
+              <Lbl>State of formation</Lbl>
+              <select value={fields.stateOfFormation} onChange={(e) => sf('stateOfFormation', e.target.value)} className={sel}>
+                <option value="">Select a state…</option>
+                {US_STATES.map((s) => <option key={s} value={s}>{s}</option>)}
+              </select>
+            </div>
+            <div>
+              <Lbl>EIN</Lbl>
+              <input type="text" value={fields.ein} onChange={(e) => sf('ein', e.target.value)} placeholder="XX-XXXXXXX" className={inp} />
+            </div>
+            <div>
+              <Lbl>Fiscal year end</Lbl>
+              <select value={fields.fiscalYearEnd} onChange={(e) => sf('fiscalYearEnd', e.target.value)} className={sel}>
+                <option value="">Select…</option>
+                {['December 31','March 31','June 30','September 30','Other'].map((o) => (
+                  <option key={o} value={o}>{o}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <Divider />
+          <div className="flex flex-col gap-3">
+            <div>
+              <Lbl>Do you currently have a tax preparer?</Lbl>
+              <Hint>Either a CPA or tax professional</Hint>
+            </div>
+            <div className="flex flex-col gap-2">
+              {[
+                { value: 'yes',          label: 'Yes' },
+                { value: 'no-recommend', label: "No — and I'd like a recommendation" },
+                { value: 'no-ok',        label: "No — and I'm all set without one" },
+              ].map((opt) => (
+                <RadioPillRow
+                  key={opt.value}
+                  value={opt.value}
+                  label={opt.label}
+                  selected={fields.hasTaxPreparer === opt.value}
+                  onSelect={(v) => sf('hasTaxPreparer', v)}
+                />
+              ))}
+            </div>
+            {fields.hasTaxPreparer === 'yes' && (
+              <SubCard>
+                <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted mb-3">Tax preparer details</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div><Lbl>Name</Lbl><input type="text" value={fields.taxPreparer.name} onChange={(e) => sn('taxPreparer','name',e.target.value)} className={inp} /></div>
+                  <div><Lbl>Firm name</Lbl><input type="text" value={fields.taxPreparer.firmName} onChange={(e) => sn('taxPreparer','firmName',e.target.value)} className={inp} /></div>
+                  <div><Lbl>Email</Lbl><input type="email" value={fields.taxPreparer.email} onChange={(e) => sn('taxPreparer','email',e.target.value)} className={inp} /></div>
+                  <div><Lbl>Phone</Lbl><input type="tel" value={fields.taxPreparer.phone} onChange={(e) => sn('taxPreparer','phone',e.target.value)} className={inp} /></div>
+                </div>
+              </SubCard>
+            )}
+          </div>
+        </SectionCard>
+      )}
 
       {/* ── 4: ACCOUNTING SOFTWARE ── */}
       <SectionCard badge="Accounting" title="Accounting software">
