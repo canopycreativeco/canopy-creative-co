@@ -96,10 +96,11 @@ function formatPhone(digits) {
 
 // ── Helper components ─────────────────────────────────────────────────────────
 
-function Lbl({ children, opt }) {
+function Lbl({ children, opt, req }) {
   return (
     <label className="block text-[13px] font-medium text-brown mb-1">
       {children}
+      {req && <span className="text-red-500 ml-0.5">*</span>}
       {opt && <span className="text-muted font-normal ml-1">(optional)</span>}
     </label>
   )
@@ -545,7 +546,7 @@ export default function IntakeForm() {
       <SectionCard badge="Getting Started" title="About your business">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="sm:col-span-2">
-            <Lbl>Legal business name</Lbl>
+            <Lbl req>Legal business name</Lbl>
             <input type="text" value={fields.legalBusinessName} onChange={(e) => sf('legalBusinessName', e.target.value)} className={inp} />
           </div>
           <div className="sm:col-span-2">
@@ -554,11 +555,11 @@ export default function IntakeForm() {
             <input type="text" value={fields.dba} onChange={(e) => sf('dba', e.target.value)} className={inp} />
           </div>
           <div>
-            <Lbl>Owner / primary contact name</Lbl>
+            <Lbl req>Owner / primary contact name</Lbl>
             <input type="text" value={fields.ownerName} onChange={(e) => sf('ownerName', e.target.value)} className={inp} />
           </div>
           <div>
-            <Lbl>Primary business email address</Lbl>
+            <Lbl req>Primary business email address</Lbl>
             <input type="email" value={fields.primaryBusinessEmail} onChange={(e) => sf('primaryBusinessEmail', e.target.value)} className={inp} />
           </div>
           <div>
@@ -618,7 +619,7 @@ export default function IntakeForm() {
       {/* ── 3: SERVICES ── */}
       <SectionCard
         badge="Your Services"
-        title="Which services are you signing on for?"
+        title={<>Which services are you signing on for? <span className="text-red-500">*</span></>}
         description="Select everything that applies. We'll ask for the relevant details below based on your selections."
       >
         <div className="flex flex-col gap-5">
