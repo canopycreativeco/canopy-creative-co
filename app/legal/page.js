@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Legal | Canopy Creative Co.",
+  title: "Legal | Canopy Creative Co",
   description: "Privacy policy, terms of use, and disclaimers for Canopy Creative Co.",
   robots: "noindex",
 };
@@ -56,9 +56,9 @@ export default function LegalPage() {
             </h2>
             <div className="space-y-6 text-base leading-relaxed text-[#3B1E08]/80">
               <p>
-                Canopy Creative Co. LLC ("we," "us," or "our") operates this website at
-                canopycreativeco.com. This policy explains what information we collect, how we
-                use it, and your rights with respect to it.
+                Canopy Creative Consulting LLC, doing business as Canopy Creative Co ("we," "us,"
+                or "our"), operates this website at canopycreativeco.com. This policy explains
+                what information we collect, how we use it, and your rights with respect to it.
               </p>
               <div>
                 <h3 className="font-['Libre_Baskerville'] text-lg text-[#3B1E08] mb-2">Information we collect</h3>
@@ -107,7 +107,7 @@ export default function LegalPage() {
               <div>
                 <h3 className="font-['Libre_Baskerville'] text-lg text-[#3B1E08] mb-2">Contact</h3>
                 <p>
-                  Canopy Creative Co. LLC<br />
+                  Canopy Creative Consulting LLC d/b/a Canopy Creative Co<br />
                   5005 W Laurel Street, Suite 100, PMB 3206<br />
                   Tampa, FL 33607<br />
                   United States<br />
@@ -143,7 +143,7 @@ export default function LegalPage() {
                 <h3 className="font-['Libre_Baskerville'] text-lg text-[#3B1E08] mb-2">Intellectual property</h3>
                 <p>
                   All content on this site — including text, design, graphics, and logos — is the
-                  property of Canopy Creative Co. LLC and may not be reproduced or distributed
+                  property of Canopy Creative Consulting LLC and may not be reproduced or distributed
                   without our written permission.
                 </p>
               </div>
@@ -157,7 +157,7 @@ export default function LegalPage() {
               <div>
                 <h3 className="font-['Libre_Baskerville'] text-lg text-[#3B1E08] mb-2">Limitation of liability</h3>
                 <p>
-                  To the fullest extent permitted by law, Canopy Creative Co. LLC shall not be
+                  To the fullest extent permitted by law, Canopy Creative Consulting LLC shall not be
                   liable for any damages arising from your use of, or inability to use, this
                   website or its content.
                 </p>
