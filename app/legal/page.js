@@ -12,20 +12,20 @@ export default function LegalPage() {
   const [active, setActive] = useState("privacy");
 
   useEffect(() => {
-    const observers = [];
-    sections.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActive(id);
-        },
-        { rootMargin: "-20% 0px -70% 0px", threshold: 0 }
-      );
-      observer.observe(el);
-      observers.push(observer);
-    });
-    return () => observers.forEach((o) => o.disconnect());
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      let current = sections[0].id;
+      sections.forEach(({ id }) => {
+        const el = document.getElementById(id);
+        if (el && el.offsetTop - 120 <= scrollY) {
+          current = id;
+        }
+      });
+      setActive(current);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
