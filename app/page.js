@@ -180,7 +180,7 @@ export default function HomePage() {
               tag: 'Advisory',
               name: 'The Canopy',
               desc: 'Financial clarity that protects and guides everything underneath — so every decision is grounded in the full picture.',
-              services: ['Financial Planning & Analysis', 'Cash flow analysis', 'Budgeting and forecasting', 'Project & product profitability', 'Finance & accounting coaching'],
+              services: ['Financial planning & analysis', 'Cash flow analysis', 'Budgeting and forecasting', 'Project & product profitability', 'Finance & accounting coaching'],
             },
             {
               tag: 'Operations & Systems',

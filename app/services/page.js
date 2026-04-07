@@ -34,7 +34,7 @@ const tiers = [
     descriptor:
       "Your business grows best when there's something solid overhead. The Canopy brings the financial clarity that protects and guides everything underneath — what's driving your revenue, where margin is slipping, and what the road ahead actually looks like. So every decision you make is grounded in the full picture, not just a feeling.",
     services: [
-      'Financial Planning & Analysis',
+      'Financial planning & analysis',
       'Cash flow analysis',
       'Budgeting and forecasting',
       'Project and product profitability',
