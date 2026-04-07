@@ -10,7 +10,7 @@ const footerLinks = [
 export default function Footer() {
   return (
     <footer className="bg-brown-dark px-[60px] py-10 flex items-center justify-between flex-wrap gap-5 max-md:px-6 max-md:flex-col max-md:items-start">
-      <div className="text-[12px] font-bold tracking-[0.18em] uppercase text-orange/85" style={{ fontFamily: "'Alta', serif" }}>
+      <div className="text-[24px] font-bold tracking-[0.18em] uppercase text-orange/85" style={{ fontFamily: "'Alta', serif" }}>
         Canopy Creative Co.
       </div>
 

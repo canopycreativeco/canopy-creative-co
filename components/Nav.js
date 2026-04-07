@@ -20,7 +20,7 @@ export default function Nav() {
     >
       <Link
         href="/"
-        className="text-[12.5px] font-bold tracking-[0.2em] uppercase text-orange no-underline"
+        className="text-[25px] font-bold tracking-[0.2em] uppercase text-orange no-underline"
         style={{ fontFamily: "'Alta', serif" }}
       >
         Canopy Creative Co.
