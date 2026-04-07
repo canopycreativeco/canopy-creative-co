@@ -31,7 +31,7 @@ export default function LegalPage() {
   return (
     <main className="bg-[#FDF6EC] min-h-screen">
       {/* Page Header */}
-      <div className="bg-[#3B1E08] px-6 pt-[100px] pb-16 max-md:pt-[80px] max-md:pb-12">
+      <div className="bg-[#3B1E08] px-6 pt-[100px] pb-12 max-md:pt-[80px] max-md:pb-10">
         <div className="max-w-5xl mx-auto">
           <p className="text-[#9A7A62] text-sm tracking-widest uppercase mb-3 font-['DM_Sans']">
             Legal
@@ -39,7 +39,7 @@ export default function LegalPage() {
           <h1 className="font-['Libre_Baskerville'] text-[#FDF6EC] text-4xl md:text-5xl leading-tight">
             Policies &amp; Terms
           </h1>
-          <p className="text-[#9A7A62] mt-4 font-['DM_Sans'] text-sm">
+          <p className="text-[#9A7A62] font-['DM_Sans'] text-sm">
             Last updated: January 1, 2026
           </p>
         </div>
