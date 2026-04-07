@@ -15,10 +15,6 @@ export default function Nav() {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
 
-  const currentLabel = navLinks.find(({ href }) =>
-    href === '/' ? pathname === '/' : pathname.startsWith(href)
-  )?.label ?? ''
-
   return (
     <nav
       className="fixed top-0 left-0 right-0 z-[200]"
@@ -74,10 +70,6 @@ export default function Nav() {
           >
             Canopy Creative Co.
           </Link>
-
-          <span className="text-[13px] font-medium tracking-[0.05em] text-brown/60 absolute left-1/2 -translate-x-1/2">
-            {currentLabel}
-          </span>
 
           <button
             onClick={() => setMenuOpen((o) => !o)}
