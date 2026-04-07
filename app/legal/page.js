@@ -1,8 +1,6 @@
-export const metadata = {
-  title: "Legal | Canopy Creative Co",
-  description: "Privacy policy, terms of use, and disclaimers for Canopy Creative Co.",
-  robots: "noindex",
-};
+"use client";
+
+import { useEffect, useState } from "react";
 
 const sections = [
   { id: "privacy", label: "Privacy Policy" },
@@ -11,6 +9,25 @@ const sections = [
 ];
 
 export default function LegalPage() {
+  const [active, setActive] = useState("privacy");
+
+  useEffect(() => {
+    const observers = [];
+    sections.forEach(({ id }) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActive(id);
+        },
+        { rootMargin: "-20% 0px -70% 0px", threshold: 0 }
+      );
+      observer.observe(el);
+      observers.push(observer);
+    });
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
   return (
     <main className="bg-[#FDF6EC] min-h-screen">
       {/* Page Header */}
@@ -38,7 +55,11 @@ export default function LegalPage() {
               <a
                 key={s.id}
                 href={`#${s.id}`}
-                className="text-sm font-['DM_Sans'] text-[#9A7A62] hover:text-[#CC4E00] transition-colors py-1 border-b border-transparent hover:border-[#CC4E00]"
+                className={`text-sm font-['DM_Sans'] transition-colors py-1 border-b ${
+                  active === s.id
+                    ? "text-[#CC4E00] border-[#CC4E00]"
+                    : "text-[#9A7A62] border-transparent hover:text-[#CC4E00] hover:border-[#CC4E00]"
+                }`}
               >
                 {s.label}
               </a>
@@ -56,9 +77,7 @@ export default function LegalPage() {
             </h2>
             <div className="space-y-6 text-base leading-relaxed text-[#3B1E08]/80">
               <p>
-                Canopy Creative Consulting LLC, doing business as Canopy Creative Co ("we," "us,"
-                or "our"), operates this website at canopycreativeco.com. This policy explains
-                what information we collect, how we use it, and your rights with respect to it.
+                Canopy Creative Consulting LLC, doing business as Canopy Creative Co ("we," "us," or "our") operates this website at canopycreativeco.com. This policy explains what information we collect, how we use it, and your rights with respect to it.
               </p>
               <div>
                 <h3 className="font-['Libre_Baskerville'] text-lg text-[#3B1E08] mb-2">Information we collect</h3>
@@ -107,7 +126,7 @@ export default function LegalPage() {
               <div>
                 <h3 className="font-['Libre_Baskerville'] text-lg text-[#3B1E08] mb-2">Contact</h3>
                 <p>
-                  Canopy Creative Consulting LLC d/b/a Canopy Creative Co<br />
+                  Canopy Creative Consulting LLC (DBA: Canopy Creative Co)<br />
                   5005 W Laurel Street, Suite 100, PMB 3206<br />
                   Tampa, FL 33607<br />
                   United States<br />
@@ -224,7 +243,7 @@ export default function LegalPage() {
           <div className="pt-4 border-t border-[#F5EBD8]">
             <p className="text-sm text-[#9A7A62]">
               Questions about these policies?{" "}
-              <a href="/contact" className="text-[#CC4E00] hover:underline">
+              <a href="mailto:hello@canopycreativeco.com" className="text-[#CC4E00] hover:underline">
                 Get in touch.
               </a>
             </p>
