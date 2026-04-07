@@ -1,5 +1,18 @@
 import Link from 'next/link'
 
+export const metadata = {
+  title: {
+    absolute: 'Canopy Creative Co',
+  },
+  description: 'Your back office, finally working for you. Canopy Creative Co provides on-demand bookkeeping, financial advisory, and operations support for creative businesses across the US.',
+  openGraph: {
+    title: 'Canopy Creative Co',
+    description: 'Your back office, finally working for you. Canopy Creative Co provides on-demand bookkeeping, financial advisory, and operations support for creative businesses across the US.',
+    url: 'https://canopycreativeco.com',
+    siteName: 'Canopy Creative Co',
+  },
+}
+
 /* ── Shared button styles ── */
 const btnPrimary =
   'inline-block bg-orange text-cream text-[14px] font-semibold tracking-[0.04em] px-8 py-[15px] rounded-[3px] no-underline transition-all duration-200 hover:bg-[#b04400] hover:-translate-y-px'

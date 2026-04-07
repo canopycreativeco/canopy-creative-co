@@ -1,8 +1,14 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Services — Canopy Creative Co',
-  description: 'Operations and finance services for creative businesses — bookkeeping, advisory, and systems implementation.',
+  title: 'Services',
+  description: 'Explore The Roots, The Canopy, and The Build — three tiers of operations and finance support designed for creative businesses. Transparent, on-demand pricing.',
+  openGraph: {
+    title: 'Services | Canopy Creative Co',
+    description: 'Explore The Roots, The Canopy, and The Build — three tiers of operations and finance support designed for creative businesses. Transparent, on-demand pricing.',
+    url: 'https://canopycreativeco.com/services',
+    siteName: 'Canopy Creative Co',
+  },
 }
 
 const tiers = [

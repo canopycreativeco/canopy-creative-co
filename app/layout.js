@@ -19,9 +19,24 @@ const dmSans = DM_Sans({
 })
 
 export const metadata = {
-  title: 'Canopy Creative Co',
-  description: 'Operations & Finance Consulting for Creative Businesses — wherever you are, we\'ve got you covered.',
+  metadataBase: new URL('https://canopycreativeco.com'),
+  title: {
+    default: 'Canopy Creative Co',
+    template: '%s | Canopy Creative Co',
+  },
+  description: 'Operations and finance support for creative businesses. Bookkeeping, financial advisory, and systems — transparent pricing.',
   icons: { icon: '/favicon.svg' },
+  openGraph: {
+    type: 'website',
+    siteName: 'Canopy Creative Co',
+  },
+  twitter: {
+    card: 'summary_large_image',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
 
 export default function RootLayout({ children }) {
@@ -31,6 +46,20 @@ export default function RootLayout({ children }) {
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'ProfessionalService',
+              name: 'Canopy Creative Co',
+              url: 'https://canopycreativeco.com',
+              description: 'On-demand operations and finance support for creative businesses.',
+              areaServed: 'US',
+              serviceType: ['Bookkeeping', 'Financial Advisory', 'Operations Consulting'],
+            }),
+          }}
+        />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-LYG1SEG3Q5"
           strategy="afterInteractive"

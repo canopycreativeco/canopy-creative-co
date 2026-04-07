@@ -2,9 +2,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'About — Canopy Creative Co',
-  description:
-    'From Fortune 500 to your back office. Meet Dave Altshul, founder of Canopy Creative Co',
+  title: 'About',
+  description: 'Canopy Creative Co is an operations and finance consultancy built for creative businesses — from interior design studios to agencies, artists, and makers.',
+  openGraph: {
+    title: 'About | Canopy Creative Co',
+    description: 'Canopy Creative Co is an operations and finance consultancy built for creative businesses — from interior design studios to agencies, artists, and makers.',
+    url: 'https://canopycreativeco.com/about',
+    siteName: 'Canopy Creative Co',
+  },
 }
 
 export default function AboutPage() {
