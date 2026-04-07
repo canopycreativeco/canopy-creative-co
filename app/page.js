@@ -357,12 +357,12 @@ export default function HomePage() {
             >
               Book a discovery call
             </Link>
-            <Link
-              href="/contact"
+            <a
+              href="mailto:hello@canopycreativeco.com"
               className="inline-block bg-transparent text-cream text-[14px] font-semibold tracking-[0.04em] px-8 py-[15px] border-[1.5px] border-cream/40 rounded-[3px] no-underline transition-all duration-200 hover:border-cream/85 hover:-translate-y-px w-[220px] text-center"
             >
               Send us a message
-            </Link>
+            </a>
           </div>
         </div>
       </section>
