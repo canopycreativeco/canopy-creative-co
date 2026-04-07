@@ -2,6 +2,7 @@ import { Libre_Baskerville, DM_Sans } from 'next/font/google'
 import './globals.css'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import Script from 'next/script'
 
 const libreBaskerville = Libre_Baskerville({
   weight: ['400', '700'],
@@ -30,6 +31,18 @@ export default function RootLayout({ children }) {
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-LYG1SEG3Q5"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-LYG1SEG3Q5');
+          `}
+        </Script>
       </body>
     </html>
   )
