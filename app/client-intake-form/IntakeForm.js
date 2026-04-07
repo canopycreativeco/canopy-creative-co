@@ -530,7 +530,7 @@ export default function IntakeForm() {
 
       {/* ── HEADER CARD ── */}
       <div className="bg-brown rounded-xl p-8">
-        <p className="font-serif text-[11px] font-bold tracking-[0.28em] uppercase text-orange mb-3">
+        <p className="text-[11px] font-bold tracking-[0.28em] uppercase text-orange mb-3" style={{ fontFamily: "'Alta', serif" }}>
           Canopy Creative Co.
         </p>
         <h1 className="font-serif font-bold text-cream text-[28px] leading-[1.2] mb-3">
