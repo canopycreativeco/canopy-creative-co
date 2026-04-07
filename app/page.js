@@ -25,9 +25,10 @@ export default function HomePage() {
         />
         {/* Decorative large C */}
         <div
-          className="absolute right-[-30px] top-1/2 -translate-y-1/2 font-serif font-bold leading-none pointer-events-none select-none max-md:hidden"
+          className="absolute right-[-30px] top-1/2 -translate-y-1/2 font-bold leading-none pointer-events-none select-none max-md:hidden"
           aria-hidden="true"
           style={{
+            fontFamily: "'Alta', serif",
             fontSize: 'clamp(300px, 35vw, 520px)',
             color: 'rgba(204,78,0,0.06)',
           }}

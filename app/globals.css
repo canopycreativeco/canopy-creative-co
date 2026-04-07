@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Alta';
+  src: url('/fonts/alta-regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @theme {
   /* Brand colors */
   --color-orange: #CC4E00;
