@@ -308,7 +308,7 @@ export default function AboutPage() {
               behind the <em className="text-orange italic">work.</em>
             </h2>
             <p className="text-[16px] text-brown leading-[1.85] mb-4" style={{ opacity: 0.82 }}>
-              He moved from the Chicagoland suburbs to New York City at 24 with ambition and not
+              He moved from Chicago to New York City at 24 with ambition and not
               much else — and spent years building a career in one of the world's most demanding
               professional environments. NYC teaches you how to move fast, think clearly, and never
               waste anyone's time. He tries to bring all three to every client engagement.
