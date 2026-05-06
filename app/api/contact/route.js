@@ -136,7 +136,7 @@ export async function POST(request) {
     logToSheet(data).catch((err) => console.error('Sheets logging error:', err))
 
     const { error } = await resend.emails.send({
-      from: 'Canopy Creative Co <onboarding@resend.dev>',
+      from: 'Canopy Creative Co <notifications@canopycreativeco.com>',
       to: ['dave@canopycreativeco.com', 'hello@canopycreativeco.com'],
       subject: `New Contact Form Submission — ${data.businessName}`,
       html: buildHtml(data),
