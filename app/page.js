@@ -8,8 +8,11 @@ export const metadata = {
   openGraph: {
     title: 'Canopy Creative Co',
     description: 'Your back office, finally working for you. Canopy Creative Co provides on-demand bookkeeping, financial advisory, and operations support for creative businesses across the US.',
-    url: 'https://canopycreativeco.com',
+    url: 'https://www.canopycreativeco.com',
     siteName: 'Canopy Creative Co',
+  },
+  alternates: {
+    canonical: 'https://www.canopycreativeco.com',
   },
 }
 

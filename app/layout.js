@@ -19,7 +19,7 @@ const dmSans = DM_Sans({
 })
 
 export const metadata = {
-  metadataBase: new URL('https://canopycreativeco.com'),
+  metadataBase: new URL('https://www.canopycreativeco.com'),
   title: {
     default: 'Canopy Creative Co',
     template: '%s | Canopy Creative Co',
@@ -53,7 +53,7 @@ export default function RootLayout({ children }) {
               '@context': 'https://schema.org',
               '@type': 'ProfessionalService',
               name: 'Canopy Creative Co',
-              url: 'https://canopycreativeco.com',
+              url: 'https://www.canopycreativeco.com',
               description: 'On-demand operations and finance support for creative businesses.',
               areaServed: 'US',
               serviceType: ['Bookkeeping', 'Financial Advisory', 'Operations Consulting'],

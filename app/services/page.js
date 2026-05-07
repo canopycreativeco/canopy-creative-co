@@ -6,8 +6,11 @@ export const metadata = {
   openGraph: {
     title: 'Services | Canopy Creative Co',
     description: 'Explore The Roots, The Canopy, and The Build — three tiers of operations and finance support designed for creative businesses. Transparent, on-demand pricing.',
-    url: 'https://canopycreativeco.com/services',
+    url: 'https://www.canopycreativeco.com/services',
     siteName: 'Canopy Creative Co',
+  },
+  alternates: {
+    canonical: 'https://www.canopycreativeco.com/services',
   },
 }
 

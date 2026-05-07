@@ -7,8 +7,11 @@ export const metadata = {
   openGraph: {
     title: 'About | Canopy Creative Co',
     description: 'Canopy Creative Co is an operations and finance consultancy built for creative businesses — from interior design studios to agencies, artists, and makers.',
-    url: 'https://canopycreativeco.com/about',
+    url: 'https://www.canopycreativeco.com/about',
     siteName: 'Canopy Creative Co',
+  },
+  alternates: {
+    canonical: 'https://www.canopycreativeco.com/about',
   },
 }
 

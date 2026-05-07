@@ -4,6 +4,6 @@ export default function robots() {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://canopycreativeco.com/sitemap.xml',
+    sitemap: 'https://www.canopycreativeco.com/sitemap.xml',
   }
 }
