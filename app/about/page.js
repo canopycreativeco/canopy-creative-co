@@ -62,7 +62,7 @@ export default function AboutPage() {
           <div className="sticky top-[88px] max-md:static">
             <div className="relative w-full aspect-[4/5] rounded-[4px] overflow-hidden">
               <Image
-                src="/dave.jpg.jpg"
+                src="/dave-about.jpeg"
                 alt="Dave Altshul, Founder of Canopy Creative Co"
                 fill
                 className="object-cover object-top"
