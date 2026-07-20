@@ -282,8 +282,7 @@ export default function HomePage() {
 
       {/* ── WHO WE SERVE ── */}
       <section className="bg-cream py-[100px] px-[60px] max-md:py-[70px] max-md:px-6">
-        <div className="max-w-[960px] mx-auto grid grid-cols-[1.2fr_1fr] gap-[80px] items-center max-md:grid-cols-1 max-md:gap-12">
-          {/* Left */}
+        <div className="max-w-[720px] mx-auto">
           <div>
             <p className="text-[10.5px] font-semibold tracking-[0.22em] uppercase text-orange/85 mb-5">
               Who We Work With
@@ -316,21 +315,6 @@ export default function HomePage() {
                 </li>
               ))}
             </ul>
-          </div>
-
-          {/* Right — testimonial card */}
-          <div
-            className="bg-brown rounded-[4px] px-11 py-12 relative overflow-hidden border-t-[3px] border-orange"
-          >
-            <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-orange/85 mb-5">
-              Why clients choose us
-            </p>
-            <p className="font-serif text-[20px] italic text-cream/90 leading-[1.6] mb-7">
-              "Finally a company that doesn't make me feel like I'm just a number. I get exactly what I need, when I need it — nothing more, nothing less."
-            </p>
-            <p className="text-[13px] font-medium tracking-[0.04em]" style={{ color: 'rgba(253,246,236,0.4)' }}>
-              — A Canopy Creative Co client
-            </p>
           </div>
         </div>
       </section>
