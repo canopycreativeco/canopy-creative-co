@@ -9,14 +9,10 @@ const APPS_SCRIPT_URL =
 
 async function logToSheet(data) {
   const {
-    name, email, phone, businessName, website, instagram,
-    states, businessType, helpWith,
-    accountingSoftware, accountingOther, howFound, referralName, otherSource, anythingElse,
+    name, email, phone, businessName, website,
+    businessType, helpWith,
+    howFound, referralName, otherSource, anythingElse,
   } = data
-
-  const accountingSoftwareDisplay = accountingSoftware === 'Other' && accountingOther
-    ? `Other — ${accountingOther}`
-    : accountingSoftware
 
   const howDidYouFindUsDisplay = howFound === 'Referral' && referralName
     ? `Referral — thank: ${referralName}`
@@ -34,11 +30,8 @@ async function logToSheet(data) {
       phone: phone || '',
       businessName: businessName || '',
       businessWebsite: website || '',
-      businessInstagram: instagram || '',
-      states: Array.isArray(states) ? states.join(', ') : (states || ''),
       businessType: businessType || '',
       lookingForHelp: helpWith || '',
-      accountingSoftware: accountingSoftwareDisplay || '',
       howDidYouFindUs: howDidYouFindUsDisplay || '',
       referralName: referralName || '',
       otherSource: otherSource || '',
@@ -73,14 +66,10 @@ function section(title, rows) {
 
 function buildHtml(data) {
   const {
-    name, email, website, businessName, phone, instagram,
-    states, businessType, helpWith,
-    accountingSoftware, accountingOther, howFound, referralName, otherSource, anythingElse,
+    name, email, website, businessName, phone,
+    businessType, helpWith,
+    howFound, referralName, otherSource, anythingElse,
   } = data
-
-  const accountingDisplay = accountingSoftware === 'Other' && accountingOther
-    ? `Other — ${accountingOther}`
-    : accountingSoftware
 
   const howFoundDisplay = howFound === 'Referral' && referralName
     ? `Referral — thank: ${referralName}`
@@ -103,17 +92,14 @@ function buildHtml(data) {
           row('Business Name', businessName),
           row('Website', website),
           row('Phone', phone),
-          row('Instagram', instagram),
         ])}
 
         ${section('About Your Business', [
-          row('State(s)', states),
           row('Business Type', businessType),
           row('Looking for help with', helpWith),
         ])}
 
         ${section('A Little More', [
-          row('Accounting Software', accountingDisplay),
           row('How They Found Us', howFoundDisplay),
           row('Anything Else', anythingElse),
         ])}

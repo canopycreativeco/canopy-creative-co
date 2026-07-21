@@ -1,13 +1,15 @@
 import Link from 'next/link'
+import { DEMO_REGISTRATION_URL, ROOTS_URL, CANOPY_URL } from '@/lib/site'
+import SendMessageButton from '@/components/MessageModal'
 
 export const metadata = {
   title: {
     absolute: 'Canopy Creative Co',
   },
-  description: 'Your back office, finally working for you. Canopy Creative Co provides on-demand bookkeeping, financial advisory, and operations support for creative businesses across the US.',
+  description: 'Canopy Creative Co teaches operators to run lean businesses with AI. Free monthly live demos, a self-paced course, an ongoing membership, and done-with-you systems work.',
   openGraph: {
     title: 'Canopy Creative Co',
-    description: 'Your back office, finally working for you. Canopy Creative Co provides on-demand bookkeeping, financial advisory, and operations support for creative businesses across the US.',
+    description: 'Canopy Creative Co teaches operators to run lean businesses with AI. Free monthly live demos, a self-paced course, an ongoing membership, and done-with-you systems work.',
     url: 'https://www.canopycreativeco.com',
     siteName: 'Canopy Creative Co',
   },
@@ -22,6 +24,30 @@ const btnPrimary =
 
 const btnGhost =
   'inline-block bg-transparent text-[14px] font-medium tracking-[0.04em] px-8 py-[15px] border-[1.5px] rounded-[3px] no-underline transition-all duration-200 hover:-translate-y-px'
+
+const cardLink =
+  'text-[13px] font-semibold text-orange no-underline tracking-[0.04em] flex items-center gap-2 transition-[gap] duration-200 hover:gap-4'
+
+const offerings = [
+  {
+    tag: 'Buy a course',
+    name: 'The Roots',
+    desc: "Self-paced and recorded. Start where you are, learn the fundamentals of putting AI to work in a real business, and walk out with a prompt library organized by what your business actually does. This is teaching with you doing the building.",
+    cta: { label: 'See The Roots', href: ROOTS_URL, external: true },
+  },
+  {
+    tag: 'Join the membership',
+    name: 'The Canopy',
+    desc: "A live session every month, the full library of everything we've built, and the prompts and summary pages that go with them. This is where operators who've decided they need a system come to build one, next to other people doing the same thing.",
+    cta: { label: 'See The Canopy', href: CANOPY_URL, external: true },
+  },
+  {
+    tag: 'Hire us',
+    name: 'The Greenhouse',
+    desc: 'For operators who want it built with them. Our team works alongside yours to design and build the systems, with advisory layered on top. We do it with you, and it starts with a conversation.',
+    cta: { label: 'Start a conversation', href: '/contact', external: false },
+  },
+]
 
 export default function HomePage() {
   return (
@@ -52,171 +78,168 @@ export default function HomePage() {
           C
         </div>
 
-        <div className="relative max-w-[800px]">
+        <div className="relative max-w-[860px]">
           {/* Eyebrow */}
-          <p className="text-[11px] font-semibold tracking-[0.24em] uppercase text-orange mb-7">
-            Operations &amp; Finance Consulting for Creative Businesses
+          <p className="text-[12px] font-semibold tracking-[0.24em] uppercase text-orange mb-7">
+            Teaching operators to run lean businesses with AI
           </p>
 
           {/* Headline */}
           <h1
-            className="font-serif font-bold text-cream leading-[1.12] tracking-[-0.02em] mb-8"
-            style={{ fontSize: 'clamp(38px, 6vw, 72px)' }}
+            className="font-serif font-bold text-cream leading-[1.15] tracking-[-0.02em] mb-8"
+            style={{ fontSize: 'clamp(34px, 4.8vw, 58px)' }}
           >
-            Your back office,
-            <br />
-            <em className="text-orange italic">finally</em> working
-            <br />
-            for you.
+            Most operators are already doing everything right. They're just doing all of it{' '}
+            <em className="text-orange italic">themselves.</em>
           </h1>
 
           {/* Subtext */}
-          <p className="text-[18px] font-light max-w-[520px] leading-[1.75] mb-12" style={{ color: 'rgba(253,246,236,0.65)' }}>
-            Wherever you are — just starting out, scaling fast, or ready to get serious about your numbers — we build the financial and operational infrastructure that lets your creative business actually run.
+          <p className="text-[18px] font-light max-w-[560px] leading-[1.75] mb-12" style={{ color: 'rgba(253,246,236,0.65)' }}>
+            We teach operators how to design the systems that do the work, so the work only you can do finally gets the time it deserves. AI is the lever, not the product.
           </p>
 
           {/* Buttons */}
           <div className="flex gap-[14px] flex-wrap">
-            <Link href="/contact" className={`${btnPrimary} w-[220px] text-center`}>
-              Book a discovery call
-            </Link>
-            <Link
-              href="/services"
-              className={`${btnGhost} border-cream/25 text-cream/75 hover:border-cream/60 hover:text-cream w-[220px] text-center`}
+            <a
+              href={DEMO_REGISTRATION_URL}
+              target="_blank"
+              rel="noopener"
+              className={`${btnPrimary} text-center`}
             >
-              See our services
+              Join the next live demo. It's free.
+            </a>
+            <Link
+              href="/work-with-us"
+              className={`${btnGhost} border-cream/25 text-cream/75 hover:border-cream/60 hover:text-cream text-center`}
+            >
+              See how we work together
             </Link>
           </div>
         </div>
 
         {/* Scroll indicator */}
         <div
-          className="absolute bottom-9 left-[60px] text-[11px] font-medium tracking-[0.14em] uppercase max-md:left-6"
+          className="absolute bottom-9 left-[60px] text-[12px] font-medium tracking-[0.14em] uppercase max-md:left-6"
           style={{ color: 'rgba(253,246,236,0.3)' }}
         >
           Scroll to explore
         </div>
       </section>
 
-      {/* ── POSITIONING STRIP ── */}
-      <div className="bg-orange py-5 px-[60px] flex flex-col items-center gap-3 max-md:px-6">
-        {[
-          ['Interior Design Studios', 'Creative Agencies', 'Artists & Makers'],
-          ['Independent Creatives', 'Creative Service Businesses'],
-        ].map((row, rowIdx) => (
-          <div key={rowIdx} className="flex items-center gap-10 flex-wrap justify-center max-md:gap-5">
-            {row.map((label, i) => (
-              <span key={label} className="flex items-center gap-10 max-md:gap-5">
-                <span className="text-[12px] font-semibold tracking-[0.18em] uppercase text-cream/90">
-                  {label}
-                </span>
-                {i < row.length - 1 && (
-                  <span className="w-1 h-1 rounded-full bg-cream/40 shrink-0" aria-hidden="true" />
-                )}
-              </span>
-            ))}
-          </div>
-        ))}
-      </div>
-
-      {/* ── INTRO ── */}
+      {/* ── FREE DEMO ── */}
       <section className="bg-cream py-[100px] px-[60px] max-md:py-[70px] max-md:px-6">
         <div className="max-w-[960px] mx-auto grid grid-cols-[1fr_1.4fr] gap-[80px] items-start max-md:grid-cols-1 max-md:gap-10">
           {/* Left */}
           <div>
-            <p className="text-[10.5px] font-semibold tracking-[0.22em] uppercase text-orange/85 mb-5">
-              Who We Are
+            <p className="text-[12px] font-semibold tracking-[0.22em] uppercase text-orange/85 mb-5">
+              Start Here
             </p>
             <h2
               className="font-serif font-bold text-brown leading-[1.25] tracking-[-0.01em]"
               style={{ fontSize: 'clamp(26px, 3.5vw, 38px)' }}
             >
-              Not your average
+              Live demos every month.
               <br />
-              <em className="text-orange italic">consulting firm.</em>
+              <em className="text-orange italic">Free,</em> always.
             </h2>
           </div>
 
           {/* Right */}
-          <div className="space-y-5">
-            {[
-              "Most creative business owners didn't start their business to manage spreadsheets, reconcile accounts, or figure out which software actually talks to each other. That's where we come in.",
-              'Canopy Creative Co is an operations and finance consultancy built specifically for creative businesses. We cover the full back office — from keeping your books clean and your taxes filed, to building the systems and infrastructure that let you grow without the chaos.',
-              'Hourly, on-demand, and always transparent. No bloated retainers, no mystery pricing, no surprise scope creep. Just the work your business actually needs.',
-            ].map((text) => (
-              <p key={text.slice(0, 20)} className="text-[16.5px] text-brown/80 leading-[1.8]">
-                {text}
-              </p>
-            ))}
+          <div>
+            <p className="text-[16.5px] text-brown/80 leading-[1.8] mb-5">
+              Every month we take one real workflow from a design firm's back office and show you, live in 30 minutes, what an AI assistant can take off your plate. Come watch how it works, ask your questions, and leave with a clear picture of what's possible in your own business.
+            </p>
+            <p className="text-[16.5px] text-brown/80 leading-[1.8] mb-9">
+              The standing rhythm is one demo a month. Right now, during our interior design series, we're running two a month: five sessions across ten weeks, starting in August. If you run a design business, this one was built for you. If you run something else, the methodology travels.
+            </p>
+            <a href={DEMO_REGISTRATION_URL} target="_blank" rel="noopener" className={btnPrimary}>
+              Register for the next demo
+            </a>
           </div>
         </div>
       </section>
 
-      {/* ── THREE TIER CARDS ── */}
+      {/* ── THREE WAYS TO WORK TOGETHER ── */}
       <section className="bg-cream-dark py-[100px] px-[60px] max-md:py-[70px] max-md:px-6">
         {/* Header */}
-        <div className="max-w-[960px] mx-auto flex items-end justify-between gap-10 mb-[60px] max-md:flex-col max-md:items-start max-md:gap-4">
+        <div className="max-w-[1080px] mx-auto mb-[60px]">
           <h2
-            className="font-serif font-bold text-brown leading-[1.2] tracking-[-0.01em] max-w-[400px]"
+            className="font-serif font-bold text-brown leading-[1.2] tracking-[-0.01em] max-w-[480px]"
             style={{ fontSize: 'clamp(26px, 3.5vw, 38px)' }}
           >
-            Three ways we can work together.
+            Three ways to work <em className="text-orange italic">together.</em>
           </h2>
-          <Link
-            href="/services"
-            className="text-[13px] font-semibold text-orange no-underline tracking-[0.04em] whitespace-nowrap flex items-center gap-2 transition-[gap] duration-200 hover:gap-4"
-          >
-            View all services &nbsp;→
-          </Link>
         </div>
 
         {/* Cards */}
-        <div className="max-w-[960px] mx-auto grid grid-cols-3 gap-6 max-md:grid-cols-1">
-          {[
-            {
-              tag: 'Foundation',
-              name: 'The Roots',
-              desc: 'The ongoing fundamentals that keep your business running day to day — so you can stop doing it yourself.',
-              services: ['Bookkeeping', 'Sales tax filing', 'Payroll support', '1099 preparation and filing', 'Ongoing systems operation'],
-            },
-            {
-              tag: 'Advisory',
-              name: 'The Canopy',
-              desc: 'Financial clarity that protects and guides everything underneath — so every decision is grounded in the full picture.',
-              services: ['Financial planning & analysis', 'Cash flow analysis', 'Budgeting and forecasting', 'Project & product profitability', 'Finance & accounting coaching'],
-            },
-            {
-              tag: 'Operations & Systems',
-              name: 'The Build',
-              desc: "For businesses that need the infrastructure to actually operate — whether you're starting from scratch or outgrowing what you have.",
-              services: ['Software selection & implementation', 'Workflow and process design', 'Business launch support'],
-            },
-          ].map(({ tag, name, desc, services }) => (
+        <div className="max-w-[1080px] mx-auto grid grid-cols-3 gap-6 max-md:grid-cols-1">
+          {offerings.map(({ tag, name, desc, cta }) => (
             <div
               key={name}
-              className="bg-cream rounded-[4px] px-9 py-10 relative overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(59,30,8,0.1)] border-t-[3px] border-orange"
+              className="bg-cream rounded-[4px] px-9 py-10 relative overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(59,30,8,0.1)] border-t-[3px] border-orange flex flex-col"
             >
-              <p className="text-[10px] font-semibold tracking-[0.18em] uppercase text-muted mb-3">
+              <p className="text-[11.5px] font-semibold tracking-[0.18em] uppercase text-muted mb-3">
                 {tag}
               </p>
-              <h3 className="font-serif text-[28px] font-bold text-brown mb-[18px] leading-[1.15]">
+              <h3 className="font-serif text-[28px] font-bold text-brown mb-[18px] leading-[1.15] whitespace-nowrap">
                 {name}
               </h3>
-              <p className="text-[14.5px] text-brown/72 leading-[1.7] mb-7">{desc}</p>
-              <ul className="list-none m-0 p-0 flex flex-col gap-2">
-                {services.map((s) => (
-                  <li key={s} className="text-[13px] text-brown/65 flex items-center gap-2">
-                    <span className="w-1 h-1 rounded-full bg-orange/60 shrink-0" aria-hidden="true" />
-                    {s}
-                  </li>
-                ))}
-              </ul>
+              <p className="text-[14.5px] text-brown/72 leading-[1.7] mb-7 flex-1">{desc}</p>
+              {cta.external ? (
+                <a href={cta.href} target="_blank" rel="noopener" className={cardLink}>
+                  {cta.label}&nbsp;→
+                </a>
+              ) : (
+                <Link href={cta.href} className={cardLink}>
+                  {cta.label}&nbsp;→
+                </Link>
+              )}
             </div>
           ))}
         </div>
       </section>
 
-      {/* ── HOW IT WORKS ── */}
+      {/* ── WHO THIS IS FOR ── */}
+      <section className="bg-cream py-[100px] px-[60px] max-md:py-[70px] max-md:px-6">
+        <div className="max-w-[720px] mx-auto">
+          <p className="text-[12px] font-semibold tracking-[0.22em] uppercase text-orange/85 mb-5">
+            Who This Is For
+          </p>
+          <h2
+            className="font-serif font-bold text-brown leading-[1.25] mb-6"
+            style={{ fontSize: 'clamp(26px, 3.5vw, 38px)' }}
+          >
+            Built for operators who are done <em className="text-orange italic">stacking</em> tools.
+          </h2>
+          <p className="text-[16px] text-brown/75 leading-[1.8] mb-9">
+            Most of the operators we work with run businesses between $250K and $3M. They've paid for ChatGPT or Claude, stacked two or three more tools on top, and worked out that none of it added up to a system. They aren't looking to replace their team with AI and they aren't looking for the tool of the week. They want a system, not another tool.
+          </p>
+          <ul className="list-none m-0 p-0 mb-9">
+            {[
+              'Interior design firms',
+              'Professional services',
+              'Trades and home services',
+              'Creative and marketing businesses',
+              'Ecommerce operators',
+              'Coaches',
+              'Bootstrapped software founders',
+            ].map((item) => (
+              <li
+                key={item}
+                className="text-[15px] font-medium text-brown py-[14px] border-b border-brown/10 flex items-center gap-[14px] first:border-t first:border-brown/10"
+              >
+                <span className="w-[6px] h-[6px] rounded-full bg-orange shrink-0" aria-hidden="true" />
+                {item}
+              </li>
+            ))}
+          </ul>
+          <p className="text-[16px] text-brown/75 leading-[1.8]">
+            The methodology doesn't care what you sell. It cares how you run. Interior design is where we go deepest, because that's where we've spent the most time inside the back office.
+          </p>
+        </div>
+      </section>
+
+      {/* ── WHAT WE WON'T TELL YOU ── */}
       <section className="bg-brown py-[100px] px-[60px] relative overflow-hidden max-md:py-[70px] max-md:px-6">
         {/* Gradient */}
         <div
@@ -224,102 +247,20 @@ export default function HomePage() {
           aria-hidden="true"
           style={{ background: 'radial-gradient(ellipse 60% 80% at 100% 50%, rgba(204,78,0,0.12) 0%, transparent 60%)' }}
         />
-
-        <div className="max-w-[960px] mx-auto relative">
-          <p className="text-[10.5px] font-semibold tracking-[0.22em] uppercase text-orange/85 mb-5">
-            How It Works
-          </p>
+        <div className="max-w-[720px] mx-auto relative">
           <h2
-            className="font-serif font-bold text-cream leading-[1.25] mb-16 max-w-[480px]"
+            className="font-serif font-bold text-cream leading-[1.25] mb-8"
             style={{ fontSize: 'clamp(26px, 3.5vw, 38px)' }}
           >
-            From first conversation to fully supported.
+            What we <em className="text-orange italic">won't</em> tell you.
           </h2>
-
-          <div className="grid grid-cols-3 gap-0 relative max-md:grid-cols-2 max-md:gap-10">
-            {/* Connecting line (desktop only) */}
-            <div
-              className="absolute top-[22px] left-5 right-5 h-px pointer-events-none max-md:hidden"
-              aria-hidden="true"
-              style={{ background: 'rgba(253,246,236,0.1)' }}
-            />
-
-            {[
-              {
-                n: '1',
-                title: 'Discovery Call',
-                body: "A 30-minute conversation to understand where you are, what's not working, and where you want to go.",
-              },
-              {
-                n: '2',
-                title: 'Scope & Agreement',
-                body: "We define exactly what we're doing together, agree on rates, and get everything in writing before work begins.",
-              },
-              {
-                n: '3',
-                title: 'Active Support',
-                body: 'Ongoing, on-demand work billed hourly and transparently — with room to expand as your business grows.',
-              },
-            ].map(({ n, title, body }) => (
-              <div key={n} className="pr-6 max-md:pr-0">
-                <div
-                  className="w-11 h-11 rounded-full flex items-center justify-center font-serif text-[15px] font-bold text-orange mb-6 relative z-[1]"
-                  style={{ background: '#3B1E08', border: '1.5px solid rgba(204,78,0,0.3)' }}
-                >
-                  {n}
-                </div>
-                <h3 className="font-serif text-[17px] font-bold text-cream mb-[10px] leading-[1.3]">
-                  {title}
-                </h3>
-                <p className="text-[13.5px] font-light leading-[1.65]" style={{ color: 'rgba(253,246,236,0.5)' }}>
-                  {body}
-                </p>
-              </div>
-            ))}
-          </div>
+          <p className="text-[16.5px] font-light leading-[1.85]" style={{ color: 'rgba(253,246,236,0.75)' }}>
+            AI is the lever, not the product. Humans stay in the picture. We won't tell you to replace your team, we won't promise you'll hit seven figures, and we won't sell you the tool of the week. We don't make revenue guarantees or hours-saved guarantees, because we can't know your business before we've seen it. What we can do is teach you the methodology and show you the work we run inside real client back offices every day.
+          </p>
         </div>
       </section>
 
-      {/* ── WHO WE SERVE ── */}
-      <section className="bg-cream py-[100px] px-[60px] max-md:py-[70px] max-md:px-6">
-        <div className="max-w-[720px] mx-auto">
-          <div>
-            <p className="text-[10.5px] font-semibold tracking-[0.22em] uppercase text-orange/85 mb-5">
-              Who We Work With
-            </p>
-            <h2
-              className="font-serif font-bold text-brown leading-[1.25] mb-6"
-              style={{ fontSize: 'clamp(26px, 3.5vw, 38px)' }}
-            >
-              Built for creative businesses
-              <br />
-              <em className="text-orange italic">at every stage.</em>
-            </h2>
-            <p className="text-[16px] text-brown/75 leading-[1.8] mb-9">
-              We work with studios, agencies, independent creatives, and the vendors and collaborators in their world. If you run a creative business and your back office feels like a second job, you're in the right place.
-            </p>
-            <ul className="list-none m-0 p-0">
-              {[
-                'Interior design studios and firms',
-                'Creative agencies and brand studios',
-                'Artists, photographers, and makers',
-                'Musicians and entertainment businesses',
-                'Vendors and service providers in the creative space',
-              ].map((item) => (
-                <li
-                  key={item}
-                  className="text-[15px] font-medium text-brown py-[14px] border-b border-brown/10 flex items-center gap-[14px] first:border-t first:border-brown/10"
-                >
-                  <span className="w-[6px] h-[6px] rounded-full bg-orange shrink-0" aria-hidden="true" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* ── CTA ── */}
+      {/* ── FINAL CTA ── */}
       <section className="bg-orange py-[90px] px-[60px] text-center relative overflow-hidden max-md:px-6">
         {/* Highlight */}
         <div
@@ -332,24 +273,23 @@ export default function HomePage() {
             className="font-serif font-bold text-cream leading-[1.2] tracking-[-0.01em] mb-5"
             style={{ fontSize: 'clamp(28px, 4vw, 46px)' }}
           >
-            Wherever you are, we've got you covered.
+            Start with a demo.
           </h2>
           <p className="text-[17px] font-light leading-[1.7] mb-10" style={{ color: 'rgba(253,246,236,0.75)' }}>
-            Book a free discovery call and we'll figure out the right fit together. No pressure, no commitment — just a conversation.
+            If you're the bottleneck in your own business and you know it, come to the next demo. It's free, and it's the clearest picture you'll get of what AI can do in a business like yours.
           </p>
           <div className="flex gap-[14px] justify-center flex-wrap">
-            <Link
-              href="/contact"
+            <a
+              href={DEMO_REGISTRATION_URL}
+              target="_blank"
+              rel="noopener"
               className="inline-block bg-cream text-orange text-[14px] font-bold tracking-[0.04em] px-8 py-[15px] rounded-[3px] no-underline transition-all duration-200 hover:bg-[#f0e8d6] hover:-translate-y-px w-[220px] text-center"
             >
-              Book a discovery call
-            </Link>
-            <a
-              href="mailto:hello@canopycreativeco.com"
-              className="inline-block bg-transparent text-cream text-[14px] font-semibold tracking-[0.04em] px-8 py-[15px] border-[1.5px] border-cream/40 rounded-[3px] no-underline transition-all duration-200 hover:border-cream/85 hover:-translate-y-px w-[220px] text-center"
-            >
-              Send us a message
+              Join the next demo
             </a>
+            <SendMessageButton className="inline-block bg-transparent text-cream text-[14px] font-semibold tracking-[0.04em] px-8 py-[15px] border-[1.5px] border-cream/40 rounded-[3px] transition-all duration-200 hover:border-cream/85 hover:-translate-y-px w-[220px] text-center cursor-pointer">
+              Send us a message
+            </SendMessageButton>
           </div>
         </div>
       </section>

@@ -512,7 +512,7 @@ export default function IntakeForm() {
       const data = await res.json()
 
       if (data.success) {
-        window.location.href = 'https://calendly.com/dave-canopycreativeco/onboarding-kickoff-call'
+        window.location.href = 'https://scheduler.zoom.us/dave-altshul/onboarding-kickoff-call'
       } else {
         setSubmitError('Something went wrong — please try again or email hello@canopycreativeco.com')
       }

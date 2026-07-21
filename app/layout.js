@@ -24,14 +24,16 @@ export const metadata = {
     default: 'Canopy Creative Co',
     template: '%s | Canopy Creative Co',
   },
-  description: 'Operations and finance support for creative businesses. Bookkeeping, financial advisory, and systems — transparent pricing.',
+  description: 'Canopy Creative Co teaches operators to run lean businesses with AI. Free monthly live demos, a self-paced course, an ongoing membership, and done-with-you systems work.',
   icons: { icon: '/favicon.svg' },
   openGraph: {
     type: 'website',
     siteName: 'Canopy Creative Co',
+    description: 'Canopy Creative Co teaches operators to run lean businesses with AI. Free monthly live demos, a self-paced course, an ongoing membership, and done-with-you systems work.',
   },
   twitter: {
     card: 'summary_large_image',
+    description: 'Canopy Creative Co teaches operators to run lean businesses with AI. Free monthly live demos, a self-paced course, an ongoing membership, and done-with-you systems work.',
   },
   robots: {
     index: true,
@@ -54,9 +56,9 @@ export default function RootLayout({ children }) {
               '@type': 'ProfessionalService',
               name: 'Canopy Creative Co',
               url: 'https://www.canopycreativeco.com',
-              description: 'On-demand operations and finance support for creative businesses.',
+              description: 'Canopy Creative Co teaches operators to run lean businesses with AI. Free monthly live demos, a self-paced course, an ongoing membership, and done-with-you systems work.',
               areaServed: 'US',
-              serviceType: ['Bookkeeping', 'Financial Advisory', 'Operations Consulting'],
+              serviceType: ['AI education for business operators', 'Business operations advisory'],
             }),
           }}
         />

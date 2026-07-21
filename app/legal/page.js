@@ -243,9 +243,7 @@ export default function LegalPage() {
           <div className="pt-4 border-t border-[#F5EBD8]">
             <p className="text-sm text-[#9A7A62]">
               Questions about these policies?{" "}
-              <a href="mailto:hello@canopycreativeco.com" className="text-[#CC4E00] hover:underline">
-                Get in touch.
-              </a>
+              Email <span className="text-[#CC4E00]">hello@canopycreativeco.com</span>
             </p>
           </div>
 

@@ -3,10 +3,11 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
+import { DEMO_REGISTRATION_URL } from '@/lib/site'
 
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/services', label: 'Services' },
+  { href: '/work-with-us', label: 'Work with us' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
 ]
@@ -38,7 +39,7 @@ export default function Nav() {
                 <Link
                   href={href}
                   className={[
-                    'text-[13px] font-medium tracking-[0.05em] no-underline transition-opacity duration-200',
+                    'text-[13px] font-medium tracking-[0.05em] whitespace-nowrap no-underline transition-opacity duration-200',
                     isActive ? 'text-orange opacity-100' : 'text-brown opacity-60 hover:opacity-100',
                   ].join(' ')}
                 >
@@ -48,12 +49,14 @@ export default function Nav() {
             )
           })}
           <li>
-            <Link
-              href="/contact"
-              className="bg-orange text-cream text-[13px] font-semibold tracking-[0.04em] px-5 py-[9px] rounded-[3px] no-underline transition-colors duration-200 hover:bg-[#b04400]"
+            <a
+              href={DEMO_REGISTRATION_URL}
+              target="_blank"
+              rel="noopener"
+              className="bg-orange text-cream text-[13px] font-semibold tracking-[0.04em] whitespace-nowrap px-5 py-[9px] rounded-[3px] no-underline transition-colors duration-200 hover:bg-[#b04400]"
             >
-              Book a call
-            </Link>
+              Join the next demo
+            </a>
           </li>
         </ul>
       </div>

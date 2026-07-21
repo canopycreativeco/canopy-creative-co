@@ -1,12 +1,14 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { DEMO_REGISTRATION_URL } from '@/lib/site'
+import SendMessageButton from '@/components/MessageModal'
 
 export const metadata = {
   title: 'About',
-  description: 'Canopy Creative Co is an operations and finance consultancy built for creative businesses — from interior design studios to agencies, artists, and makers.',
+  description: 'Canopy Creative Co teaches operators to run lean businesses with AI. Free monthly live demos, a self-paced course, an ongoing membership, and done-with-you systems work.',
   openGraph: {
     title: 'About | Canopy Creative Co',
-    description: 'Canopy Creative Co is an operations and finance consultancy built for creative businesses — from interior design studios to agencies, artists, and makers.',
+    description: 'Canopy Creative Co teaches operators to run lean businesses with AI. Free monthly live demos, a self-paced course, an ongoing membership, and done-with-you systems work.',
     url: 'https://www.canopycreativeco.com/about',
     siteName: 'Canopy Creative Co',
   },
@@ -30,7 +32,7 @@ export default function AboutPage() {
         />
         <div className="relative max-w-[960px] mx-auto grid grid-cols-2 gap-[80px] items-end max-md:grid-cols-1 max-md:gap-8">
           <div>
-            <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-orange mb-6">
+            <p className="text-[12px] font-semibold tracking-[0.22em] uppercase text-orange mb-6">
               About
             </p>
             <h1
@@ -47,8 +49,8 @@ export default function AboutPage() {
               className="text-[17px] font-light leading-[1.75]"
               style={{ color: 'rgba(253,246,236,0.65)' }}
             >
-              The same rigor applied to billion-dollar compliance programs, now applied to the
-              businesses that actually keep creative industries alive.
+              The same rigor applied to million-dollar compliance programs, now applied to the
+              operators who keep real businesses running efficiently and cost effectively.
             </p>
           </div>
         </div>
@@ -82,7 +84,7 @@ export default function AboutPage() {
             {/* THE BACKGROUND */}
             <div>
               <p
-                className="text-[10px] font-semibold tracking-[0.22em] uppercase text-orange mb-4"
+                className="text-[11.5px] font-semibold tracking-[0.22em] uppercase text-orange mb-4"
                 style={{ opacity: 0.85 }}
               >
                 The Background
@@ -108,15 +110,15 @@ export default function AboutPage() {
                   },
                   {
                     number: '35,000+',
-                    label: 'Employees in the global\norganization he supported',
+                    label: 'Employees in the global organization\nDave supported',
                   },
                   {
                     number: '$39B+',
-                    label: 'Annual revenue of\nWarner Bros. Discovery',
+                    label: 'Annual revenue of the global media\ncompany Dave served',
                   },
                 ].map(({ number, label }) => (
-                  <div key={number} className="bg-cream-dark py-7 px-6 text-center">
-                    <p className="font-serif text-[28px] font-bold text-orange mb-[6px]">
+                  <div key={number} className="bg-cream-dark py-7 px-4 text-center">
+                    <p className="font-serif text-[22px] font-bold text-orange mb-[6px] whitespace-nowrap">
                       {number}
                     </p>
                     <p
@@ -129,26 +131,20 @@ export default function AboutPage() {
               </div>
 
               <p className="text-[16px] text-brown leading-[1.85] mb-4" style={{ opacity: 0.82 }}>
-                Before Canopy Creative Co, Dave Altshul spent years operating at the highest levels
-                of corporate finance and internal audit — building programs, leading teams, and
-                solving complex operational problems for organizations that don't have room for
-                error.
+                Before Canopy Creative Co, Dave Altshul spent years in corporate finance and
+                internal audit at the highest level, solving operational problems for organizations
+                with no room for error.
               </p>
               <p className="text-[16px] text-brown leading-[1.85] mb-4" style={{ opacity: 0.82 }}>
-                At Warner Bros. Discovery, a Fortune 500 global media and entertainment company with
-                35,000 employees, Dave served as the internal audit lead on the company's global SOX
-                compliance program — playing a central role in transforming a manual, fragmented
-                process into a streamlined, automated system that dramatically reduced the time and
-                cost of the compliance cycle while improving the quality of the work. That meant
-                redesigning testing architecture, sequencing delivery to minimize disruption to the
-                business, building automation that eliminated hours of manual work, and making
-                strategic scope decisions that ensured the program reflected exactly what was
-                required and nothing more.
+                Dave's specialty, then and now: take a complex process, identify efficiencies, and
+                streamline it with as little disruption to the business as possible. At a Fortune
+                500 media company, that meant leading the global compliance program's shift from
+                manual and fragmented to streamlined and automated. The scale was different. The
+                method is the same one he brings to his clients' businesses.
               </p>
               <p className="text-[16px] text-brown leading-[1.85]" style={{ opacity: 0.82 }}>
-                It was at Morningstar where Dave built the financial foundation that would define
-                everything that came after — starting in a leadership development program with a
-                rotation as a General Ledger Accountant before moving into Internal Audit.
+                Dave's financial foundation came earlier, in a leadership development program at a
+                leading financial data firm.
               </p>
             </div>
 
@@ -161,7 +157,7 @@ export default function AboutPage() {
             {/* THE APPROACH */}
             <div>
               <p
-                className="text-[10px] font-semibold tracking-[0.22em] uppercase text-orange mb-4"
+                className="text-[11.5px] font-semibold tracking-[0.22em] uppercase text-orange mb-4"
                 style={{ opacity: 0.85 }}
               >
                 The Approach
@@ -175,11 +171,10 @@ export default function AboutPage() {
                 <em className="text-orange italic">built in.</em>
               </h2>
               <p className="text-[16px] text-brown leading-[1.85] mb-6" style={{ opacity: 0.82 }}>
-                He holds a Project Management Professional (PMP) certification — earned as a
-                deliberate investment in understanding how systems integrate and implementations
-                actually succeed. When you're helping a business select, implement, and build their
-                operational infrastructure, how the pieces connect and in what order matters
-                enormously. The PMP sharpened that. It shows up in every engagement.
+                Dave holds a Project Management Professional (PMP) certification, a deliberate
+                investment in knowing how implementations actually succeed. When you're building a
+                business's operational infrastructure, what connects to what, and in what order,
+                matters enormously. It shows up in every engagement.
               </p>
 
               {/* Pull quote */}
@@ -198,7 +193,7 @@ export default function AboutPage() {
                   className="font-serif text-[19px] italic text-cream leading-[1.65] relative"
                   style={{ opacity: 0.92 }}
                 >
-                  He approaches every engagement the way an architect approaches a building —
+                  Dave approaches every engagement the way an architect approaches a building:
                   foundation first. Before anything gets built or changed, he maps what exists,
                   identifies what's missing, and determines what needs to happen in what order.
                   Nothing gets patched. Everything gets built with intention.
@@ -215,7 +210,7 @@ export default function AboutPage() {
             {/* THE MOVE */}
             <div>
               <p
-                className="text-[10px] font-semibold tracking-[0.22em] uppercase text-orange mb-4"
+                className="text-[11.5px] font-semibold tracking-[0.22em] uppercase text-orange mb-4"
                 style={{ opacity: 0.85 }}
               >
                 The Move
@@ -229,20 +224,14 @@ export default function AboutPage() {
                 <em className="text-orange italic">A deliberate next chapter.</em>
               </h2>
               <p className="text-[16px] text-brown leading-[1.85] mb-4" style={{ opacity: 0.82 }}>
-                Dave spent the better part of a decade in New York City — living in Hell's Kitchen,
-                learning from some of the best operators and creative minds the city has to offer,
-                and building a career that looked impressive on paper but felt increasingly
-                disconnected from the people it was supposed to serve.
-              </p>
-              <p className="text-[16px] text-brown leading-[1.85] mb-4" style={{ opacity: 0.82 }}>
-                That's the part that finally got to him. At the corporate level, the work was
-                technically excellent but the humans it affected were abstract. He wanted to see the
-                impact. He wanted to sit across from a business owner, solve a real problem, and
-                watch it actually change something for them.
+                Dave spent the better part of a decade in New York City, learning from some of the
+                best operators the city has to offer, and building a career that looked impressive
+                on paper but felt increasingly far from the people it was supposed to serve. He
+                wanted to sit across from a business owner, solve a real problem, and watch it
+                change something.
               </p>
               <p className="text-[16px] text-brown leading-[1.85]" style={{ opacity: 0.82 }}>
-                So he left. He and his husband relocated to Tampa, started building something new,
-                and Canopy Creative Co was born.
+                So he left. He and his husband relocated to Tampa, and Canopy Creative Co was born.
               </p>
             </div>
 
@@ -252,13 +241,13 @@ export default function AboutPage() {
               style={{ background: 'linear-gradient(to right, rgba(59,30,8,0.12), transparent)' }}
             />
 
-            {/* WHY CREATIVE BUSINESSES */}
+            {/* WHY THIS WORK */}
             <div>
               <p
-                className="text-[10px] font-semibold tracking-[0.22em] uppercase text-orange mb-4"
+                className="text-[11.5px] font-semibold tracking-[0.22em] uppercase text-orange mb-4"
                 style={{ opacity: 0.85 }}
               >
-                Why Creative Businesses
+                Why This Work
               </p>
               <h2
                 className="font-serif font-bold text-brown leading-[1.25] tracking-[-0.01em] mb-5"
@@ -268,23 +257,15 @@ export default function AboutPage() {
                 <br />
                 <em className="text-orange italic">he picked off a list.</em>
               </h2>
-              <p className="text-[16px] text-brown leading-[1.85] mb-4" style={{ opacity: 0.82 }}>
-                Dave's entry into working with creative businesses wasn't accidental. His husband
-                owns an interior design firm — and watching him navigate the back office chaos of a
-                growing creative business up close showed Dave exactly how badly this space needed
-                better support. The disorganized books. The software that doesn't talk to each
-                other. The late nights trying to figure out cash flow on a gut feeling. The hours
-                spent on admin that could have gone toward the actual work.
-              </p>
-              <p className="text-[16px] text-brown leading-[1.85] mb-4" style={{ opacity: 0.82 }}>
-                That inside perspective isn't a conflict. It's the whole point.
-              </p>
               <p className="text-[16px] text-brown leading-[1.85]" style={{ opacity: 0.82 }}>
-                Today, Canopy Creative Co works with interior design studios, creative agencies,
-                artists, workrooms, entertainment companies, and the businesses that support them —
-                across the United States. The back office problems are consistent. The chaos is
-                familiar. And the solution always starts the same way: understand what's actually
-                there before you touch anything.
+                Dave's entry into working with creative businesses wasn't accidental. His husband
+                owns an interior design firm, and watching him run it up close showed Dave that
+                this space needed better support. Canopy Creative Co goes deepest with interior
+                design firms, because that's where it started and where Dave has spent the most
+                time inside the back office. The same principles run through professional
+                services, trades, ecommerce, and every operator-run business. The problems are
+                consistent, and the fix starts the same way: understand what's actually there
+                before you touch anything.
               </p>
             </div>
 
@@ -297,10 +278,10 @@ export default function AboutPage() {
         <div className="max-w-[960px] mx-auto grid grid-cols-2 gap-[80px] items-center max-md:grid-cols-1 max-md:gap-10">
           <div>
             <p
-              className="text-[10px] font-semibold tracking-[0.22em] uppercase text-orange mb-4"
+              className="text-[11.5px] font-semibold tracking-[0.22em] uppercase text-orange mb-4"
               style={{ opacity: 0.85 }}
             >
-              A Little More Dave
+              A Little More About Dave
             </p>
             <h2
               className="font-serif font-bold text-brown leading-[1.25] tracking-[-0.01em] mb-5"
@@ -310,35 +291,31 @@ export default function AboutPage() {
               <br />
               behind the <em className="text-orange italic">work.</em>
             </h2>
-            <p className="text-[16px] text-brown leading-[1.85] mb-4" style={{ opacity: 0.82 }}>
-              He moved from Chicago to New York City at 24 with ambition and not
-              much else — and spent years building a career in one of the world's most demanding
-              professional environments. NYC teaches you how to move fast, think clearly, and never
-              waste anyone's time. He tries to bring all three to every client engagement.
-            </p>
             <p className="text-[16px] text-brown leading-[1.85]" style={{ opacity: 0.82 }}>
-              He lives in South Tampa with his husband and their dog August, who structures Dave's
-              day with the kind of reliability most project plans can only aspire to.
+              Dave previously lived in Chicago and New York City, where he built a career in the
+              world's most demanding professional environments. He was taught to move fast, think
+              clearly, and never waste anyone's time, a skillset he now brings to every
+              engagement.
             </p>
           </div>
           <div className="flex flex-col gap-4">
             {[
               {
-                label: 'Based in',
-                body: 'South Tampa, Florida — working with creative businesses across the United States.',
+                label: 'Currently Based In',
+                body: 'Tampa, Florida, working with operators across the United States.',
               },
               {
                 label: 'Background',
-                body: 'Corporate finance, internal audit, SOX compliance, program management, and operational systems — at Fortune 500 scale.',
+                body: 'Corporate finance, program management, and operational systems, at Fortune 500 scale.',
               },
               {
                 label: 'Philosophy',
-                body: "Foundation first. Always. No patching, no shortcuts, no work that doesn't serve the whole.",
+                body: 'Foundation first. Always. No patching, no shortcuts, and only work that serves the whole.',
               },
             ].map(({ label, body }) => (
               <div key={label} className="bg-cream rounded-[4px] px-7 py-6 border-l-[3px] border-orange">
                 <p
-                  className="text-[10px] font-semibold tracking-[0.18em] uppercase text-orange mb-2"
+                  className="text-[11.5px] font-semibold tracking-[0.18em] uppercase text-orange mb-2"
                   style={{ opacity: 0.8 }}
                 >
                   {label}
@@ -373,22 +350,21 @@ export default function AboutPage() {
             className="text-[17px] font-light leading-[1.7] mb-10"
             style={{ color: 'rgba(253,246,236,0.75)' }}
           >
-            Whether you're just getting started or finally ready to get your back office in order,
-            the first step is a conversation.
+            Start with the free monthly demo, or send a message and tell us where your business is
+            stuck. Either way, the first step is a conversation.
           </p>
           <div className="flex flex-col items-center gap-3">
-            <Link
-              href="/contact"
+            <a
+              href={DEMO_REGISTRATION_URL}
+              target="_blank"
+              rel="noopener"
               className="w-[260px] text-center inline-block bg-cream text-orange text-[14px] font-bold tracking-[0.04em] px-8 py-[15px] rounded-[3px] no-underline transition-all duration-200 hover:bg-[#f0e8d6] hover:-translate-y-px"
             >
-              Book a discovery call
-            </Link>
-            <a
-              href="mailto:hello@canopycreativeco.com"
-              className="w-[260px] text-center inline-block bg-transparent text-cream text-[14px] font-semibold tracking-[0.04em] px-8 py-[15px] border-[1.5px] border-cream/40 rounded-[3px] no-underline transition-all duration-200 hover:border-cream/85 hover:-translate-y-px"
-            >
-              Send us a message
+              Join the next demo
             </a>
+            <SendMessageButton className="w-[260px] text-center inline-block bg-transparent text-cream text-[14px] font-semibold tracking-[0.04em] px-8 py-[15px] border-[1.5px] border-cream/40 rounded-[3px] transition-all duration-200 hover:border-cream/85 hover:-translate-y-px cursor-pointer">
+              Send us a message
+            </SendMessageButton>
           </div>
         </div>
       </section>

@@ -2,10 +2,10 @@ import ContactForm from './ContactForm'
 
 export const metadata = {
   title: 'Contact',
-  description: 'Get in touch with Canopy Creative Co to talk through bookkeeping, financial advisory, or operations support for your creative business.',
+  description: 'Canopy Creative Co teaches operators to run lean businesses with AI. Free monthly live demos, a self-paced course, an ongoing membership, and done-with-you systems work.',
   openGraph: {
     title: 'Contact | Canopy Creative Co',
-    description: 'Get in touch with Canopy Creative Co to talk through bookkeeping, financial advisory, or operations support for your creative business.',
+    description: 'Canopy Creative Co teaches operators to run lean businesses with AI. Free monthly live demos, a self-paced course, an ongoing membership, and done-with-you systems work.',
     url: 'https://www.canopycreativeco.com/contact',
     siteName: 'Canopy Creative Co',
   },
@@ -18,7 +18,7 @@ export default function ContactPage() {
   return (
     <section className="bg-cream min-h-screen pt-[140px] pb-[100px] px-6">
       <div className="max-w-[640px] mx-auto">
-        <p className="text-[10.5px] font-semibold tracking-[0.22em] uppercase text-orange/85 mb-5">
+        <p className="text-[12px] font-semibold tracking-[0.22em] uppercase text-orange/85 mb-5">
           Get in Touch
         </p>
         <h1
