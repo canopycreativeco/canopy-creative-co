@@ -30,7 +30,7 @@ const cardLink =
 
 const offerings = [
   {
-    tag: 'Buy a course',
+    tag: 'Take a course',
     name: 'The Roots',
     desc: "Self-paced and recorded. Start where you are, learn the fundamentals of putting AI to work in a real business, and walk out with a prompt library organized by what your business actually does. This is teaching with you doing the building.",
     cta: { label: 'See The Roots', href: ROOTS_URL, external: true },

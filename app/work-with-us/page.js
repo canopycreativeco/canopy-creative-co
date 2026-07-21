@@ -83,7 +83,7 @@ export default function WorkWithUsPage() {
       <section className="bg-cream py-[90px] px-[60px] max-md:py-[60px] max-md:px-6">
         <div className="max-w-[720px] mx-auto">
           <span className="inline-block text-[11.5px] font-semibold tracking-[0.2em] uppercase text-orange border border-orange rounded-[2px] px-[10px] py-1 mb-[18px] opacity-80">
-            Buy a Course
+            Take a Course
           </span>
           <h2
             className="font-serif font-bold text-brown leading-[1.15] tracking-[-0.01em] mb-6"
