@@ -4,6 +4,7 @@ const footerLinks = [
   { href: '/work-with-us', label: 'Work with us' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
+  { href: '/referral-program', label: 'Become an Affiliate' },
   { href: '/legal', label: 'Legal' },
 ]
 

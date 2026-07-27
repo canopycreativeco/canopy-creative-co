@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 const sections = [
   { id: "privacy", label: "Privacy Policy" },
   { id: "terms", label: "Terms of Use" },
+  { id: "affiliate", label: "Affiliate Program" },
   { id: "disclaimer", label: "Disclaimer" },
 ];
 
@@ -40,7 +41,7 @@ export default function LegalPage() {
             Policies &amp; Terms
           </h1>
           <p className="text-[#9A7A62] font-['DM_Sans'] text-sm">
-            Last updated: January 1, 2026
+            Last updated: July 27, 2026
           </p>
         </div>
       </div>
@@ -193,6 +194,87 @@ export default function LegalPage() {
                 <p>
                   These terms are governed by the laws of the State of Florida, without regard to
                   its conflict of law provisions.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <hr className="border-[#F5EBD8]" />
+
+          {/* Affiliate Program Terms */}
+          <section id="affiliate">
+            <h2 className="font-['Libre_Baskerville'] text-2xl md:text-3xl text-[#3B1E08] mb-6">
+              Affiliate Program Terms
+            </h2>
+            <div className="space-y-6 text-base leading-relaxed text-[#3B1E08]/80">
+              <p>
+                These terms govern the Canopy Creative Co affiliate program. Applying to the
+                program or sharing an affiliate link means you agree to them.
+              </p>
+              <div>
+                <h3 className="font-['Libre_Baskerville'] text-lg text-[#3B1E08] mb-2">Participation</h3>
+                <p>
+                  Applications are reviewed by our team, and we may approve, decline, or remove
+                  any affiliate at our discretion. You do not need to be a current student to
+                  apply. Affiliate accounts are created on our course platform, and
+                  participation is free.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-['Libre_Baskerville'] text-lg text-[#3B1E08] mb-2">Commission</h3>
+                <p>
+                  Affiliates earn a 20% commission on purchases of The Roots and The Canopy
+                  made through their referral link. For The Canopy, commission applies to the
+                  referral's first annual membership payment only. Renewal payments do not
+                  generate commission, and no other products or services are eligible.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-['Libre_Baskerville'] text-lg text-[#3B1E08] mb-2">Tracking</h3>
+                <p>
+                  Referral links do not expire. Referrals are tracked on our course platform
+                  using a browser cookie that lasts 30 days from the click. Purchases made
+                  outside that window, purchases
+                  made without the referral link, and purchases made by affiliates on their own
+                  accounts do not earn commission.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-['Libre_Baskerville'] text-lg text-[#3B1E08] mb-2">Payouts</h3>
+                <p>
+                  We review each recorded commission before approving it. Approved commissions
+                  are paid quarterly through PayPal to the payout email we have on file.
+                  Commissions tied to refunded, disputed, or charged-back purchases are
+                  reversed, including after payout, in which case the amount is deducted from
+                  the next payment.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-['Libre_Baskerville'] text-lg text-[#3B1E08] mb-2">Tax forms</h3>
+                <p>
+                  If your total earnings reach the level where federal tax reporting applies,
+                  we will notify you and provide a Form W-9 or the applicable equivalent to
+                  complete. You never need to track this or submit a form on your own, since we
+                  will always reach out first. Payouts that require a completed form are held
+                  until we receive it. If we do not receive the completed form within 60 days
+                  of our request, the held commissions are forfeited.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-['Libre_Baskerville'] text-lg text-[#3B1E08] mb-2">Promotion standards</h3>
+                <p>
+                  When you share your affiliate link you must clearly disclose that you earn a
+                  commission, consistent with FTC guidance. Affiliates may not make earnings or
+                  outcome claims on our behalf, may not run paid ads on our brand name, and may
+                  not present themselves as Canopy Creative Co.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-['Libre_Baskerville'] text-lg text-[#3B1E08] mb-2">Changes and termination</h3>
+                <p>
+                  We may update these terms or close the program at any time, with notice sent
+                  to the email on file. Commissions approved before a change or closure will
+                  still be paid under the terms in effect when they were earned.
                 </p>
               </div>
             </div>
