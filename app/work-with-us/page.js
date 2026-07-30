@@ -151,9 +151,8 @@ export default function WorkWithUsPage() {
             session's starter comes home with you, written to run on your own business.
           </p>
           <p className="text-[16px] text-brown/85 leading-[1.8] mb-7">
-            Everything stays in the library. Nothing is dripped, nothing is gated, and nothing gets
-            removed while you are a member. This is where operators who've decided they need a
-            system come to build one, next to other people doing the same thing.
+            This is where operators who've decided they need a system come to build one, next to
+            other people doing the same thing.
           </p>
           <OfferBullets
             items={[
