@@ -37,6 +37,19 @@ const GREENHOUSE_STEPS = [
 const ctaBtn =
   'inline-block bg-orange text-cream text-[14px] font-semibold tracking-[0.04em] px-8 py-[15px] rounded-[3px] no-underline transition-all duration-200 hover:bg-[#b04400] hover:-translate-y-px text-center'
 
+function OfferBullets({ items }) {
+  return (
+    <ul className="list-none m-0 p-0 mb-9">
+      {items.map((b) => (
+        <li key={b} className="text-[14.5px] font-medium text-brown/85 py-[8px] flex items-start gap-[12px]">
+          <span className="w-[6px] h-[6px] rounded-full bg-orange shrink-0 mt-[8px]" aria-hidden="true" />
+          {b}
+        </li>
+      ))}
+    </ul>
+  )
+}
+
 function SectionDivider() {
   return (
     <div
@@ -81,7 +94,8 @@ export default function WorkWithUsPage() {
 
       {/* THE ROOTS */}
       <section className="bg-cream py-[90px] px-[60px] max-md:py-[60px] max-md:px-6">
-        <div className="max-w-[720px] mx-auto">
+        <div className="max-w-[960px] mx-auto grid grid-cols-[1fr_240px] gap-[56px] items-center max-md:grid-cols-1">
+        <div>
           <span className="inline-block text-[11.5px] font-semibold tracking-[0.2em] uppercase text-orange border border-orange rounded-[2px] px-[10px] py-1 mb-[18px] opacity-80">
             Take a Course
           </span>
@@ -92,18 +106,27 @@ export default function WorkWithUsPage() {
             The Roots
           </h2>
           <p className="text-[16px] text-brown/85 leading-[1.8] mb-4">
-            The Roots is the self-paced course. Every lesson is recorded, so you start where you
-            are, move at your own pace, and return to any lesson whenever you need it. You learn the
-            fundamentals of putting AI to work in a real business, and you walk out with a prompt
-            library organized by what your business actually does.
+            Every lesson in The Roots is recorded, so you start where you are, move at your own
+            pace, and return to any lesson whenever you need it. You learn the fundamentals of
+            putting AI to work in a real business, and you walk out with a prompt library organized
+            by what your business actually does.
           </p>
-          <p className="text-[16px] text-brown/85 leading-[1.8] mb-9">
+          <p className="text-[16px] text-brown/85 leading-[1.8] mb-7">
             This is teaching with you doing the building. A system you build yourself is a system
             you understand, and you can keep extending it long after the course ends.
           </p>
-          <a href={ROOTS_URL} target="_blank" rel="noopener" className={ctaBtn}>
-            See the course
-          </a>
+          <OfferBullets
+            items={[
+              'Self-paced video course, on your schedule',
+              'The four layers: prompt, skill, project, automation',
+              '12 months of access',
+            ]}
+          />
+          <Link href={ROOTS_URL} className={ctaBtn}>
+            See The Roots
+          </Link>
+        </div>
+        <img src="/art/tree-roots.png" alt="Illustrated sapling with visible roots" className="w-full max-w-[190px] mx-auto max-md:max-w-[160px]" />
         </div>
       </section>
 
@@ -111,7 +134,8 @@ export default function WorkWithUsPage() {
 
       {/* THE CANOPY */}
       <section className="bg-cream-mid py-[90px] px-[60px] max-md:py-[60px] max-md:px-6">
-        <div className="max-w-[720px] mx-auto">
+        <div className="max-w-[960px] mx-auto grid grid-cols-[1fr_260px] gap-[56px] items-center max-md:grid-cols-1">
+        <div>
           <span className="inline-block text-[11.5px] font-semibold tracking-[0.2em] uppercase text-orange border border-orange rounded-[2px] px-[10px] py-1 mb-[18px] opacity-80">
             Join the Membership
           </span>
@@ -122,30 +146,36 @@ export default function WorkWithUsPage() {
             The Canopy
           </h2>
           <p className="text-[16px] text-brown/85 leading-[1.8] mb-4">
-            The Canopy is the membership. There's a live session every month, and during a
-            featured series, like the interior design series running now, there are two. You get
-            the full library of everything we've built, each session's prompt turned into a
-            reusable skill with a summary page, and a room of operators working through the same
-            decisions you are.
+            The Canopy is the membership. A new build session lands every month, and the full
+            library of recordings and starter prompts is included from the day you join. Each
+            session's starter comes home with you, written to run on your own business.
           </p>
-          <p className="text-[16px] text-brown/85 leading-[1.8] mb-9">
-            Every demo we run is recorded and added to the library, along with the prompt from the
-            call and a summary page for putting it to work in your own AI tools. If you missed a
-            session, the recording is in there with everything else. This is where operators who've
-            decided they need a system come to build one, next to other people doing the same
-            thing.
+          <p className="text-[16px] text-brown/85 leading-[1.8] mb-7">
+            Everything stays in the library. Nothing is dripped, nothing is gated, and nothing gets
+            removed while you are a member. This is where operators who've decided they need a
+            system come to build one, next to other people doing the same thing.
           </p>
-          <a href={CANOPY_URL} target="_blank" rel="noopener" className={ctaBtn}>
-            Join the membership
-          </a>
+          <OfferBullets
+            items={[
+              'One new build session every month',
+              "Every session's starter prompt, yours to run",
+              'The full library included from day one',
+            ]}
+          />
+          <Link href={CANOPY_URL} className={ctaBtn}>
+            See The Canopy
+          </Link>
+        </div>
+        <img src="/art/tree-canopy.png" alt="Illustrated tree with a full green canopy" className="w-full max-w-[250px] mx-auto max-md:max-w-[210px]" />
         </div>
       </section>
 
       <SectionDivider />
 
       {/* THE GREENHOUSE */}
-      <section className="bg-cream py-[90px] px-[60px] max-md:py-[60px] max-md:px-6">
-        <div className="max-w-[720px] mx-auto">
+      <section id="the-greenhouse" className="bg-cream py-[90px] px-[60px] scroll-mt-[70px] max-md:py-[60px] max-md:px-6">
+        <div className="max-w-[960px] mx-auto grid grid-cols-[1fr_280px] gap-[56px] items-start max-md:grid-cols-1">
+        <div>
           <span className="inline-block text-[11.5px] font-semibold tracking-[0.2em] uppercase text-orange border border-orange rounded-[2px] px-[10px] py-1 mb-[18px] opacity-80">
             Hire Us
           </span>
@@ -198,9 +228,18 @@ export default function WorkWithUsPage() {
             </p>
           </div>
 
+          <OfferBullets
+            items={[
+              'AI integrated into your back office, built together',
+              'One department at a time',
+              'Starts with a conversation',
+            ]}
+          />
           <Link href="/contact" className={ctaBtn}>
             Start a conversation
           </Link>
+        </div>
+        <img src="/art/greenhouse.png" alt="Illustrated greenhouse full of plants" className="w-full max-w-[270px] mx-auto self-center max-md:max-w-[225px]" />
         </div>
       </section>
 

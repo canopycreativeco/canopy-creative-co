@@ -32,19 +32,25 @@ const offerings = [
   {
     tag: 'Take a course',
     name: 'The Roots',
-    desc: "Self-paced and recorded. Start where you are, learn the fundamentals of putting AI to work in a real business, and walk out with a prompt library organized by what your business actually does. This is teaching with you doing the building.",
-    cta: { label: 'See The Roots', href: ROOTS_URL, external: true },
+    desc: "Learn the fundamentals of putting AI to work in a real business. This is teaching with you doing the building.",
+    bullets: ['Self-paced video course, on your schedule', 'The four layers: prompt, skill, project, automation', '12 months of access'],
+    art: { src: '/art/tree-roots.png', alt: 'Illustrated sapling with visible roots' },
+    cta: { label: 'See The Roots', href: ROOTS_URL, external: false },
   },
   {
     tag: 'Join the membership',
     name: 'The Canopy',
-    desc: "A live session every month, the full library of everything we've built, and the prompts and summary pages that go with them. This is where operators who've decided they need a system come to build one, next to other people doing the same thing.",
-    cta: { label: 'See The Canopy', href: CANOPY_URL, external: true },
+    desc: "This is where operators who've decided they need a system come to build one, next to other people doing the same thing.",
+    bullets: ['One new build session every month', "Every session's starter prompt, yours to run", 'The full library included from day one'],
+    art: { src: '/art/tree-canopy.png', alt: 'Illustrated tree with a full green canopy' },
+    cta: { label: 'See The Canopy', href: CANOPY_URL, external: false },
   },
   {
     tag: 'Hire us',
     name: 'The Greenhouse',
     desc: 'For operators who want it built with them. Our team works alongside yours to design and build the systems, with advisory layered on top. We do it with you, and it starts with a conversation.',
+    bullets: ['AI integrated into your back office, built together', 'One department at a time', 'Starts with a conversation'],
+    art: { src: '/art/greenhouse.png', alt: 'Illustrated greenhouse full of plants' },
     cta: { label: 'Start a conversation', href: '/contact', external: false },
   },
 ]
@@ -138,19 +144,17 @@ export default function HomePage() {
               className="font-serif font-bold text-brown leading-[1.25] tracking-[-0.01em]"
               style={{ fontSize: 'clamp(26px, 3.5vw, 38px)' }}
             >
-              Live demos every month.
-              <br />
-              <em className="text-orange italic">Free,</em> always.
+              <em className="text-orange italic">Free</em> live demos every month.
             </h2>
           </div>
 
           {/* Right */}
           <div>
             <p className="text-[16.5px] text-brown/80 leading-[1.8] mb-5">
-              Every month we take one real workflow from a design firm's back office and show you, live in 30 minutes, what an AI assistant can take off your plate. Come watch how it works, ask your questions, and leave with a clear picture of what's possible in your own business.
+              Every month we take one real workflow from a business and show you what an AI assistant can take off your plate. Come watch how it works, ask your questions, and leave with a clear picture of what's possible in your own business.
             </p>
             <p className="text-[16.5px] text-brown/80 leading-[1.8] mb-9">
-              The standing rhythm is one demo a month. Right now, during our interior design series, we're running two a month: five sessions across ten weeks, starting in August. If you run a design business, this one was built for you. If you run something else, the methodology travels.
+              The standing rhythm is one demo a month. Right now, during our interior design series, we're running every other week: five sessions across ten weeks, starting in August. If you run a design business, this one was built for you. If you run something else, the methodology travels.
             </p>
             <a href={DEMO_REGISTRATION_URL} target="_blank" rel="noopener" className={btnPrimary}>
               Register for the next demo
@@ -171,30 +175,34 @@ export default function HomePage() {
           </h2>
         </div>
 
-        {/* Cards */}
-        <div className="max-w-[1080px] mx-auto grid grid-cols-3 gap-6 max-md:grid-cols-1">
-          {offerings.map(({ tag, name, desc, cta }) => (
-            <div
+        {/* Cards: whole tile is the link; subgrid keeps bullets and CTAs aligned across columns */}
+        <div className="max-w-[1080px] mx-auto grid grid-cols-3 gap-x-6 gap-y-0 [grid-template-rows:repeat(6,auto)] max-md:grid-cols-1 max-md:gap-y-6 max-md:[grid-template-rows:none]">
+          {offerings.map(({ tag, name, desc, bullets, art, cta }) => (
+            <Link
               key={name}
-              className="bg-cream rounded-[4px] px-9 py-10 relative overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(59,30,8,0.1)] border-t-[3px] border-orange flex flex-col"
+              href={cta.href}
+              className="row-span-6 grid [grid-template-rows:subgrid] max-md:flex max-md:flex-col bg-cream rounded-[4px] px-9 py-10 relative overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(59,30,8,0.1)] border-t-[3px] border-orange no-underline"
             >
               <p className="text-[11.5px] font-semibold tracking-[0.18em] uppercase text-muted mb-3">
                 {tag}
               </p>
-              <h3 className="font-serif text-[28px] font-bold text-brown mb-[18px] leading-[1.15] whitespace-nowrap">
+              <h3 className="font-serif text-[28px] font-bold text-brown mb-4 leading-[1.15] whitespace-nowrap">
                 {name}
               </h3>
-              <p className="text-[14.5px] text-brown/72 leading-[1.7] mb-7 flex-1">{desc}</p>
-              {cta.external ? (
-                <a href={cta.href} target="_blank" rel="noopener" className={cardLink}>
-                  {cta.label}&nbsp;→
-                </a>
-              ) : (
-                <Link href={cta.href} className={cardLink}>
-                  {cta.label}&nbsp;→
-                </Link>
-              )}
-            </div>
+              <img src={art.src} alt={art.alt} className="h-[160px] w-auto mx-auto mb-5 self-center" />
+              <p className="text-[14.5px] text-brown/72 leading-[1.7] mb-5">{desc}</p>
+              <ul className="list-none m-0 p-0 mb-7">
+                {bullets.map((b) => (
+                  <li key={b} className="text-[13.5px] font-medium text-brown/85 py-[7px] flex items-start gap-[10px]">
+                    <span className="w-[6px] h-[6px] rounded-full bg-orange shrink-0 mt-[7px]" aria-hidden="true" />
+                    {b}
+                  </li>
+                ))}
+              </ul>
+              <span className={cardLink}>
+                {cta.label}&nbsp;→
+              </span>
+            </Link>
           ))}
         </div>
       </section>
@@ -234,7 +242,7 @@ export default function HomePage() {
             ))}
           </ul>
           <p className="text-[16px] text-brown/75 leading-[1.8]">
-            The methodology doesn't care what you sell. It cares how you run. Interior design is where we go deepest, because that's where we've spent the most time inside the back office.
+            The methodology carries across business types.
           </p>
         </div>
       </section>
@@ -252,10 +260,10 @@ export default function HomePage() {
             className="font-serif font-bold text-cream leading-[1.25] mb-8"
             style={{ fontSize: 'clamp(26px, 3.5vw, 38px)' }}
           >
-            What we <em className="text-orange italic">won't</em> tell you.
+            What we <em className="text-orange italic">can</em> do.
           </h2>
           <p className="text-[16.5px] font-light leading-[1.85]" style={{ color: 'rgba(253,246,236,0.75)' }}>
-            AI is the lever, not the product. Humans stay in the picture. We won't tell you to replace your team, we won't promise you'll hit seven figures, and we won't sell you the tool of the week. We don't make revenue guarantees or hours-saved guarantees, because we can't know your business before we've seen it. What we can do is teach you the methodology and show you the work we run inside real client back offices every day.
+            AI is the lever, not the product. Humans stay in the picture. What we can do is teach you the methodology and show you the work we run inside real client back offices every day. What we won't do is tell you to replace your team, promise you'll hit seven figures, or sell you the tool of the week. We don't make revenue guarantees or hours-saved guarantees, because we can't know your business before we've seen it.
           </p>
         </div>
       </section>
