@@ -153,11 +153,70 @@ export default function HomePage() {
             <p className="text-[16.5px] text-brown/80 leading-[1.8] mb-5">
               Every month we take one real workflow from a business and show you what an AI assistant can take off your plate. Come watch how it works, ask your questions, and leave with a clear picture of what's possible in your own business.
             </p>
-            <p className="text-[16.5px] text-brown/80 leading-[1.8] mb-9">
+            <p className="text-[16.5px] text-brown/80 leading-[1.8] mb-6">
               The standing rhythm is one demo a month. Right now, during our interior design series, we're running every other week: five sessions across ten weeks, starting in August. If you run a design business, this one was built for you. If you run something else, the methodology travels.
             </p>
+
+            {/* Next session: Profit Levers */}
+            <div className="border border-brown/15 rounded-lg bg-white/60 p-6 mb-9">
+              <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-orange/85 mb-2">
+                Next session &middot; Wednesday, August 19 &middot; 1pm ET
+              </p>
+              <p className="font-serif font-bold text-brown text-[22px] leading-[1.3] mb-4">
+                Profit Levers: am I charging enough?
+              </p>
+
+              {/* A peek at the dashboard, live HTML in the teaser's visual language */}
+              <div className="rounded-lg border border-brown/10 bg-cream p-4 mb-4" aria-label="A preview of the pricing dashboard built in the session">
+                <div className="bg-white rounded-md border border-brown/10 p-4 mb-3">
+                  <div className="flex justify-between gap-4 text-[12.5px] text-brown/85 py-[3px]">
+                    <span>What clients paid you</span><span className="font-semibold">$2,901,645</span>
+                  </div>
+                  <div className="flex justify-between gap-4 text-[12px] text-brown/60 py-[3px] pl-3">
+                    <span>less what you paid furniture vendors</span><span>&minus;$1,600,000</span>
+                  </div>
+                  <div className="flex justify-between gap-4 text-[12px] text-brown/60 py-[3px] pl-3">
+                    <span>less what you paid for freight and receiving</span><span>&minus;$85,000</span>
+                  </div>
+                  <div className="flex justify-between items-baseline gap-4 border-t border-brown/15 mt-2 pt-2.5">
+                    <span className="text-[13px] font-semibold text-brown">What you keep before overhead</span>
+                    <span className="font-serif font-bold text-brown text-[21px]">$996,645</span>
+                  </div>
+                </div>
+                <div className="bg-white rounded-md border border-brown/10 border-l-[3px] border-l-orange p-4 mb-3">
+                  <p className="text-[9.5px] font-bold tracking-[0.14em] uppercase text-orange mb-1.5">Finding 1 of 3</p>
+                  <p className="font-serif font-bold text-brown text-[15.5px] leading-[1.35]">
+                    You scaled the team and the volume. You never scaled the pricing.
+                  </p>
+                </div>
+                <div className="bg-white rounded-md border border-brown/10 p-4">
+                  <div className="flex justify-between gap-4 text-[12.5px] font-semibold text-brown mb-2">
+                    <span>Product markup, on landed cost</span><span>18.7%</span>
+                  </div>
+                  <div className="relative h-[16px]">
+                    <div className="absolute top-[4px] h-[8px] rounded-full bg-[#D5E7DC]" style={{ left: '75%', width: '13.6%' }}></div>
+                    <div className="absolute top-[4px] h-[8px] rounded-full bg-[#F6DFC8]" style={{ left: '88.6%', right: 0 }}></div>
+                    <div className="absolute top-[6.5px] h-[3px] rounded-full bg-brown/10 inset-x-0"></div>
+                    <div className="absolute top-[6.5px] h-[3px] rounded-full bg-orange" style={{ width: '46.75%' }}></div>
+                    <div className="absolute top-[1.5px] w-[13px] h-[13px] rounded-full bg-orange border-2 border-white" style={{ left: 'calc(46.75% - 6px)' }}></div>
+                  </div>
+                  <div className="flex justify-between items-center gap-4 mt-1.5">
+                    <span className="text-[10.5px] font-semibold text-brown/70 bg-cream rounded-full px-2.5 py-[3px]">below typical</span>
+                    <span className="text-[11px] text-brown/50">$315,090 a year</span>
+                  </div>
+                </div>
+              </div>
+
+              <p className="text-[15.5px] text-brown/80 leading-[1.75] mb-3">
+                We built a fictional Tampa design studio with eight years of books, resembling many interior design firms we&rsquo;ve seen and helped, and you&rsquo;ll watch Claude read the whole workspace and turn it into a live pricing dashboard: where the money went, what the numbers say in plain words, one move worth making first, and dials you can use to map out the impact of real, tangible changes you can make to your business.
+              </p>
+              <p className="text-[13px] text-brown/60 leading-[1.6]">
+                You leave with the starter prompt the whole build begins from, ready to point at your own numbers. The demo firm is fictional, so we can show you everything with nothing to hide.
+              </p>
+            </div>
+
             <a href={DEMO_REGISTRATION_URL} target="_blank" rel="noopener" className={btnPrimary}>
-              Register for the next demo
+              Save your seat for August 19
             </a>
           </div>
         </div>
