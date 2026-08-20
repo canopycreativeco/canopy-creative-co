@@ -7,7 +7,7 @@ import { DEMO_REGISTRATION_URL } from '@/lib/site'
 
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/work-with-us', label: 'Work with us' },
+  { href: '/start-here', label: 'Start here' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
 ]

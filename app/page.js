@@ -1,6 +1,5 @@
 import Link from 'next/link'
-import { DEMO_REGISTRATION_URL, ROOTS_URL, CANOPY_URL } from '@/lib/site'
-import SendMessageButton from '@/components/MessageModal'
+import { DEMO_REGISTRATION_URL } from '@/lib/site'
 
 export const metadata = {
   title: {
@@ -20,40 +19,10 @@ export const metadata = {
 
 /* ── Shared button styles ── */
 const btnPrimary =
-  'inline-block bg-orange text-cream text-[14px] font-semibold tracking-[0.04em] px-8 py-[15px] rounded-[3px] no-underline transition-all duration-200 hover:bg-[#b04400] hover:-translate-y-px'
+  'inline-block bg-orange text-cream text-[14px] font-semibold tracking-[0.04em] px-8 py-[15px] rounded-full no-underline transition-all duration-200 hover:bg-[#b04400] hover:-translate-y-px'
 
 const btnGhost =
-  'inline-block bg-transparent text-[14px] font-medium tracking-[0.04em] px-8 py-[15px] border-[1.5px] rounded-[3px] no-underline transition-all duration-200 hover:-translate-y-px'
-
-const cardLink =
-  'text-[13px] font-semibold text-orange no-underline tracking-[0.04em] flex items-center gap-2 transition-[gap] duration-200 hover:gap-4'
-
-const offerings = [
-  {
-    tag: 'Take a course',
-    name: 'The Roots',
-    desc: "Learn the fundamentals of putting AI to work in a real business. This is teaching with you doing the building.",
-    bullets: ['Self-paced video course, on your schedule', 'The four layers: prompt, skill, project, automation', '12 months of access'],
-    art: { src: '/art/tree-roots.png', alt: 'Illustrated sapling with visible roots' },
-    cta: { label: 'See The Roots', href: ROOTS_URL, external: false },
-  },
-  {
-    tag: 'Join the membership',
-    name: 'The Canopy',
-    desc: "This is where operators who've decided they need a system come to build one, next to other people doing the same thing.",
-    bullets: ['One new build session every month', "Every session's starter prompt, yours to run", 'The full library included from day one'],
-    art: { src: '/art/tree-canopy.png', alt: 'Illustrated tree with a full green canopy' },
-    cta: { label: 'See The Canopy', href: CANOPY_URL, external: false },
-  },
-  {
-    tag: 'Hire us',
-    name: 'The Greenhouse',
-    desc: 'For operators who want it built with them. Our team works alongside yours to design and build the systems, with advisory layered on top. We do it with you, and it starts with a conversation.',
-    bullets: ['AI integrated into your back office, built together', 'One department at a time', 'Starts with a conversation'],
-    art: { src: '/art/greenhouse.png', alt: 'Illustrated greenhouse full of plants' },
-    cta: { label: 'Start a conversation', href: '/contact', external: false },
-  },
-]
+  'inline-block bg-transparent text-[14px] font-medium tracking-[0.04em] px-8 py-[15px] border-[1.5px] rounded-full no-underline transition-all duration-200 hover:-translate-y-px'
 
 export default function HomePage() {
   return (
@@ -115,7 +84,7 @@ export default function HomePage() {
               Join the next live demo. It's free.
             </a>
             <Link
-              href="/work-with-us"
+              href="/start-here"
               className={`${btnGhost} border-cream/25 text-cream/75 hover:border-cream/60 hover:text-cream text-center`}
             >
               See how we work together
@@ -124,63 +93,97 @@ export default function HomePage() {
         </div>
 
         {/* Scroll indicator */}
-        <div
-          className="absolute bottom-9 left-[60px] text-[12px] font-medium tracking-[0.14em] uppercase max-md:left-6"
-          style={{ color: 'rgba(253,246,236,0.3)' }}
-        >
-          Scroll to explore
+        <div className="absolute bottom-9 left-[60px] flex flex-col items-start gap-[10px] max-md:left-6">
+          <span className="text-[12px] font-bold tracking-[0.18em] uppercase text-orange">
+            Scroll to explore
+          </span>
+          {/* Arrowheads only, no shaft */}
+          <svg
+            width="24"
+            height="26"
+            viewBox="0 0 24 26"
+            fill="none"
+            aria-hidden="true"
+            className="text-orange animate-bounce motion-reduce:animate-none ml-[2px]"
+          >
+            <path
+              d="M4 5 L12 13 L20 5"
+              stroke="currentColor"
+              strokeWidth="2.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M4 14 L12 22 L20 14"
+              stroke="currentColor"
+              strokeWidth="2.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              opacity="0.45"
+            />
+          </svg>
         </div>
       </section>
 
       {/* ── FREE DEMO ── */}
       <section className="bg-cream py-[100px] px-[60px] max-md:py-[70px] max-md:px-6">
-        <div className="max-w-[960px] mx-auto grid grid-cols-[1fr_1.4fr] gap-[80px] items-start max-md:grid-cols-1 max-md:gap-10">
-          {/* Left */}
-          <div>
-            <p className="text-[12px] font-semibold tracking-[0.22em] uppercase text-orange/85 mb-5">
-              Start Here
-            </p>
-            <h2
-              className="font-serif font-bold text-brown leading-[1.25] tracking-[-0.01em]"
-              style={{ fontSize: 'clamp(26px, 3.5vw, 38px)' }}
-            >
-              <em className="text-orange italic">Free</em> live demos every month.
-            </h2>
-          </div>
+        <div className="max-w-[1080px] mx-auto">
+          {/* Header, full width */}
+          <p className="text-[12px] font-semibold tracking-[0.22em] uppercase text-orange/85 mb-5">
+            Start Here
+          </p>
+          <h2
+            className="font-serif font-bold text-brown leading-[1.25] tracking-[-0.01em] mb-5"
+            style={{ fontSize: 'clamp(26px, 3.5vw, 38px)' }}
+          >
+            <em className="text-orange italic">Free</em> live demos every month.
+          </h2>
+          <p className="text-[16.5px] text-brown/80 leading-[1.8] max-w-[680px]">
+            Every month we take one real workflow and build it in front of you, so you can see what
+            AI takes off your plate. Watch, ask questions, and leave with a clear picture of what it
+            does in a business like yours.
+          </p>
+          {/* CCC-EXPIRES-OCT14: after the series the cadence is the third Wednesday of every month. */}
+          <p className="text-[13.5px] text-brown/60 leading-[1.7] mt-3 max-w-[680px]">
+            One demo a month. During the interior design series we run every other week, through
+            October 14.
+          </p>
 
-          {/* Right */}
-          <div>
-            <p className="text-[16.5px] text-brown/80 leading-[1.8] mb-5">
-              Every month we take one real workflow from a business and show you what an AI assistant can take off your plate. Come watch how it works, ask your questions, and leave with a clear picture of what's possible in your own business.
-            </p>
-            <p className="text-[16.5px] text-brown/80 leading-[1.8] mb-6">
-              The standing rhythm is one demo a month. Right now, during our interior design series, we're running every other week: five sessions across ten weeks, starting in August. If you run a design business, this one was built for you. If you run something else, the methodology travels.
-            </p>
+          {/* Look back, and look ahead */}
+          <div className="grid grid-cols-2 gap-8 items-stretch mt-12 max-md:grid-cols-1 max-md:gap-6">
 
-            {/* Next session: Profit Levers */}
-            <div className="border border-brown/15 rounded-lg bg-white/60 p-6 mb-9">
-              <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-orange/85 mb-2">
-                Next session &middot; Wednesday, August 19 &middot; 1pm ET
+            {/* ── LEFT · WHAT AIRED ── */}
+            <div className="flex flex-col border border-brown/15 rounded-lg bg-[#FFFCF6] p-6 shadow-[0_2px_12px_rgba(59,30,8,0.05)] max-md:p-5">
+              <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-muted mb-2">
+                Look back &middot; Aired August 19
               </p>
-              <p className="font-serif font-bold text-brown text-[22px] leading-[1.3] mb-4">
-                Profit Levers: am I charging enough?
+              <h3 className="font-serif font-bold text-brown text-[21px] leading-[1.3] mb-1">
+                Profit Levers: am I charging enough
+              </h3>
+              <p className="text-[13px] text-brown/60 leading-[1.6] mb-4">
+                Here&rsquo;s what the room saw.
               </p>
 
-              {/* A peek at the dashboard, live HTML in the teaser's visual language */}
+              {/* A peek at the dashboard built in the session */}
               <div className="rounded-lg border border-brown/10 bg-cream p-4 mb-4" aria-label="A preview of the pricing dashboard built in the session">
-                <div className="bg-white rounded-md border border-brown/10 p-4 mb-3">
-                  <div className="flex justify-between gap-4 text-[12.5px] text-brown/85 py-[3px]">
-                    <span>What clients paid you</span><span className="font-semibold">$2,901,645</span>
-                  </div>
-                  <div className="flex justify-between gap-4 text-[12px] text-brown/60 py-[3px] pl-3">
-                    <span>less what you paid furniture vendors</span><span>&minus;$1,600,000</span>
-                  </div>
-                  <div className="flex justify-between gap-4 text-[12px] text-brown/60 py-[3px] pl-3">
-                    <span>less what you paid for freight and receiving</span><span>&minus;$85,000</span>
-                  </div>
-                  <div className="flex justify-between items-baseline gap-4 border-t border-brown/15 mt-2 pt-2.5">
-                    <span className="text-[13px] font-semibold text-brown">What you keep before overhead</span>
-                    <span className="font-serif font-bold text-brown text-[21px]">$996,645</span>
+                <div className="bg-white rounded-md border border-brown/10 overflow-hidden mb-3">
+                  <p className="text-[9.5px] font-bold tracking-[0.14em] uppercase text-cream bg-orange px-4 py-2">
+                    Sample data &middot; Fictional demo firm
+                  </p>
+                  <div className="p-4">
+                    <div className="flex justify-between gap-4 text-[12.5px] text-brown/85 py-[3px]">
+                      <span>What clients paid you</span><span className="font-semibold">$2,901,645</span>
+                    </div>
+                    <div className="flex justify-between gap-4 text-[12px] text-brown/60 py-[3px] pl-3">
+                      <span>Less what you paid vendors</span><span>&minus;$1,600,000</span>
+                    </div>
+                    <div className="flex justify-between gap-4 text-[12px] text-brown/60 py-[3px] pl-3">
+                      <span>Less freight and receiving</span><span>&minus;$85,000</span>
+                    </div>
+                    <div className="flex justify-between items-baseline gap-4 border-t border-brown/15 mt-2 pt-2.5">
+                      <span className="text-[13px] font-semibold text-brown">What you keep before overhead</span>
+                      <span className="font-serif font-bold text-brown text-[21px]">$996,645</span>
+                    </div>
                   </div>
                 </div>
                 <div className="bg-white rounded-md border border-brown/10 border-l-[3px] border-l-orange p-4 mb-3">
@@ -207,67 +210,119 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <p className="text-[15.5px] text-brown/80 leading-[1.75] mb-3">
-                We built a fictional Tampa design studio with eight years of books, resembling many interior design firms we&rsquo;ve seen and helped, and you&rsquo;ll watch Claude read the whole workspace and turn it into a live pricing dashboard: where the money went, what the numbers say in plain words, one move worth making first, and dials you can use to map out the impact of real, tangible changes you can make to your business.
+              <p className="text-[14.5px] text-brown/80 leading-[1.75] mb-3">
+                A fictional Florida design studio with eight years of books. Claude read the whole
+                workspace and turned it into a live pricing dashboard, then came the dials. Change a
+                markup, change a fee, watch what it does to the year.
               </p>
-              <p className="text-[13px] text-brown/60 leading-[1.6]">
-                You leave with the starter prompt the whole build begins from, ready to point at your own numbers. The demo firm is fictional, so we can show you everything with nothing to hide.
+              <p className="text-[13px] text-brown/60 leading-[1.6] mt-auto">
+                The firm is fictional, so we could show everything with nothing to hide.
               </p>
             </div>
 
-            <a href={DEMO_REGISTRATION_URL} target="_blank" rel="noopener" className={btnPrimary}>
-              Save your seat for August 19
-            </a>
+            {/* ── RIGHT · WHAT'S NEXT ── */}
+            {/* CCC-EXPIRES-OCT14: swap to the next scheduled session once Sep 2 airs. */}
+            <div className="flex flex-col border-2 border-orange rounded-lg bg-[#FFFCF6] p-6 shadow-[0_6px_26px_rgba(59,30,8,0.10)] max-md:p-5">
+              <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-orange mb-2">
+                Coming up &middot; Wednesday, September 2 &middot; 1pm ET
+              </p>
+              <h3 className="font-serif font-bold text-brown text-[21px] leading-[1.3] mb-3">
+                Where&rsquo;s my stuff: the order and PO tracker
+              </h3>
+              <p className="text-[15.5px] text-brown/80 leading-[1.75] mb-6">
+                Every order, every vendor, one view, so the answer is one search away. Built live,
+                start to finish, with your questions along the way.
+              </p>
+
+              {/* Placeholder for the Sep 2 build graphic.
+                  Deliberately abstract: bars, not numbers, so nothing here reads as data about a
+                  session that has not aired. Swap this whole block for the real dashboard preview
+                  once the build exists, matching the Aug 19 markup in the left column. */}
+              <div
+                className="relative rounded-lg border border-brown/10 bg-cream p-4 mb-6 overflow-hidden"
+                role="img"
+                aria-label="Placeholder for the September 2 build. The graphic is made after the session is built."
+              >
+                <div className="blur-[6px] opacity-70 select-none pointer-events-none" aria-hidden="true">
+                  <div className="bg-white rounded-md border border-brown/10 overflow-hidden mb-3">
+                    <div className="bg-orange h-[22px]" />
+                    <div className="p-4">
+                      {[['70%', '26%'], ['58%', '20%'], ['52%', '18%']].map(([w, v], i) => (
+                        <div key={i} className="flex justify-between items-center gap-4 py-[5px]">
+                          <span className="h-[9px] rounded-full bg-brown/20" style={{ width: w }} />
+                          <span className="h-[9px] rounded-full bg-brown/30" style={{ width: v }} />
+                        </div>
+                      ))}
+                      <div className="flex justify-between items-center gap-4 border-t border-brown/15 mt-2 pt-3">
+                        <span className="h-[11px] rounded-full bg-brown/30 w-[54%]" />
+                        <span className="h-[18px] rounded-full bg-brown/35 w-[28%]" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-white rounded-md border border-brown/10 border-l-[3px] border-l-orange p-4 mb-3">
+                    <span className="block h-[7px] rounded-full bg-orange/60 w-[26%] mb-2.5" />
+                    <span className="block h-[10px] rounded-full bg-brown/25 w-[92%] mb-1.5" />
+                    <span className="block h-[10px] rounded-full bg-brown/25 w-[64%]" />
+                  </div>
+                  <div className="bg-white rounded-md border border-brown/10 p-4">
+                    <div className="flex justify-between items-center gap-4 mb-3">
+                      <span className="h-[9px] rounded-full bg-brown/25 w-[46%]" />
+                      <span className="h-[9px] rounded-full bg-brown/30 w-[14%]" />
+                    </div>
+                    <div className="relative h-[16px]">
+                      <div className="absolute top-[4px] h-[8px] rounded-full bg-[#D5E7DC]" style={{ left: '72%', width: '15%' }} />
+                      <div className="absolute top-[4px] h-[8px] rounded-full bg-[#F6DFC8]" style={{ left: '87%', right: 0 }} />
+                      <div className="absolute top-[6.5px] h-[3px] rounded-full bg-brown/10 inset-x-0" />
+                      <div className="absolute top-[6.5px] h-[3px] rounded-full bg-orange w-[38%]" />
+                      <div className="absolute top-[1.5px] w-[13px] h-[13px] rounded-full bg-orange border-2 border-white" style={{ left: 'calc(38% - 6px)' }} />
+                    </div>
+                    <div className="flex justify-between items-center gap-4 mt-2">
+                      <span className="h-[14px] rounded-full bg-brown/15 w-[30%]" />
+                      <span className="h-[8px] rounded-full bg-brown/20 w-[22%]" />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="bg-orange text-cream text-[11px] font-bold tracking-[0.2em] uppercase px-5 py-2 rounded-full shadow-[0_4px_18px_rgba(59,30,8,0.28)]">
+                    Coming soon
+                  </span>
+                </div>
+              </div>
+
+              <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted mb-3">
+                Also in the series
+              </p>
+              <div className="border-t border-brown/10">
+                {[
+                  { date: 'Sep 16', title: 'Project pulse: budget, status, and the client update' },
+                  { date: 'Sep 30', title: 'The proposal and follow-up builder' },
+                  { date: 'Oct 14', title: 'The money coach' },
+                ].map(({ date, title }) => (
+                  <div key={date} className="grid grid-cols-[64px_1fr] gap-3 py-[11px] border-b border-brown/10 items-baseline">
+                    <span className="text-[11.5px] font-semibold tracking-[0.06em] uppercase text-orange">
+                      {date}
+                    </span>
+                    <span className="text-[14px] text-brown/80 leading-[1.55]">{title}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-auto pt-7">
+                <a href={DEMO_REGISTRATION_URL} target="_blank" rel="noopener" className={`${btnPrimary} block text-center`}>
+                  Save your seat for Sep 2
+                </a>
+                <p className="text-[12.5px] text-brown/60 leading-[1.6] mt-3 text-center">
+                  Free to watch. Register and show up.
+                </p>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
-
-      {/* ── THREE WAYS TO WORK TOGETHER ── */}
-      <section className="bg-cream-dark py-[100px] px-[60px] max-md:py-[70px] max-md:px-6">
-        {/* Header */}
-        <div className="max-w-[1080px] mx-auto mb-[60px]">
-          <h2
-            className="font-serif font-bold text-brown leading-[1.2] tracking-[-0.01em] max-w-[480px]"
-            style={{ fontSize: 'clamp(26px, 3.5vw, 38px)' }}
-          >
-            Three ways to work <em className="text-orange italic">together.</em>
-          </h2>
-        </div>
-
-        {/* Cards: whole tile is the link; subgrid keeps bullets and CTAs aligned across columns */}
-        <div className="max-w-[1080px] mx-auto grid grid-cols-3 gap-x-6 gap-y-0 [grid-template-rows:repeat(6,auto)] max-md:grid-cols-1 max-md:gap-y-6 max-md:[grid-template-rows:none]">
-          {offerings.map(({ tag, name, desc, bullets, art, cta }) => (
-            <Link
-              key={name}
-              href={cta.href}
-              className="row-span-6 grid [grid-template-rows:subgrid] max-md:flex max-md:flex-col bg-cream rounded-[4px] px-9 py-10 relative overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(59,30,8,0.1)] border-t-[3px] border-orange no-underline"
-            >
-              <p className="text-[11.5px] font-semibold tracking-[0.18em] uppercase text-muted mb-3">
-                {tag}
-              </p>
-              <h3 className="font-serif text-[28px] font-bold text-brown mb-4 leading-[1.15] whitespace-nowrap">
-                {name}
-              </h3>
-              <img src={art.src} alt={art.alt} className="h-[160px] w-auto mx-auto mb-5 self-center" />
-              <p className="text-[14.5px] text-brown/72 leading-[1.7] mb-5">{desc}</p>
-              <ul className="list-none m-0 p-0 mb-7">
-                {bullets.map((b) => (
-                  <li key={b} className="text-[13.5px] font-medium text-brown/85 py-[7px] flex items-start gap-[10px]">
-                    <span className="w-[6px] h-[6px] rounded-full bg-orange shrink-0 mt-[7px]" aria-hidden="true" />
-                    {b}
-                  </li>
-                ))}
-              </ul>
-              <span className={cardLink}>
-                {cta.label}&nbsp;→
-              </span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
       {/* ── WHO THIS IS FOR ── */}
-      <section className="bg-cream py-[100px] px-[60px] max-md:py-[70px] max-md:px-6">
+      <section className="bg-cream-dark py-[100px] px-[60px] max-md:py-[70px] max-md:px-6">
         <div className="max-w-[720px] mx-auto">
           <p className="text-[12px] font-semibold tracking-[0.22em] uppercase text-orange/85 mb-5">
             Who This Is For
@@ -306,7 +361,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── WHAT WE WON'T TELL YOU ── */}
+      {/* ── WHAT WE DO ── */}
       <section className="bg-brown py-[100px] px-[60px] relative overflow-hidden max-md:py-[70px] max-md:px-6">
         {/* Gradient */}
         <div
@@ -319,10 +374,10 @@ export default function HomePage() {
             className="font-serif font-bold text-cream leading-[1.25] mb-8"
             style={{ fontSize: 'clamp(26px, 3.5vw, 38px)' }}
           >
-            What we <em className="text-orange italic">can</em> do.
+            What we <em className="text-orange italic">do.</em>
           </h2>
           <p className="text-[16.5px] font-light leading-[1.85]" style={{ color: 'rgba(253,246,236,0.75)' }}>
-            AI is the lever, not the product. Humans stay in the picture. What we can do is teach you the methodology and show you the work we run inside real client back offices every day. What we won't do is tell you to replace your team, promise you'll hit seven figures, or sell you the tool of the week. We don't make revenue guarantees or hours-saved guarantees, because we can't know your business before we've seen it.
+            AI is the lever, not the product. Humans stay in the picture. We teach the methodology and show you the work we run inside real client back offices every day. We won't tell you to replace your team, promise you seven figures, or sell you the tool of the week.
           </p>
         </div>
       </section>
@@ -342,7 +397,7 @@ export default function HomePage() {
           >
             Start with a demo.
           </h2>
-          <p className="text-[17px] font-light leading-[1.7] mb-10" style={{ color: 'rgba(253,246,236,0.75)' }}>
+          <p className="text-[17px] font-light leading-[1.7] mb-10 text-balance" style={{ color: 'rgba(253,246,236,0.75)' }}>
             If you're the bottleneck in your own business and you know it, come to the next demo. It's free, and it's the clearest picture you'll get of what AI can do in a business like yours.
           </p>
           <div className="flex gap-[14px] justify-center flex-wrap">
@@ -350,13 +405,10 @@ export default function HomePage() {
               href={DEMO_REGISTRATION_URL}
               target="_blank"
               rel="noopener"
-              className="inline-block bg-cream text-orange text-[14px] font-bold tracking-[0.04em] px-8 py-[15px] rounded-[3px] no-underline transition-all duration-200 hover:bg-[#f0e8d6] hover:-translate-y-px w-[220px] text-center"
+              className="inline-block bg-cream text-orange text-[14px] font-bold tracking-[0.04em] px-8 py-[15px] rounded-full no-underline transition-all duration-200 hover:bg-[#f0e8d6] hover:-translate-y-px w-[220px] text-center"
             >
               Join the next demo
             </a>
-            <SendMessageButton className="inline-block bg-transparent text-cream text-[14px] font-semibold tracking-[0.04em] px-8 py-[15px] border-[1.5px] border-cream/40 rounded-[3px] transition-all duration-200 hover:border-cream/85 hover:-translate-y-px w-[220px] text-center cursor-pointer">
-              Send us a message
-            </SendMessageButton>
           </div>
         </div>
       </section>

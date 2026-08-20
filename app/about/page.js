@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { DEMO_REGISTRATION_URL } from '@/lib/site'
 import SendMessageButton from '@/components/MessageModal'
 
 export const metadata = {
@@ -354,15 +353,7 @@ export default function AboutPage() {
             stuck. Either way, the first step is a conversation.
           </p>
           <div className="flex flex-col items-center gap-3">
-            <a
-              href={DEMO_REGISTRATION_URL}
-              target="_blank"
-              rel="noopener"
-              className="w-[260px] text-center inline-block bg-cream text-orange text-[14px] font-bold tracking-[0.04em] px-8 py-[15px] rounded-[3px] no-underline transition-all duration-200 hover:bg-[#f0e8d6] hover:-translate-y-px"
-            >
-              Join the next demo
-            </a>
-            <SendMessageButton className="w-[260px] text-center inline-block bg-transparent text-cream text-[14px] font-semibold tracking-[0.04em] px-8 py-[15px] border-[1.5px] border-cream/40 rounded-[3px] transition-all duration-200 hover:border-cream/85 hover:-translate-y-px cursor-pointer">
+            <SendMessageButton className="w-[260px] text-center inline-block bg-[#FFFCF6] text-orange text-[14px] font-bold tracking-[0.04em] px-8 py-[15px] rounded-full transition-all duration-200 hover:bg-[#f0e8d6] hover:-translate-y-px cursor-pointer">
               Send us a message
             </SendMessageButton>
           </div>

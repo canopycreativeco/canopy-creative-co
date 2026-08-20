@@ -68,3 +68,25 @@ body {
   font-family: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
+
+/* ── Line breaking ──
+   Headings balance across their lines instead of leaving a short last line.
+   Body copy avoids orphans, so a paragraph never ends on a single hanging word.
+   Scoped to <main> so the nav and footer are untouched.
+   Inside @layer base so a per-element `text-balance` utility can still win:
+   unlayered rules beat every layered Tailwind utility regardless of specificity. */
+@layer base {
+  main h1,
+  main h2,
+  main h3,
+  main h4 {
+    text-wrap: balance;
+  }
+
+  main p,
+  main li,
+  main summary,
+  main figcaption {
+    text-wrap: pretty;
+  }
+}

@@ -8,7 +8,7 @@ export default function sitemap() {
       priority: 1.0,
     },
     {
-      url: 'https://www.canopycreativeco.com/work-with-us',
+      url: 'https://www.canopycreativeco.com/start-here',
       lastModified,
       changeFrequency: 'monthly',
       priority: 0.9,
@@ -21,6 +21,12 @@ export default function sitemap() {
     },
     {
       url: 'https://www.canopycreativeco.com/the-canopy',
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: 'https://www.canopycreativeco.com/the-greenhouse',
       lastModified,
       changeFrequency: 'monthly',
       priority: 0.9,

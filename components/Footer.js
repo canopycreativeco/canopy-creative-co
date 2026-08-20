@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 const footerLinks = [
-  { href: '/work-with-us', label: 'Work with us' },
+  { href: '/start-here', label: 'Start here' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
   { href: '/referral-program', label: 'Become an Affiliate' },
