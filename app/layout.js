@@ -2,6 +2,7 @@ import { Libre_Baskerville, DM_Sans } from 'next/font/google'
 import './globals.css'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import MessageWidget from '@/components/MessageWidget'
 import Script from 'next/script'
 
 const libreBaskerville = Libre_Baskerville({
@@ -48,6 +49,7 @@ export default function RootLayout({ children }) {
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />
+        <MessageWidget />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
