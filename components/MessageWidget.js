@@ -9,7 +9,7 @@ import MessageForm from './MessageForm'
    scroll, so the page stays usable while the form is open. */
 
 // Pages that already put a message form in front of the visitor
-const HIDE_ON = ['/contact']
+const HIDE_ON = ['/contact', '/client-intake-form']
 
 export default function MessageWidget() {
   const [open, setOpen] = useState(false)
