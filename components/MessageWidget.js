@@ -1,16 +1,21 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import { usePathname } from 'next/navigation'
 import MessageForm from './MessageForm'
 
 /* A persistent launcher in the bottom right corner. Expands into a panel in the
    same corner rather than a centred modal, and deliberately does not lock page
    scroll, so the page stays usable while the form is open. */
 
+// Pages that already put a message form in front of the visitor
+const HIDE_ON = ['/contact']
+
 export default function MessageWidget() {
   const [open, setOpen] = useState(false)
   const panelRef = useRef(null)
   const buttonRef = useRef(null)
+  const pathname = usePathname()
 
   useEffect(() => {
     if (!open) return
@@ -39,6 +44,8 @@ export default function MessageWidget() {
       document.removeEventListener('mousedown', handleClickAway)
     }
   }, [open])
+
+  if (HIDE_ON.includes(pathname)) return null
 
   return (
     <div className="fixed bottom-6 right-6 z-[210] flex flex-col items-end gap-3 max-md:bottom-4 max-md:right-4 print:hidden">
