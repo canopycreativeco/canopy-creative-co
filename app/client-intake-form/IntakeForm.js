@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
@@ -22,7 +22,6 @@ const ROOTS_SERVICES = [
   { id: 'sales-tax-filing',   label: 'Sales tax filing' },
   { id: 'payroll-support',    label: 'Payroll support' },
   { id: '1099-prep',          label: '1099 prep and filing' },
-  { id: 'ongoing-software',   label: 'Ongoing software & systems operation' },
 ]
 
 const CANOPY_SERVICES = [
@@ -38,6 +37,10 @@ const BUILD_SERVICES = [
   { id: 'workflow-design',         label: 'Workflow & process design' },
   { id: 'business-launch',         label: 'Business launch support' },
 ]
+
+const FOUNDATION_IDS = ROOTS_SERVICES.map((s) => s.id)
+const ADVISORY_IDS   = CANOPY_SERVICES.map((s) => s.id)
+const OPS_IDS        = BUILD_SERVICES.map((s) => s.id)
 
 const LAUNCH_ITEMS = [
   'Getting an EIN',
@@ -103,6 +106,79 @@ function Lbl({ children, opt, req }) {
       {req && <span className="text-red-500 ml-0.5">*</span>}
       {opt && <span className="text-muted font-normal ml-1">(optional)</span>}
     </label>
+  )
+}
+
+const READ_ONLY_TIP =
+  "Most banks and financial institutions let you create a read-only sub-account under your primary login. It's a safer way to provide access for pulling account statements and reviewing transactions, as needed. If your institution offers read-only sub-accounts, please include those credentials on this form."
+
+// Label with a circled-i that reveals a note on hover, tap, or keyboard focus.
+// Used on the Login / username field in all three Bank Access blocks.
+function LblWithTip({ children, tip, tipLabel }) {
+  const [hover, setHover]   = useState(false)
+  const [pinned, setPinned] = useState(false)
+  const [place, setPlace]   = useState('bottom')
+  const wrapRef = useRef(null)
+  const open = hover || pinned
+
+  // A tap outside dismisses a pinned tip. Hover-only tips need no listener.
+  useEffect(() => {
+    if (!pinned) return
+    function onDown(e) {
+      if (wrapRef.current && !wrapRef.current.contains(e.target)) setPinned(false)
+    }
+    document.addEventListener('pointerdown', onDown)
+    return () => document.removeEventListener('pointerdown', onDown)
+  }, [pinned])
+
+  // Flip above the label when there is not enough room below it. Measured as the
+  // tip opens rather than in an effect, so there is no second render to settle.
+  function measure() {
+    const r = wrapRef.current?.getBoundingClientRect()
+    if (r) setPlace(window.innerHeight - r.bottom < 200 ? 'top' : 'bottom')
+  }
+
+  return (
+    <div ref={wrapRef} className="relative flex items-center gap-1.5 mb-1">
+      <label className="block text-[13px] font-medium text-brown">{children}</label>
+      <button
+        type="button"
+        aria-label={tipLabel}
+        aria-expanded={open}
+        onClick={() => { measure(); setPinned((v) => !v) }}
+        onPointerEnter={(e) => { if (e.pointerType === 'mouse') { measure(); setHover(true) } }}
+        onPointerLeave={(e) => { if (e.pointerType === 'mouse') setHover(false) }}
+        onFocus={() => { measure(); setHover(true) }}
+        onBlur={() => setHover(false)}
+        className={`shrink-0 leading-none transition-colors hover:text-orange focus:outline-none focus-visible:text-orange ${
+          open ? 'text-orange' : 'text-muted'
+        }`}
+      >
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.3" />
+          <circle cx="8" cy="4.9" r="0.95" fill="currentColor" />
+          <path d="M8 7.2v4.3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
+      </button>
+      {open && (
+        <div
+          role="tooltip"
+          className={`absolute left-0 z-20 w-[280px] max-w-full bg-[#FFF8F3] border border-orange/25 rounded-lg px-3 py-2.5 text-[13px] text-brown/80 leading-[1.65] shadow-sm ${
+            place === 'top' ? 'bottom-full mb-1.5' : 'top-full mt-1.5'
+          }`}
+        >
+          {tip}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function LoginLbl({ children }) {
+  return (
+    <LblWithTip tip={READ_ONLY_TIP} tipLabel="Why read-only access">
+      {children}
+    </LblWithTip>
   )
 }
 
@@ -185,6 +261,24 @@ function ServiceCheckbox({ id, label, checked, onToggle }) {
   )
 }
 
+function ContactMethodCheckbox({ label, checked, onToggle }) {
+  return (
+    <label
+      className={`flex items-center justify-center gap-2 border rounded-lg px-2.5 py-2 min-h-[43px] cursor-pointer transition-colors flex-1 min-w-[84px] ${
+        checked ? 'border-[1.5px] border-orange bg-cream' : 'border-[#D1C4B8] bg-white hover:border-orange/40'
+      }`}
+    >
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={() => onToggle(label)}
+        className="accent-orange shrink-0"
+      />
+      <span className="text-[13px] text-brown leading-[1.4]">{label}</span>
+    </label>
+  )
+}
+
 function LaunchCheckbox({ label, checked, onToggle }) {
   return (
     <label
@@ -222,38 +316,6 @@ function RadioPillRow({ value, label, selected, onSelect }) {
   )
 }
 
-function FileZone({ accept, hint, multiple = false, value, onChange }) {
-  const ref = useRef(null)
-
-  function pick(files) {
-    const names = Array.from(files).map((f) => f.name).join(', ')
-    onChange(names)
-  }
-
-  return (
-    <div
-      onClick={() => ref.current?.click()}
-      onDragOver={(e) => e.preventDefault()}
-      onDrop={(e) => { e.preventDefault(); pick(e.dataTransfer.files) }}
-      className="border-2 border-dashed border-[#D1C4B8] rounded-lg p-8 text-center cursor-pointer hover:border-orange/50 transition-colors"
-    >
-      <input
-        ref={ref}
-        type="file"
-        accept={accept}
-        multiple={multiple}
-        className="hidden"
-        onChange={(e) => pick(e.target.files)}
-      />
-      <p className="text-[14px] text-brown/70 mb-1">Click to choose a file or drag here</p>
-      <p className="text-[12px] text-muted">{hint}</p>
-      {value && (
-        <p className="mt-3 text-[12px] font-medium text-orange break-all">{value}</p>
-      )}
-    </div>
-  )
-}
-
 // Reusable software credential block (used in sections 9 and 13)
 function SoftwareBlock({ data, onChange }) {
   return (
@@ -286,7 +348,7 @@ function SoftwareBlock({ data, onChange }) {
 
 const INIT = {
   // About Your Business
-  legalBusinessName: '', dba: '', ownerName: '', primaryBusinessEmail: '', primaryBusinessPhone: '',
+  legalBusinessName: '', dba: '', ownerName: '', contactMethods: [], primaryBusinessEmail: '', primaryBusinessPhone: '',
   businessAddress: '', entityType: '', entityTypeOther: '',
   stateOfFormation: '', ein: '', fiscalYearEnd: '',
   hasTaxPreparer: '',
@@ -319,8 +381,8 @@ const INIT = {
   // 1099
   contractorCount: '', w9OnFile: '', notes1099: '',
 
-  // Ongoing Software
-  ongoingSoftware: [{ ...SOFTWARE_T }], ongoingNotes: '',
+  // Systems that feed your books
+  hasOtherSystems: '', otherSystems: [{ ...SOFTWARE_T }], otherSystemsNotes: '',
 
   // Advisory
   advisoryAccountsAccurate: '', advisoryNotes: '',
@@ -330,20 +392,17 @@ const INIT = {
   projectOpSoftware: '', profitabilityNotes: '',
 
   // Coaching
-  coachingUsesAccounting: '', coachingFocus: '', coachingNotes: '',
+  coachingFocus: '', coachingNotes: '',
 
   // Software Implementation
   implementationBackground: '',
   implementationSoftware: [{ ...SOFTWARE_T }],
 
   // Workflow Design
-  workflows: ['', ''], workflowNotes: '',
+  workflows: [''], workflowNotes: '',
 
   // Business Launch
   launchItems: [], launchNotes: '',
-
-  // Branding / Attachments
-  logoFileName: '', attachmentFileNames: '',
 
   // Just For Fun
   birthday: '', socialPlatform: '', socialHandle: '',
@@ -390,6 +449,11 @@ export default function IntakeForm() {
     sf('selectedServices', s.includes(id) ? s.filter((x) => x !== id) : [...s, id])
   }
 
+  function toggleContactMethod(method) {
+    const m = fields.contactMethods
+    sf('contactMethods', m.includes(method) ? m.filter((x) => x !== method) : [...m, method])
+  }
+
   function toggleLaunch(label) {
     const l = fields.launchItems
     sf('launchItems', l.includes(label) ? l.filter((x) => x !== label) : [...l, label])
@@ -399,17 +463,23 @@ export default function IntakeForm() {
 
   const svcs = fields.selectedServices
   const showLegalSection   = ['txn-categorization','sales-tax-filing','payroll-support','1099-prep'].some((s) => svcs.includes(s))
-  const showBankAccounts   = ['txn-categorization','1099-prep','fpa','cash-flow','budgeting'].some((s) => svcs.includes(s))
+  const showAccounting     = [...FOUNDATION_IDS, ...ADVISORY_IDS].some((s) => svcs.includes(s))
+  const showBankAccounts   = ['txn-categorization','1099-prep'].some((s) => svcs.includes(s))
   const showSalesTax       = svcs.includes('sales-tax-filing')
   const showPayroll        = svcs.includes('payroll-support')
   const show1099           = svcs.includes('1099-prep')
-  const showOngoingSW      = svcs.includes('ongoing-software')
-  const showAdvisory       = ['fpa','cash-flow','budgeting'].some((s) => svcs.includes(s))
+  const showOtherSystems   = svcs.includes('txn-categorization')
+  const payrollAlsoSelected = svcs.includes('payroll-support')
+  const showAdvisory       =
+    ['fpa','cash-flow','budgeting'].some((s) => svcs.includes(s)) &&
+    !FOUNDATION_IDS.some((s) => svcs.includes(s))
   const showProjectProfit  = svcs.includes('project-profitability')
   const showCoaching       = svcs.includes('coaching')
   const showSoftwareImpl   = svcs.includes('software-implementation')
   const showWorkflow       = svcs.includes('workflow-design')
   const showBusinessLaunch = svcs.includes('business-launch')
+
+  const showPhoneField = fields.contactMethods.includes('Call') || fields.contactMethods.includes('Text')
 
   const showQBO = fields.accountingSoftware === 'QuickBooks Online'
   const showProjectAccounting = ['accounting','both'].includes(fields.projectTrackingLocation)
@@ -420,9 +490,14 @@ export default function IntakeForm() {
   async function handleSubmit() {
     const missingFields = []
     if (!fields.legalBusinessName.trim()) missingFields.push('Legal business name')
-    if (!fields.ownerName.trim()) missingFields.push('Owner / primary contact name')
-    if (!fields.primaryBusinessEmail.trim()) missingFields.push('Primary business email address')
+    if (!fields.ownerName.trim()) missingFields.push('Name of primary contact')
+    if (fields.contactMethods.length === 0) missingFields.push('How can we reach you')
+    const phoneDigits = fields.primaryBusinessPhone.replace(/\D/g, '')
+    if (phoneDigits.length > 0 && phoneDigits.length !== 10) missingFields.push('Phone number of primary contact')
     if (fields.selectedServices.length === 0) missingFields.push('At least one service selection')
+    if (showOtherSystems && !fields.hasOtherSystems) {
+      missingFields.push('Do you use other software that holds details about your transactions')
+    }
 
     if (missingFields.length > 0) {
       setSubmitError(`Please complete the following before submitting: ${missingFields.join(', ')}`)
@@ -432,75 +507,18 @@ export default function IntakeForm() {
     setLoading(true)
     setSubmitError('')
 
-    const f = fields
-
-    function serialize(arr, fn) {
-      return arr.filter((x) => fn ? fn(x) : x).map(fn || ((x) => x)).join(' | ')
-    }
-
     const payload = {
-      timestamp:            new Date().toISOString(),
-      businessName:         f.legalBusinessName || '',
-      legalBusinessName:    f.legalBusinessName || '',
-      dba:                  f.dba || '',
-      ownerName:            f.ownerName || '',
-      primaryBusinessEmail: f.primaryBusinessEmail || '',
-      primaryBusinessPhone: f.primaryBusinessPhone || '',
-      ...(showLegalSection ? {
-        businessAddress:    f.businessAddress || '',
-        entityType:         f.entityType === 'Other' ? `Other — ${f.entityTypeOther}` : (f.entityType || ''),
-        stateOfFormation:   f.stateOfFormation || '',
-        ein:                f.ein || '',
-        fiscalYearEnd:      f.fiscalYearEnd || '',
-        taxPreparer:        f.hasTaxPreparer === 'yes'
-          ? `${f.taxPreparer.name}, ${f.taxPreparer.firmName}, ${f.taxPreparer.email}, ${f.taxPreparer.phone}`
-          : (f.hasTaxPreparer || ''),
-      } : {}),
-      additionalContacts:   serialize(f.additionalContacts.filter((c) => c.name), (c) => `${c.name} (${c.role}) — ${c.email}${c.phone ? ' / ' + c.phone : ''}`),
-      selectedServices:     svcs.join(', ') || '',
-      futureServices:       f.futureServices || '',
-      accountingSoftware:   f.accountingSoftware === 'Other' ? `Other — ${f.accountingSoftwareOther}` : (f.accountingSoftware || ''),
-      accountingSoftwareEmail: f.accountingSoftware && !['QuickBooks Desktop','Spreadsheets','None — starting from scratch'].includes(f.accountingSoftware) ? f.accountingSoftwareEmail : '',
-      accountingSoftwarePassword: f.accountingSoftware && !['QuickBooks Desktop','Spreadsheets','None — starting from scratch'].includes(f.accountingSoftware) ? f.accountingSoftwarePassword : '',
-      accountingSoftwareNotes: f.accountingSoftwareNotes || '',
-      qboDetails:           showQBO ? `Plan: ${f.qboPlan} | Bank feeds: ${f.qboBankFeeds} | Login: ${f.qboEmail}` : '',
-      checkingAccounts:     serialize(f.checkingAccounts.filter((a) => a.institution), (a) => `${a.institution}${a.nickname ? ' ('+a.nickname+')' : ''} | ${a.loginEmail}`),
-      savingsAccounts:      serialize(f.savingsAccounts.filter((a) => a.institution), (a) => `${a.institution}${a.nickname ? ' ('+a.nickname+')' : ''} | ${a.loginEmail}`),
-      creditCards:          serialize(f.creditCards.filter((a) => a.institution), (a) => `${a.institution}${a.nickname ? ' ('+a.nickname+')' : ''} last4:${a.lastFour} | ${a.loginEmail}`),
-      accountsNotes:        f.accountsNotes || '',
-      salesTaxStates:       serialize(f.salesTaxStates.filter((s) => s.state), (s) => `${s.state}: ID ${s.taxId}, ${s.frequency}`),
-      salesTaxSoftware:     f.salesTaxSoftware || '',
-      salesTaxNotes:        f.salesTaxNotes || '',
-      payrollService:       f.payrollService === 'Other' ? `Other — ${f.payrollServiceOther}` : (f.payrollService || ''),
-      payrollFrequency:     f.payrollFrequency === 'Other' ? `Other — ${f.payrollFrequencyOther}` : (f.payrollFrequency || ''),
-      w2Employees:          f.w2Employees || '',
-      contractors1099:      f.contractors1099 || '',
-      payrollNotes:         f.payrollNotes || '',
-      contractorCount:      f.contractorCount || '',
-      w9OnFile:             f.w9OnFile || '',
-      notes1099:            f.notes1099 || '',
-      ongoingSoftware:      serialize(f.ongoingSoftware.filter((s) => s.name), (s) => `${s.name}: ${s.purpose}`),
-      ongoingNotes:         f.ongoingNotes || '',
-      advisoryAccountsAccurate: f.advisoryAccountsAccurate || '',
-      advisoryNotes:        f.advisoryNotes || '',
-      projectTrackingLocation: f.projectTrackingLocation || '',
-      projectOrganization:  f.projectOrganization || '',
-      projectOpSoftware:    f.projectOpSoftware || '',
-      profitabilityNotes:   f.profitabilityNotes || '',
-      coachingUsesAccounting: f.coachingUsesAccounting || '',
-      coachingFocus:        f.coachingFocus || '',
-      coachingNotes:        f.coachingNotes || '',
-      implementationBackground: f.implementationBackground || '',
-      implementationSoftware:   serialize(f.implementationSoftware.filter((s) => s.name), (s) => `${s.name}: ${s.purpose}`),
-      workflows:            f.workflows.filter(Boolean).map((w, i) => `${i + 1}. ${w}`).join(', ') || '',
-      workflowNotes:        f.workflowNotes || '',
-      launchItems:          f.launchItems.join(', ') || '',
-      launchNotes:          f.launchNotes || '',
-      logoFileName:         f.logoFileName || '',
-      attachmentFileNames:  f.attachmentFileNames || '',
-      birthday:             f.birthday || '',
-      socialMedia:          f.socialPlatform ? `${f.socialPlatform}: ${f.socialHandle}` : '',
-      finalNotes:           f.finalNotes || '',
+      submissionId: `CCC-${Date.now()}`,
+      submittedAt: new Date().toISOString(),
+      fields,
+      visibility: {
+        showLegalSection, showAccounting, showBankAccounts, showSalesTax,
+        showPayroll, show1099, showOtherSystems, showAdvisory,
+        showProjectProfit, showCoaching, showSoftwareImpl, showWorkflow,
+        showBusinessLaunch, showPhoneField, showQBO,
+        showProjectAccounting, showProjectOpSW,
+        hasOtherSystems: fields.hasOtherSystems === 'Yes',
+      },
     }
 
     try {
@@ -561,15 +579,33 @@ export default function IntakeForm() {
             <input type="text" value={fields.dba} onChange={(e) => sf('dba', e.target.value)} className={inp} />
           </div>
           <div>
-            <Lbl req>Owner / primary contact name</Lbl>
+            <Lbl req>Name of primary contact</Lbl>
             <input type="text" value={fields.ownerName} onChange={(e) => sf('ownerName', e.target.value)} className={inp} />
           </div>
           <div>
-            <Lbl req>Primary business email address</Lbl>
+            <div className="flex items-baseline gap-2 mb-1">
+              <label className="block text-[13px] font-medium text-brown shrink-0">
+                How can we reach you?<span className="text-red-500 ml-0.5">*</span>
+              </label>
+              <span className="flex-1 text-center text-[12px] text-muted italic">Check all that work.</span>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {['Email','Call','Text'].map((m) => (
+                <ContactMethodCheckbox
+                  key={m}
+                  label={m}
+                  checked={fields.contactMethods.includes(m)}
+                  onToggle={toggleContactMethod}
+                />
+              ))}
+            </div>
+          </div>
+          <div>
+            <Lbl>Email address of primary contact</Lbl>
             <input type="email" value={fields.primaryBusinessEmail} onChange={(e) => sf('primaryBusinessEmail', e.target.value)} className={inp} />
           </div>
           <div>
-            <Lbl>Primary business phone number</Lbl>
+            <Lbl>Phone number of primary contact</Lbl>
             <input type="tel" value={formatPhone(fields.primaryBusinessPhone)} onChange={(e) => sf('primaryBusinessPhone', e.target.value.replace(/\D/g, '').slice(0, 10))} placeholder="(555) 000-0000" className={inp} />
           </div>
         </div>
@@ -632,7 +668,7 @@ export default function IntakeForm() {
           {/* The Roots */}
           <div>
             <span className="inline-block text-[11px] font-semibold tracking-[0.16em] uppercase text-orange border border-orange rounded-full px-3 py-1 mb-3">
-              The Roots — Foundation
+              Foundation
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {ROOTS_SERVICES.map((s) => (
@@ -644,7 +680,7 @@ export default function IntakeForm() {
           {/* The Canopy */}
           <div>
             <span className="inline-block text-[11px] font-semibold tracking-[0.16em] uppercase text-brown border border-[#C4A98A] bg-cream-dark rounded-full px-3 py-1 mb-3">
-              The Canopy — Advisory
+              Advisory
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {CANOPY_SERVICES.map((s) => (
@@ -656,7 +692,7 @@ export default function IntakeForm() {
           {/* The Build */}
           <div>
             <span className="inline-block text-[11px] font-semibold tracking-[0.16em] uppercase text-cream bg-brown rounded-full px-3 py-1 mb-3">
-              The Build — Operations & Systems
+              Operations & Systems
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {BUILD_SERVICES.map((s) => (
@@ -762,7 +798,8 @@ export default function IntakeForm() {
         </SectionCard>
       )}
 
-      {/* ── 4: ACCOUNTING SOFTWARE ── */}
+      {/* ── 4: ACCOUNTING SOFTWARE (conditional) ── */}
+      {showAccounting && (
       <SectionCard badge="Accounting" title="Accounting software">
         <div className="flex flex-col gap-4">
           <div>
@@ -862,13 +899,14 @@ export default function IntakeForm() {
           </div>
         </div>
       </SectionCard>
+      )}
 
       {/* ── 5: BANK ACCOUNTS (conditional) ── */}
       {showBankAccounts && (
         <SectionCard badge="Bank Access" title="Business bank accounts">
           <div className="flex flex-col gap-6">
             <NotePill>
-              Please provide login credentials for all business accounts. Quick tip before you fill this section out — most banks and financial institutions let you create a read-only sub-account under your primary login. It's a simple way to provide the access the Canopy Creative Co team needs while keeping your main credentials completely private. If you're setting up a read-only account, just make sure the username is something recognizable like "Your Business Name — Accounting" or "Your Business Name — Read Only" so it's easy to identify and unique to your business.
+              Please provide login credentials for all business accounts.
               <br /><br />
               Questions? Reach out to the Canopy Creative Co team anytime.
             </NotePill>
@@ -893,11 +931,11 @@ export default function IntakeForm() {
                     )}
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div><Lbl>Institution name</Lbl><input type="text" value={a.institution} onChange={(e) => ua('checkingAccounts',i,'institution',e.target.value)} className={inp} /></div>
+                    <div className="sm:col-span-2"><Lbl>Institution name</Lbl><input type="text" value={a.institution} onChange={(e) => ua('checkingAccounts',i,'institution',e.target.value)} className={inp} /></div>
                     <div><Lbl opt>Account nickname</Lbl><input type="text" value={a.nickname} onChange={(e) => ua('checkingAccounts',i,'nickname',e.target.value)} className={inp} /></div>
-                    <div><Lbl>Account number</Lbl><input type="text" value={a.accountNumber} onChange={(e) => ua('checkingAccounts',i,'accountNumber',e.target.value)} className={inp} /></div>
-                    <div><Lbl>Login / username email</Lbl><input type="text" value={a.loginEmail} onChange={(e) => ua('checkingAccounts',i,'loginEmail',e.target.value)} className={inp} /></div>
-                    <div className="sm:col-span-2"><Lbl>Password</Lbl><input type="text" value={a.password} onChange={(e) => ua('checkingAccounts',i,'password',e.target.value)} className={inp} /></div>
+                    <div><Lbl>Last four digits of account number</Lbl><input type="text" value={a.accountNumber} onChange={(e) => ua('checkingAccounts',i,'accountNumber',e.target.value)} maxLength={4} placeholder="0000" className={inp} /></div>
+                    <div><LoginLbl>Login / username</LoginLbl><input type="text" value={a.loginEmail} onChange={(e) => ua('checkingAccounts',i,'loginEmail',e.target.value)} className={inp} /></div>
+                    <div><Lbl>Password</Lbl><input type="text" value={a.password} onChange={(e) => ua('checkingAccounts',i,'password',e.target.value)} className={inp} /></div>
                   </div>
                 </SubCard>
               ))}
@@ -926,11 +964,11 @@ export default function IntakeForm() {
                     )}
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div><Lbl>Institution name</Lbl><input type="text" value={a.institution} onChange={(e) => ua('savingsAccounts',i,'institution',e.target.value)} className={inp} /></div>
+                    <div className="sm:col-span-2"><Lbl>Institution name</Lbl><input type="text" value={a.institution} onChange={(e) => ua('savingsAccounts',i,'institution',e.target.value)} className={inp} /></div>
                     <div><Lbl opt>Account nickname</Lbl><input type="text" value={a.nickname} onChange={(e) => ua('savingsAccounts',i,'nickname',e.target.value)} className={inp} /></div>
-                    <div><Lbl>Account number</Lbl><input type="text" value={a.accountNumber} onChange={(e) => ua('savingsAccounts',i,'accountNumber',e.target.value)} className={inp} /></div>
-                    <div><Lbl>Login / username email</Lbl><input type="text" value={a.loginEmail} onChange={(e) => ua('savingsAccounts',i,'loginEmail',e.target.value)} className={inp} /></div>
-                    <div className="sm:col-span-2"><Lbl>Password</Lbl><input type="text" value={a.password} onChange={(e) => ua('savingsAccounts',i,'password',e.target.value)} className={inp} /></div>
+                    <div><Lbl>Last four digits of account number</Lbl><input type="text" value={a.accountNumber} onChange={(e) => ua('savingsAccounts',i,'accountNumber',e.target.value)} maxLength={4} placeholder="0000" className={inp} /></div>
+                    <div><LoginLbl>Login / username</LoginLbl><input type="text" value={a.loginEmail} onChange={(e) => ua('savingsAccounts',i,'loginEmail',e.target.value)} className={inp} /></div>
+                    <div><Lbl>Password</Lbl><input type="text" value={a.password} onChange={(e) => ua('savingsAccounts',i,'password',e.target.value)} className={inp} /></div>
                   </div>
                 </SubCard>
               ))}
@@ -962,7 +1000,7 @@ export default function IntakeForm() {
                     <div><Lbl>Institution name</Lbl><input type="text" value={a.institution} onChange={(e) => ua('creditCards',i,'institution',e.target.value)} className={inp} /></div>
                     <div><Lbl opt>Card nickname</Lbl><input type="text" value={a.nickname} onChange={(e) => ua('creditCards',i,'nickname',e.target.value)} className={inp} /></div>
                     <div><Lbl>Last 4 digits</Lbl><input type="text" value={a.lastFour} onChange={(e) => ua('creditCards',i,'lastFour',e.target.value)} maxLength={4} placeholder="0000" className={inp} /></div>
-                    <div><Lbl>Login / username email</Lbl><input type="text" value={a.loginEmail} onChange={(e) => ua('creditCards',i,'loginEmail',e.target.value)} className={inp} /></div>
+                    <div><LoginLbl>Login / username</LoginLbl><input type="text" value={a.loginEmail} onChange={(e) => ua('creditCards',i,'loginEmail',e.target.value)} className={inp} /></div>
                     <div className="sm:col-span-2"><Lbl>Password</Lbl><input type="text" value={a.password} onChange={(e) => ua('creditCards',i,'password',e.target.value)} className={inp} /></div>
                   </div>
                 </SubCard>
@@ -1120,34 +1158,60 @@ export default function IntakeForm() {
         </SectionCard>
       )}
 
-      {/* ── 9: ONGOING SOFTWARE (conditional) ── */}
-      {showOngoingSW && (
-        <SectionCard badge="Software Access" title="Ongoing software & systems operation">
+      {/* ── 9: SYSTEMS THAT FEED YOUR BOOKS (conditional) ── */}
+      {showOtherSystems && (
+        <SectionCard badge="Software Access" title="Systems that feed your books">
           <div className="flex flex-col gap-4">
-            {fields.ongoingSoftware.map((sw, i) => (
-              <SubCard key={i}>
-                <div className="flex items-center justify-between mb-3">
-                  <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted">
-                    Software {i + 1}
-                  </p>
-                  {i > 0 && (
-                    <button
-                      type="button"
-                      onClick={() => ra('ongoingSoftware', i)}
-                      className="text-[11px] font-semibold text-orange border border-orange rounded-full px-3 py-1 hover:bg-orange hover:text-white transition-colors"
-                    >
-                      Remove
-                    </button>
-                  )}
-                </div>
-                <SoftwareBlock data={sw} onChange={(sub, val) => ua('ongoingSoftware', i, sub, val)} />
-              </SubCard>
-            ))}
-            <AddBtn onClick={() => aa('ongoingSoftware', SOFTWARE_T)}>Add another software</AddBtn>
             <div>
-              <Lbl opt>Anything else your team should know?</Lbl>
-              <textarea value={fields.ongoingNotes} onChange={(e) => sf('ongoingNotes', e.target.value)} rows={3} className={ta} />
+              <Lbl req>Do you use other software that holds details about your transactions?</Lbl>
+              {payrollAlsoSelected ? (
+                <>
+                  <Hint>Design and project platforms like DesignFiles, Materio, Studio Designer, or Houzz Pro, payment processors like Stripe or Square, bill pay tools. Some of these may already sync with your accounting software and some may not, and we may need to look at the source either way.</Hint>
+                  <Hint>Skip your payroll provider here. We'll ask for that in the Payroll section below.</Hint>
+                </>
+              ) : (
+                <Hint>Payroll providers, design and project platforms like DesignFiles, Materio, Studio Designer, or Houzz Pro, payment processors like Stripe or Square, bill pay tools. Some of these may already sync with your accounting software and some may not, and we may need to look at the source either way.</Hint>
+              )}
+              <div className="flex flex-col gap-2 mt-2">
+                {['Yes','No'].map((o) => (
+                  <RadioPillRow
+                    key={o}
+                    value={o}
+                    label={o}
+                    selected={fields.hasOtherSystems === o}
+                    onSelect={(v) => sf('hasOtherSystems', v)}
+                  />
+                ))}
+              </div>
             </div>
+            {fields.hasOtherSystems === 'Yes' && (
+              <>
+                {fields.otherSystems.map((sw, i) => (
+                  <SubCard key={i}>
+                    <div className="flex items-center justify-between mb-3">
+                      <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-muted">
+                        Software {i + 1}
+                      </p>
+                      {i > 0 && (
+                        <button
+                          type="button"
+                          onClick={() => ra('otherSystems', i)}
+                          className="text-[11px] font-semibold text-orange border border-orange rounded-full px-3 py-1 hover:bg-orange hover:text-white transition-colors"
+                        >
+                          Remove
+                        </button>
+                      )}
+                    </div>
+                    <SoftwareBlock data={sw} onChange={(sub, val) => ua('otherSystems', i, sub, val)} />
+                  </SubCard>
+                ))}
+                <AddBtn onClick={() => aa('otherSystems', SOFTWARE_T)}>Add another software</AddBtn>
+                <div>
+                  <Lbl opt>Anything else your team should know?</Lbl>
+                  <textarea value={fields.otherSystemsNotes} onChange={(e) => sf('otherSystemsNotes', e.target.value)} rows={3} className={ta} />
+                </div>
+              </>
+            )}
           </div>
         </SectionCard>
       )}
@@ -1156,9 +1220,6 @@ export default function IntakeForm() {
       {showAdvisory && (
         <SectionCard badge="Advisory" title="Advisory — accounting access">
           <div className="flex flex-col gap-4">
-            <NotePill>
-              If you've already provided your accounting software login above, you're all set here. If not, please complete that section first.
-            </NotePill>
             <div>
               <Lbl>Are all accounts complete and accurate (C&A) in your accounting software?</Lbl>
               <select value={fields.advisoryAccountsAccurate} onChange={(e) => sf('advisoryAccountsAccurate', e.target.value)} className={sel}>
@@ -1219,14 +1280,7 @@ export default function IntakeForm() {
         <SectionCard badge="Coaching" title="Finance & accounting coaching">
           <div className="flex flex-col gap-4">
             <div>
-              <Lbl>Do you currently use accounting software?</Lbl>
-              <select value={fields.coachingUsesAccounting} onChange={(e) => sf('coachingUsesAccounting', e.target.value)} className={sel}>
-                <option value="">Select…</option>
-                {['Yes (completed above)','No — I use spreadsheets','No — I don\'t track finances formally'].map((o) => <option key={o} value={o}>{o}</option>)}
-              </select>
-            </div>
-            <div>
-              <Lbl opt>What do you most want to focus on?</Lbl>
+              <Lbl>What goals do you want to focus on?</Lbl>
               <textarea value={fields.coachingFocus} onChange={(e) => sf('coachingFocus', e.target.value)} rows={3} className={ta} />
             </div>
             <div>
@@ -1294,7 +1348,7 @@ export default function IntakeForm() {
                     className="flex-1 border-0 border-b border-[#D1C4B8] rounded-none px-1 py-2 text-[14px] text-brown bg-transparent outline-none focus:border-orange transition-colors placeholder:text-[#C4A98A]"
                     placeholder="Describe the workflow…"
                   />
-                  {i > 1 && (
+                  {i > 0 && (
                     <button
                       type="button"
                       onClick={() => sf('workflows', fields.workflows.filter((_, wi) => wi !== i))}
@@ -1340,35 +1394,6 @@ export default function IntakeForm() {
           </div>
         </SectionCard>
       )}
-
-      {/* ── 16: BRANDING ── */}
-      <SectionCard
-        badge="Branding"
-        title="Business logo"
-        description="We'll use this on any client-facing documents we prepare on your behalf."
-      >
-        <FileZone
-          accept=".png,.svg,.pdf"
-          hint="PNG, SVG, or PDF — up to 10MB"
-          value={fields.logoFileName}
-          onChange={(v) => sf('logoFileName', v)}
-        />
-      </SectionCard>
-
-      {/* ── 17: ATTACHMENTS ── */}
-      <SectionCard
-        badge="Attachments"
-        title="Anything else you'd like to share?"
-        description="Upload any documents that help give us context — prior reports, spreadsheets, contracts, or anything else."
-      >
-        <FileZone
-          accept=".pdf,.xlsx,.xls,.doc,.docx,.jpg,.jpeg,.png"
-          hint="PDF, Excel, Word, images — up to 25MB"
-          multiple
-          value={fields.attachmentFileNames}
-          onChange={(v) => sf('attachmentFileNames', v)}
-        />
-      </SectionCard>
 
       {/* ── 18: JUST FOR FUN ── */}
       <SectionCard
