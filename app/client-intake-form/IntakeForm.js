@@ -1551,7 +1551,7 @@ export default function IntakeForm() {
       {/* ── 20: CLOSING CARD ── */}
       <div className="bg-brown rounded-xl p-8 text-center">
         <h2 className="font-serif font-bold text-cream text-[22px] leading-[1.25] mb-8">
-          Thank you for trusting us with your business.
+          That's everything we need to get started!
         </h2>
         <div className="flex flex-col items-center gap-3">
           {loading ? (
