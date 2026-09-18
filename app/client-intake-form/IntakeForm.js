@@ -150,8 +150,8 @@ function LblWithTip({ children, tip, tipLabel }) {
         onPointerLeave={(e) => { if (e.pointerType === 'mouse') setHover(false) }}
         onFocus={() => { measure(); setHover(true) }}
         onBlur={() => setHover(false)}
-        className={`shrink-0 leading-none transition-colors hover:text-orange focus:outline-none focus-visible:text-orange ${
-          open ? 'text-orange' : 'text-muted'
+        className={`shrink-0 leading-none transition-colors focus:outline-none ${
+          open ? 'text-brown' : 'text-orange'
         }`}
       >
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -316,6 +316,39 @@ function RadioPillRow({ value, label, selected, onSelect }) {
   )
 }
 
+// Numbered list of single-line entries (used by Coaching goals and Workflows)
+function ListRows({ items, onChange, placeholder }) {
+  return (
+    <div className="flex flex-col gap-1">
+      {items.map((item, i) => (
+        <div key={i} className="flex items-center gap-3">
+          <span className="text-[13px] text-muted w-5 shrink-0 text-right select-none">{i + 1}</span>
+          <input
+            type="text"
+            value={item}
+            onChange={(e) => {
+              const updated = [...items]
+              updated[i] = e.target.value
+              onChange(updated)
+            }}
+            className="flex-1 border-0 border-b border-[#D1C4B8] rounded-none px-1 py-2 text-[14px] text-brown bg-transparent outline-none focus:border-orange transition-colors placeholder:text-[#C4A98A]"
+            placeholder={placeholder}
+          />
+          {i > 0 && (
+            <button
+              type="button"
+              onClick={() => onChange(items.filter((_, ri) => ri !== i))}
+              className="text-[11px] font-semibold text-orange border border-orange rounded-full px-3 py-1 hover:bg-orange hover:text-white transition-colors shrink-0"
+            >
+              Remove
+            </button>
+          )}
+        </div>
+      ))}
+    </div>
+  )
+}
+
 // Reusable software credential block (used in sections 9 and 13)
 function SoftwareBlock({ data, onChange }) {
   return (
@@ -392,7 +425,7 @@ const INIT = {
   projectOpSoftware: '', profitabilityNotes: '',
 
   // Coaching
-  coachingFocus: '', coachingNotes: '',
+  coachingGoals: [''], coachingNotes: '',
 
   // Software Implementation
   implementationBackground: '',
@@ -894,7 +927,7 @@ export default function IntakeForm() {
             </div>
           )}
           <div>
-            <Lbl opt>Anything else your team should know about your accounting software?</Lbl>
+            <Lbl opt>Anything else you would like to share about your accounting software?</Lbl>
             <textarea value={fields.accountingSoftwareNotes} onChange={(e) => sf('accountingSoftwareNotes', e.target.value)} rows={3} className={ta} />
           </div>
         </div>
@@ -903,12 +936,10 @@ export default function IntakeForm() {
 
       {/* ── 5: BANK ACCOUNTS (conditional) ── */}
       {showBankAccounts && (
-        <SectionCard badge="Bank Access" title="Business bank accounts">
+        <SectionCard badge="Bank & Credit Card Access" title="Business bank & credit card accounts">
           <div className="flex flex-col gap-6">
             <NotePill>
-              Please provide login credentials for all business accounts.
-              <br /><br />
-              Questions? Reach out to the Canopy Creative Co team anytime.
+              Login credentials are required for specific services offered by Canopy Creative Co. Share read-only account access whenever possible.
             </NotePill>
 
             {/* Checking */}
@@ -1009,7 +1040,7 @@ export default function IntakeForm() {
             </div>
 
             <div>
-              <Lbl opt>Anything else your team should know about your accounts?</Lbl>
+              <Lbl opt>Anything else you would like to share about your accounts?</Lbl>
               <textarea value={fields.accountsNotes} onChange={(e) => sf('accountsNotes', e.target.value)} rows={3} className={ta} />
             </div>
           </div>
@@ -1068,7 +1099,7 @@ export default function IntakeForm() {
               </select>
             </div>
             <div>
-              <Lbl opt>Anything else your team should know about your sales tax situation?</Lbl>
+              <Lbl opt>Anything else you would like to share about your sales tax situation?</Lbl>
               <textarea value={fields.salesTaxNotes} onChange={(e) => sf('salesTaxNotes', e.target.value)} rows={3} className={ta} />
             </div>
           </div>
@@ -1123,7 +1154,7 @@ export default function IntakeForm() {
               </div>
             </SubCard>
             <div>
-              <Lbl opt>Anything else your team should know about your payroll setup?</Lbl>
+              <Lbl opt>Anything else you would like to share about your payroll setup?</Lbl>
               <textarea value={fields.payrollNotes} onChange={(e) => sf('payrollNotes', e.target.value)} rows={3} className={ta} />
             </div>
           </div>
@@ -1151,7 +1182,7 @@ export default function IntakeForm() {
               We'll use your checking and savings account access (collected above) to review payments. Please ensure those are filled in.
             </NotePill>
             <div>
-              <Lbl opt>Anything else your team should know about your 1099 situation?</Lbl>
+              <Lbl opt>Anything else you would like to share about your 1099 situation?</Lbl>
               <textarea value={fields.notes1099} onChange={(e) => sf('notes1099', e.target.value)} rows={3} className={ta} />
             </div>
           </div>
@@ -1167,7 +1198,7 @@ export default function IntakeForm() {
               {payrollAlsoSelected ? (
                 <>
                   <Hint>Design and project platforms like DesignFiles, Materio, Studio Designer, or Houzz Pro, payment processors like Stripe or Square, bill pay tools. Some of these may already sync with your accounting software and some may not, and we may need to look at the source either way.</Hint>
-                  <Hint>Skip your payroll provider here. We'll ask for that in the Payroll section below.</Hint>
+                  <Hint>Skip your payroll provider here. Since you indicated interest in payroll support, we collect payroll details in a separate section.</Hint>
                 </>
               ) : (
                 <Hint>Payroll providers, design and project platforms like DesignFiles, Materio, Studio Designer, or Houzz Pro, payment processors like Stripe or Square, bill pay tools. Some of these may already sync with your accounting software and some may not, and we may need to look at the source either way.</Hint>
@@ -1207,7 +1238,7 @@ export default function IntakeForm() {
                 ))}
                 <AddBtn onClick={() => aa('otherSystems', SOFTWARE_T)}>Add another software</AddBtn>
                 <div>
-                  <Lbl opt>Anything else your team should know?</Lbl>
+                  <Lbl opt>Anything else you would like to share?</Lbl>
                   <textarea value={fields.otherSystemsNotes} onChange={(e) => sf('otherSystemsNotes', e.target.value)} rows={3} className={ta} />
                 </div>
               </>
@@ -1218,7 +1249,7 @@ export default function IntakeForm() {
 
       {/* ── 10: ADVISORY (conditional) ── */}
       {showAdvisory && (
-        <SectionCard badge="Advisory" title="Advisory — accounting access">
+        <SectionCard badge="Advisory" title="Accounting condition">
           <div className="flex flex-col gap-4">
             <div>
               <Lbl>Are all accounts complete and accurate (C&A) in your accounting software?</Lbl>
@@ -1228,7 +1259,7 @@ export default function IntakeForm() {
               </select>
             </div>
             <div>
-              <Lbl opt>Anything else your team should know about your financial data setup?</Lbl>
+              <Lbl opt>Anything else you would like to share about your financial data setup?</Lbl>
               <textarea value={fields.advisoryNotes} onChange={(e) => sf('advisoryNotes', e.target.value)} rows={3} className={ta} />
             </div>
           </div>
@@ -1268,7 +1299,7 @@ export default function IntakeForm() {
               </div>
             )}
             <div>
-              <Lbl opt>Anything else your team should know about how you track profitability?</Lbl>
+              <Lbl opt>Anything else you would like to share about how you track profitability?</Lbl>
               <textarea value={fields.profitabilityNotes} onChange={(e) => sf('profitabilityNotes', e.target.value)} rows={3} className={ta} />
             </div>
           </div>
@@ -1281,10 +1312,15 @@ export default function IntakeForm() {
           <div className="flex flex-col gap-4">
             <div>
               <Lbl>What goals do you want to focus on?</Lbl>
-              <textarea value={fields.coachingFocus} onChange={(e) => sf('coachingFocus', e.target.value)} rows={3} className={ta} />
+              <ListRows
+                items={fields.coachingGoals}
+                onChange={(v) => sf('coachingGoals', v)}
+                placeholder="Describe the goal…"
+              />
             </div>
+            <AddBtn onClick={() => sf('coachingGoals', [...fields.coachingGoals, ''])}>Add another goal</AddBtn>
             <div>
-              <Lbl opt>Anything else your team should know?</Lbl>
+              <Lbl opt>Anything else you would like to share?</Lbl>
               <textarea value={fields.coachingNotes} onChange={(e) => sf('coachingNotes', e.target.value)} rows={3} className={ta} />
             </div>
           </div>
@@ -1333,36 +1369,14 @@ export default function IntakeForm() {
           description="List each workflow or process you need help with. Add as many rows as you need."
         >
           <div className="flex flex-col gap-4">
-            <div className="flex flex-col gap-1">
-              {fields.workflows.map((wf, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <span className="text-[13px] text-muted w-5 shrink-0 text-right select-none">{i + 1}</span>
-                  <input
-                    type="text"
-                    value={wf}
-                    onChange={(e) => {
-                      const updated = [...fields.workflows]
-                      updated[i] = e.target.value
-                      sf('workflows', updated)
-                    }}
-                    className="flex-1 border-0 border-b border-[#D1C4B8] rounded-none px-1 py-2 text-[14px] text-brown bg-transparent outline-none focus:border-orange transition-colors placeholder:text-[#C4A98A]"
-                    placeholder="Describe the workflow…"
-                  />
-                  {i > 0 && (
-                    <button
-                      type="button"
-                      onClick={() => sf('workflows', fields.workflows.filter((_, wi) => wi !== i))}
-                      className="text-[11px] font-semibold text-orange border border-orange rounded-full px-3 py-1 hover:bg-orange hover:text-white transition-colors shrink-0"
-                    >
-                      Remove
-                    </button>
-                  )}
-                </div>
-              ))}
-            </div>
+            <ListRows
+              items={fields.workflows}
+              onChange={(v) => sf('workflows', v)}
+              placeholder="Describe the workflow…"
+            />
             <AddBtn onClick={() => sf('workflows', [...fields.workflows, ''])}>Add another workflow</AddBtn>
             <div>
-              <Lbl opt>Anything else your team should know?</Lbl>
+              <Lbl opt>Anything else you would like to share?</Lbl>
               <textarea value={fields.workflowNotes} onChange={(e) => sf('workflowNotes', e.target.value)} rows={3} className={ta} />
             </div>
           </div>
