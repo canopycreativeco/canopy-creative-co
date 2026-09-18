@@ -90,6 +90,11 @@ const inp  = 'w-full border border-[#D1C4B8] rounded-lg px-3 py-2.5 text-[14px] 
 const sel  = `${inp} appearance-none bg-[url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%239A7A62' d='M6 8L0 0h12z'/%3E%3C/svg%3E")] bg-no-repeat bg-[right_12px_center]`
 const ta   = `${inp} resize-none`
 
+function formatEIN(value) {
+  const d = (value || '').replace(/\D/g, '').slice(0, 9)
+  return d.length <= 2 ? d : `${d.slice(0, 2)}-${d.slice(2)}`
+}
+
 function formatPhone(digits) {
   const d = (digits || '').replace(/\D/g, '').slice(0, 10)
   if (d.length <= 3) return d
@@ -377,6 +382,58 @@ function SoftwareBlock({ data, onChange }) {
   )
 }
 
+function SubmittedDialog({ onClose }) {
+  useEffect(() => {
+    function onKey(e) { if (e.key === 'Escape') onClose() }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [onClose])
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="submitted-heading"
+      className="fixed inset-0 z-50 flex items-center justify-center px-4"
+      style={{ backgroundColor: 'rgba(59,30,8,0.6)' }}
+    >
+      {/* Deliberately no click-to-dismiss on the backdrop. A stray tap beside
+          the dialog would navigate the client away from their own submission. */}
+      <div className="bg-white border border-[#E5DDD5] rounded-xl p-8 w-full max-w-[380px] text-center">
+        <svg
+          width="56"
+          height="56"
+          viewBox="0 0 56 56"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+          className="mx-auto mb-4"
+        >
+          <circle cx="28" cy="28" r="26" fill="#EAF3EC" stroke="#2F7A4F" strokeWidth="2" />
+          <path
+            d="M17 28.5l7.5 7.5L39 21"
+            stroke="#2F7A4F"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+        <h2 id="submitted-heading" className="font-serif font-bold text-brown text-[22px] leading-[1.25] mb-6">
+          Submitted Successfully
+        </h2>
+        <button
+          type="button"
+          autoFocus
+          onClick={onClose}
+          className="w-full bg-white text-orange border border-orange text-[15px] font-semibold px-8 py-3 rounded-lg transition-colors duration-150 hover:bg-orange hover:text-white"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  )
+}
+
 // ── Initial state ─────────────────────────────────────────────────────────────
 
 const INIT = {
@@ -449,6 +506,7 @@ const INIT = {
 export default function IntakeForm() {
   const [fields, setFields] = useState(INIT)
   const [loading, setLoading] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
   const [submitError, setSubmitError] = useState('')
 
   // ── State helpers ──────────────────────────────────────────────────────────
@@ -563,7 +621,7 @@ export default function IntakeForm() {
       const data = await res.json()
 
       if (data.success) {
-        window.location.href = 'https://scheduler.zoom.us/dave-altshul/onboarding-kickoff-call'
+        setSubmitted(true)
       } else {
         setSubmitError('Something went wrong — please try again or email hello@canopycreativeco.com')
       }
@@ -789,13 +847,13 @@ export default function IntakeForm() {
             </div>
             <div>
               <Lbl>EIN</Lbl>
-              <input type="text" value={fields.ein} onChange={(e) => sf('ein', e.target.value)} placeholder="XX-XXXXXXX" className={inp} />
+              <input type="text" inputMode="numeric" value={fields.ein} onChange={(e) => sf('ein', formatEIN(e.target.value))} maxLength={10} placeholder="XX-XXXXXXX" className={inp} />
             </div>
             <div>
               <Lbl>Fiscal year end</Lbl>
               <select value={fields.fiscalYearEnd} onChange={(e) => sf('fiscalYearEnd', e.target.value)} className={sel}>
                 <option value="">Select…</option>
-                {['December 31','March 31','June 30','September 30','Other'].map((o) => (
+                {['March 31','June 30','September 30','December 31','Other'].map((o) => (
                   <option key={o} value={o}>{o}</option>
                 ))}
               </select>
@@ -1492,12 +1550,9 @@ export default function IntakeForm() {
 
       {/* ── 20: CLOSING CARD ── */}
       <div className="bg-brown rounded-xl p-8 text-center">
-        <h2 className="font-serif font-bold text-cream text-[22px] leading-[1.25] mb-3">
+        <h2 className="font-serif font-bold text-cream text-[22px] leading-[1.25] mb-8">
           Thank you for trusting us with your business.
         </h2>
-        <p className="text-[13px] leading-[1.7] mb-8 max-w-[440px] mx-auto" style={{ color: 'rgba(253,246,236,0.65)' }}>
-          One click. Form submitted. Schedule your kickoff call. Let's get to work.
-        </p>
         <div className="flex flex-col items-center gap-3">
           {loading ? (
             <div className="flex flex-col items-center gap-4">
@@ -1518,7 +1573,7 @@ export default function IntakeForm() {
                 />
               </svg>
               <p className="text-[13px] leading-[1.7] max-w-[360px]" style={{ color: 'rgba(253,246,236,0.65)' }}>
-                Almost there! We're saving your response in the background — this can take up to a minute.<br />Please don't close or refresh this page.
+                Almost there! Don't close or refresh this page.
               </p>
             </div>
           ) : (
@@ -1527,7 +1582,7 @@ export default function IntakeForm() {
               onClick={handleSubmit}
               className="w-full sm:w-auto bg-white text-orange border border-orange text-[15px] font-semibold px-8 py-3.5 rounded-lg transition-colors duration-150 hover:bg-orange hover:text-white"
             >
-              Schedule onboarding kickoff call →
+              Submit
             </button>
           )}
           {submitError && (
@@ -1535,6 +1590,8 @@ export default function IntakeForm() {
           )}
         </div>
       </div>
+
+      {submitted && <SubmittedDialog onClose={() => { window.location.href = 'https://www.canopycreativeco.com/' }} />}
 
     </div>
   )
