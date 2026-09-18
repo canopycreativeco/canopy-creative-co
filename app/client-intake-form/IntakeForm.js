@@ -700,7 +700,7 @@ export default function IntakeForm() {
         <div className="flex flex-col gap-5">
           {/* The Roots */}
           <div>
-            <span className="inline-block text-[11px] font-semibold tracking-[0.16em] uppercase text-orange border border-orange rounded-full px-3 py-1 mb-3">
+            <span className="inline-block text-[11px] font-semibold tracking-[0.16em] uppercase text-white bg-orange rounded-full px-3 py-1 mb-3">
               Foundation
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -712,7 +712,7 @@ export default function IntakeForm() {
 
           {/* The Canopy */}
           <div>
-            <span className="inline-block text-[11px] font-semibold tracking-[0.16em] uppercase text-brown border border-[#C4A98A] bg-cream-dark rounded-full px-3 py-1 mb-3">
+            <span className="inline-block text-[11px] font-semibold tracking-[0.16em] uppercase text-white bg-orange rounded-full px-3 py-1 mb-3">
               Advisory
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -724,8 +724,8 @@ export default function IntakeForm() {
 
           {/* The Build */}
           <div>
-            <span className="inline-block text-[11px] font-semibold tracking-[0.16em] uppercase text-cream bg-brown rounded-full px-3 py-1 mb-3">
-              Operations & Systems
+            <span className="inline-block text-[11px] font-semibold tracking-[0.16em] uppercase text-white bg-orange rounded-full px-3 py-1 mb-3">
+              Operations
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {BUILD_SERVICES.map((s) => (
