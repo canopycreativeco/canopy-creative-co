@@ -1034,11 +1034,11 @@ export default function IntakeForm() {
                     )}
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div><Lbl>Institution name</Lbl><input type="text" value={a.institution} onChange={(e) => ua('creditCards',i,'institution',e.target.value)} className={inp} /></div>
+                    <div className="sm:col-span-2"><Lbl>Institution name</Lbl><input type="text" value={a.institution} onChange={(e) => ua('creditCards',i,'institution',e.target.value)} className={inp} /></div>
                     <div><Lbl opt>Card nickname</Lbl><input type="text" value={a.nickname} onChange={(e) => ua('creditCards',i,'nickname',e.target.value)} className={inp} /></div>
-                    <div><Lbl>Last 4 digits</Lbl><input type="text" value={a.lastFour} onChange={(e) => ua('creditCards',i,'lastFour',e.target.value)} maxLength={4} placeholder="0000" className={inp} /></div>
+                    <div><Lbl>Last four digits of credit card</Lbl><input type="text" value={a.lastFour} onChange={(e) => ua('creditCards',i,'lastFour',e.target.value)} maxLength={4} placeholder="0000" className={inp} /></div>
                     <div><LoginLbl>Login / username</LoginLbl><input type="text" value={a.loginEmail} onChange={(e) => ua('creditCards',i,'loginEmail',e.target.value)} className={inp} /></div>
-                    <div className="sm:col-span-2"><Lbl>Password</Lbl><input type="text" value={a.password} onChange={(e) => ua('creditCards',i,'password',e.target.value)} className={inp} /></div>
+                    <div><Lbl>Password</Lbl><input type="text" value={a.password} onChange={(e) => ua('creditCards',i,'password',e.target.value)} className={inp} /></div>
                   </div>
                 </SubCard>
               ))}
