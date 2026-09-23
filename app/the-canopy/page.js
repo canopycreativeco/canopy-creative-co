@@ -27,8 +27,8 @@ const SESSIONS = [
     title: 'Profit Levers: am I charging enough',
     blurb: 'Design fee, hourly, markup, or the mix. Pricing that pays you properly without scaring clients away.',
   },
-  { date: 'Sep 2', title: "Where's my stuff: the order and PO tracker", blurb: 'Every order, every vendor, one view, so the answer is one search away.' },
-  { date: 'Sep 16', title: 'Project pulse: budget, status, and the client update', blurb: 'The Monday update, drafted before Monday.' },
+  { date: 'Sep 2', aired: true, title: "Where's my stuff: the order and PO tracker", blurb: 'Every order, every vendor, one view, so the answer is one search away.' },
+  { date: 'Sep 16', aired: true, title: 'Project pulse: budget, status, and the client update', blurb: 'The Monday update, drafted before Monday.' },
   { date: 'Sep 30', title: 'The proposal and follow-up builder', blurb: 'From call notes to a clean proposal, plus the follow-up drafts you never get to.' },
   { date: 'Oct 14', title: 'The money coach', blurb: 'A morning money check you can actually keep.' },
 ]
@@ -298,16 +298,17 @@ export default function TheCanopyPage() {
           <div>
             <div className="border border-brown/15 rounded-lg bg-white/60 p-6">
               <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-orange/85 mb-2">
-                Next session &middot; Wednesday, September 2 &middot; 1pm ET
+                Next session &middot; Wednesday, September 30 &middot; 1pm ET
               </p>
               <h3 className="font-serif font-bold text-brown text-[22px] leading-[1.3] mb-3">
-                Where&rsquo;s my stuff: the order and PO tracker
+                The proposal and follow-up builder
               </h3>
               <p className="text-[15.5px] text-brown/80 leading-[1.75] mb-6">
-                Every order, every vendor, one view, so the answer is one search away.
+                From call notes to a proposal that goes out the same week, plus the follow-ups that
+                keep a warm lead from going quiet.
               </p>
               <a href={DEMO_REGISTRATION_URL} target="_blank" rel="noopener" className={btnPrimary}>
-                Save your seat for Sep 2
+                Save your seat for Sep 30
               </a>
             </div>
           </div>
@@ -404,7 +405,7 @@ export default function TheCanopyPage() {
             </p>
             {/* CCC-EXPIRES-OCT14: update the named next session after Sep 2 airs. */}
             <p className="text-[13px] text-brown/60 leading-[1.6]">
-              Every session runs this way. The next one airs September 2.
+              Every session runs this way. The next one airs September 30.
             </p>
           </div>
         </div>
