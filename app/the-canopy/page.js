@@ -29,7 +29,7 @@ const SESSIONS = [
   },
   { date: 'Sep 2', aired: true, title: "Where's my stuff: the order and PO tracker", blurb: 'Every order, every vendor, one view, so the answer is one search away.' },
   { date: 'Sep 16', aired: true, title: 'Project pulse: budget, status, and the client update', blurb: 'The Monday update, drafted before Monday.' },
-  { date: 'Sep 30', title: 'The proposal and follow-up builder', blurb: 'From call notes to a clean proposal, plus the follow-up drafts you never get to.' },
+  { date: 'Sep 30', title: 'The proposal and follow-up builder', blurb: 'From call notes to a proposal that goes out the same week, plus the follow-ups that keep a warm lead from going quiet.' },
   { date: 'Oct 14', title: 'The money coach', blurb: 'A morning money check you can actually keep.' },
 ]
 
