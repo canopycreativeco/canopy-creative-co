@@ -224,14 +224,15 @@ export default function HomePage() {
             {/* CCC-EXPIRES-OCT14: swap to the next scheduled session once Sep 2 airs. */}
             <div className="flex flex-col border-2 border-orange rounded-lg bg-[#FFFCF6] p-6 shadow-[0_6px_26px_rgba(59,30,8,0.10)] max-md:p-5">
               <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-orange mb-2">
-                Coming up &middot; Wednesday, September 2 &middot; 1pm ET
+                Coming up &middot; Wednesday, September 30 &middot; 1pm ET
               </p>
               <h3 className="font-serif font-bold text-brown text-[21px] leading-[1.3] mb-3">
-                Where&rsquo;s my stuff: the order and PO tracker
+                The proposal and follow-up builder
               </h3>
               <p className="text-[15.5px] text-brown/80 leading-[1.75] mb-6">
-                Every order, every vendor, one view, so the answer is one search away. Built live,
-                start to finish, with your questions along the way.
+                From call notes to a proposal that goes out the same week, plus the follow-ups that
+                keep a warm lead from going quiet. Built live, start to finish, with your questions
+                along the way.
               </p>
 
               {/* Placeholder for the Sep 2 build graphic.
@@ -241,7 +242,7 @@ export default function HomePage() {
               <div
                 className="relative rounded-lg border border-brown/10 bg-cream p-4 mb-6 overflow-hidden"
                 role="img"
-                aria-label="Placeholder for the September 2 build. The graphic is made after the session is built."
+                aria-label="Placeholder for the September 30 build. The graphic is made after the session is built."
               >
                 <div className="blur-[6px] opacity-70 select-none pointer-events-none" aria-hidden="true">
                   <div className="bg-white rounded-md border border-brown/10 overflow-hidden mb-3">
@@ -295,8 +296,6 @@ export default function HomePage() {
               </p>
               <div className="border-t border-brown/10">
                 {[
-                  { date: 'Sep 16', title: 'Project pulse: budget, status, and the client update' },
-                  { date: 'Sep 30', title: 'The proposal and follow-up builder' },
                   { date: 'Oct 14', title: 'The money coach' },
                 ].map(({ date, title }) => (
                   <div key={date} className="grid grid-cols-[64px_1fr] gap-3 py-[11px] border-b border-brown/10 items-baseline">
@@ -310,7 +309,7 @@ export default function HomePage() {
 
               <div className="mt-auto pt-7">
                 <a href={DEMO_REGISTRATION_URL} target="_blank" rel="noopener" className={`${btnPrimary} block text-center`}>
-                  Save your seat for Sep 2
+                  Save your seat for Sep 30
                 </a>
                 <p className="text-[12.5px] text-brown/60 leading-[1.6] mt-3 text-center">
                   Free to watch. Register and show up.
