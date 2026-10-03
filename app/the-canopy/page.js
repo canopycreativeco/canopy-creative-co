@@ -29,8 +29,8 @@ const SESSIONS = [
   },
   { date: 'Sep 2', aired: true, title: "Where's my stuff: the order and PO tracker", blurb: 'Every order, every vendor, one view, so the answer is one search away.' },
   { date: 'Sep 16', aired: true, title: 'Project pulse: budget, status, and the client update', blurb: 'The Monday update, drafted before Monday.' },
-  { date: 'Sep 30', title: 'The proposal and follow-up builder', blurb: 'From call notes to a proposal that goes out the same week, plus the follow-ups that keep a warm lead from going quiet.' },
-  { date: 'Oct 14', title: 'The money coach', blurb: 'A morning money check you can actually keep.' },
+  { date: 'Sep 30', aired: true, title: 'The proposal and follow-up builder', blurb: 'From call notes to a proposal that goes out the same week, plus the follow-ups that keep a warm lead from going quiet.' },
+  { date: 'Oct 14', title: 'The money coach', blurb: 'The other half of Profit Levers: where the money goes each month, and which costs are worth a second look.' },
 ]
 
 const BEATS = [
@@ -276,7 +276,7 @@ export default function TheCanopyPage() {
       </section>
 
 {/* ── PART A · THE NEXT LIVE SESSION ── */}
-      {/* CCC-EXPIRES-OCT14: swap to the next scheduled session once Sep 2 airs. See swap plan. */}
+      {/* CCC-EXPIRES-OCT14: swap to the next scheduled session once Oct 14 airs. See swap plan. */}
       <section className="bg-cream py-[68px] px-[60px] max-md:py-[50px] max-md:px-6">
         <div className="max-w-[960px] mx-auto grid grid-cols-[1fr_1.4fr] gap-[80px] items-start max-md:grid-cols-1 max-md:gap-10">
           <div>
@@ -298,17 +298,18 @@ export default function TheCanopyPage() {
           <div>
             <div className="border border-brown/15 rounded-lg bg-white/60 p-6">
               <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-orange/85 mb-2">
-                Next session &middot; Wednesday, September 30 &middot; 1pm ET
+                Next session &middot; Wednesday, October 14 &middot; 1pm ET
               </p>
               <h3 className="font-serif font-bold text-brown text-[22px] leading-[1.3] mb-3">
-                The proposal and follow-up builder
+                The money coach
               </h3>
               <p className="text-[15.5px] text-brown/80 leading-[1.75] mb-6">
-                From call notes to a proposal that goes out the same week, plus the follow-ups that
-                keep a warm lead from going quiet.
+                The other half of Profit Levers. That session looked at the money coming in. This
+                one looks at the money going out: where it goes each month, what keeps creeping up,
+                and which costs are worth a second look.
               </p>
               <a href={DEMO_REGISTRATION_URL} target="_blank" rel="noopener" className={btnPrimary}>
-                Save your seat for Sep 30
+                Save your seat for Oct 14
               </a>
             </div>
           </div>
@@ -403,9 +404,9 @@ export default function TheCanopyPage() {
               Members left with the starter prompt the build begins from, ready to point at their
               own numbers. The firm is fictional, so we could show everything with nothing to hide.
             </p>
-            {/* CCC-EXPIRES-OCT14: update the named next session after Sep 2 airs. */}
+            {/* CCC-EXPIRES-OCT14: update the named next session after Oct 14 airs. */}
             <p className="text-[13px] text-brown/60 leading-[1.6]">
-              Every session runs this way. The next one airs September 30.
+              Every session runs this way. The next one airs October 14.
             </p>
           </div>
         </div>
