@@ -292,8 +292,8 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="mt-auto pt-7">
-                <a href={DEMO_REGISTRATION_URL} target="_blank" rel="noopener" className={`${btnPrimary} block text-center`}>
+              <div className="mt-auto pt-7 text-center">
+                <a href={DEMO_REGISTRATION_URL} target="_blank" rel="noopener" className={btnPrimary}>
                   Save your seat for Oct 14
                 </a>
                 <p className="text-[12.5px] text-brown/60 leading-[1.6] mt-3 text-center">
