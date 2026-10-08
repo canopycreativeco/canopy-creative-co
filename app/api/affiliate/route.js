@@ -42,7 +42,7 @@ function buildApplicantHtml(firstName) {
 
     <p style="${pStyle}">Thank you for offering to spread the word. A recommendation from someone who knows our work carries more weight than any ad we could buy.</p>
 
-    <p style="${pStyle}">Once you're approved, we'll set up your affiliate account and send a short welcome note with your personal referral link and how to use it. From there, every student who signs up through your link earns you a 20% commission on The Roots and The Canopy. For The Canopy, the 20% comes from your referral's first annual payment. Payouts go out quarterly to the PayPal email you shared.</p>
+    <p style="${pStyle}">Once you're approved, we'll send a short welcome note with how referrals work. From there, every person who joins The Canopy on your recommendation earns you a 20% commission on their first membership payment, annual or monthly. Payouts go out quarterly to the PayPal email you shared.</p>
 
     <p style="${pStyle}">Nothing else to do on your end for now. Talk soon.</p>
 
@@ -72,15 +72,13 @@ function section(title, content) {
 function buildWelcomeReply(firstName) {
   return `Hi ${firstName},
 
-You're approved, and your affiliate link is ready:
+You're approved. Here is how it works.
 
-[PASTE THEIR AFFILIATE LINK]
+Recommend The Canopy anywhere you talk with others: a text to a colleague, your newsletter, a post, a DM. Point people to canopycreativeco.com/the-canopy. One thing to include when you share: say that you earn a commission. A simple "I'm an affiliate and earn a commission if you join" keeps everything clear and keeps us inside FTC guidelines.
 
-Share it anywhere you talk with others: a text to a colleague, your newsletter, a post, a DM. Your link never expires, so share it for as long as you like. Once someone clicks it, they have 30 days to sign up and still count as your referral. One thing to include when you share: say that you earn a commission. A simple "this is my referral link" keeps everything clear and keeps us inside FTC guidelines.
+When someone you referred joins, email hello@canopycreativeco.com with their name and the email they joined with, within 30 days of their purchase. We confirm the membership on our side and record your commission. There is no link to track, so the name is what connects the referral to you.
 
-The money side is simple. You earn a 20% commission on The Roots and The Canopy. For The Canopy, your commission comes from the referral's first annual payment. Payouts go out quarterly to the PayPal email you gave us. If your earnings ever reach the level where federal tax reporting applies, we will send you a W-9 and hold that payout until the form comes back. We will always reach out first, so there is nothing for you to track on your own.
-
-You can watch your referrals and commissions anytime. Log in to the course site, click your name in the top corner, and open the Affiliate menu. The links in that menu are the ones that track, so share those rather than copying page addresses from our website. If you have never logged in before, use Forgot Password with this email address to set yourself up.
+The money side is simple. You earn a 20% commission on your referral's first membership payment to The Canopy, annual or monthly. Payouts go out quarterly to the PayPal email you gave us. If your earnings ever reach the level where federal tax reporting applies, we will send you a W-9 and hold that payout until the form comes back. We will always reach out first, so there is nothing for you to track on your own beyond the names.
 
 Full program terms: ${TERMS_URL}
 
@@ -106,10 +104,9 @@ function buildInternalHtml(data) {
 
   const setupSteps = `
     <ol style="margin:0;padding-left:20px;color:#3B1E08;font-size:14px;line-height:1.8;font-family:sans-serif;">
-      <li>In Thinkific, open Users and find or create <strong>${esc(email)}</strong>.</li>
-      <li>Three dots next to their name, then Edit. Under User roles check <strong>Affiliate</strong>, set commission to <strong>20%</strong>, and Save.</li>
-      <li>Copy their referral link (it appears in their Affiliate menu once the role is saved).</li>
-      <li>Reply to this email with the welcome note below and paste their link in. Reply-to is set to the applicant, so your reply goes straight to them.</li>
+      <li>Add <strong>${esc(email)}</strong> to the affiliate tracker with their PayPal email and today's date.</li>
+      <li>Reply to this email with the welcome note below. Reply-to is set to the applicant, so your reply goes straight to them.</li>
+      <li>When they send a referral's name, confirm the membership in Circle (Members) and log the commission against this affiliate.</li>
     </ol>`
 
   const welcomeBlock = `
@@ -121,7 +118,7 @@ function buildInternalHtml(data) {
 
     ${section('Applicant', applicantRows)}
     ${section('Set Up (About 2 Minutes)', setupSteps)}
-    ${section('Welcome Reply (Copy, Add Their Link, Send)', welcomeBlock)}
+    ${section('Welcome Reply (Copy, Send)', welcomeBlock)}
 
     <p style="margin:32px 0 0;font-size:12px;color:#9A7A62;font-family:sans-serif;">
       Submitted via canopycreativeco.com

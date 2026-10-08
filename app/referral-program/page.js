@@ -4,11 +4,11 @@ import AffiliateForm from './AffiliateForm'
 export const metadata = {
   title: 'Become an Affiliate',
   description:
-    'Share The Roots and The Canopy with others you know and earn a 20% commission on every referral. Apply to the Canopy Creative Co affiliate program.',
+    'Share The Canopy with others you know and earn a 20% commission on every referral. Apply to the Canopy Creative Co affiliate program.',
   openGraph: {
     title: 'Become an Affiliate | Canopy Creative Co',
     description:
-      'Share The Roots and The Canopy with others you know and earn a 20% commission on every referral. Apply to the Canopy Creative Co affiliate program.',
+      'Share The Canopy with others you know and earn a 20% commission on every referral. Apply to the Canopy Creative Co affiliate program.',
     url: 'https://www.canopycreativeco.com/referral-program',
     siteName: 'Canopy Creative Co',
   },
@@ -19,8 +19,8 @@ export const metadata = {
 
 const steps = [
   'Apply below. We review each application and reply within 2 business days.',
-  'We set up your affiliate account and send you a personal referral link.',
-  'Share your link. You earn a 20% commission on The Roots and The Canopy, tracked automatically and paid quarterly through PayPal.',
+  'Once approved, recommend The Canopy to people you know. When someone joins, send us their name and we confirm the membership on our side.',
+  'You earn a 20% commission on their first membership payment, paid quarterly through PayPal.',
 ]
 
 export default function ReferralProgramPage() {
@@ -39,8 +39,8 @@ export default function ReferralProgramPage() {
           an&nbsp;affiliate.
         </h1>
         <p className="text-[17px] text-brown/75 leading-[1.7] mb-12">
-          If The Roots or The Canopy earned a place in how you run your business, you can put
-          them in front of others you know and earn a commission for the introduction.
+          If The Canopy earned a place in how you run your business, you can put it in front of
+          others you know and earn a commission for the introduction.
         </p>
 
         {/* How it works */}
@@ -56,8 +56,8 @@ export default function ReferralProgramPage() {
         </div>
 
         <p className="text-[14px] text-muted leading-[1.6] mb-12">
-          For The Canopy, commission comes from your referral's first annual payment. The rest
-          of the fine print lives in the{' '}
+          Commission comes from your referral&rsquo;s first membership payment, annual or monthly.
+          The rest of the fine print lives in the{' '}
           <Link href="/legal#affiliate" className="text-orange no-underline hover:underline">
             Affiliate Program Terms
           </Link>

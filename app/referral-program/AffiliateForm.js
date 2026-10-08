@@ -132,7 +132,7 @@ export default function AffiliateForm() {
       <div data-error={!!errors.email || undefined}>
         <Label required>Email address</Label>
         <HelperText>
-          If you're a current student, use the email on your course account.
+          If you're a current member, use the email on your Canopy account.
         </HelperText>
         <input
           type="email"

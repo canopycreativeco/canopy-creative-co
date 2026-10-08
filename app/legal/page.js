@@ -41,7 +41,7 @@ export default function LegalPage() {
             Policies &amp; Terms
           </h1>
           <p className="text-[#9A7A62] font-['DM_Sans'] text-sm">
-            Last updated: July 27, 2026
+            Last updated: October 8, 2026
           </p>
         </div>
       </div>
@@ -84,8 +84,15 @@ export default function LegalPage() {
                 <h3 className="font-['Libre_Baskerville'] text-lg text-[#3B1E08] mb-2">Information we collect</h3>
                 <p>
                   When you submit a contact or intake form on this site, we collect the information
-                  you provide — such as your name, email address, phone number, and business
+                  you provide, such as your name, email address, phone number, and business
                   details. We do not collect payment information through this website.
+                </p>
+                <p className="mt-3">
+                  If you join The Canopy, our membership, your member account is created on
+                  Circle, the platform that hosts the membership, and your payment is processed
+                  by Stripe. Circle and Stripe collect the information needed to create your
+                  account and process your payment, including your name, email address, and
+                  payment details. We do not store your card details.
                 </p>
                 <p className="mt-3">
                   We may also collect basic analytics data (pages visited, time on site, referring
@@ -105,8 +112,9 @@ export default function LegalPage() {
                 <h3 className="font-['Libre_Baskerville'] text-lg text-[#3B1E08] mb-2">Third-party tools</h3>
                 <p>
                   Our site uses third-party services including form providers and scheduling
-                  software. These services have their own privacy policies that govern how they
-                  handle your data. We encourage you to review them.
+                  software. The Canopy membership runs on Circle, and membership payments are
+                  processed by Stripe. These services have their own privacy policies that govern
+                  how they handle your data. We encourage you to review them.
                 </p>
               </div>
               <div>
@@ -160,9 +168,39 @@ export default function LegalPage() {
                 </p>
               </div>
               <div>
+                <h3 className="font-['Libre_Baskerville'] text-lg text-[#3B1E08] mb-2">The Canopy membership</h3>
+                <p>
+                  The Canopy is a membership sold as an annual or monthly subscription. It is
+                  hosted on Circle, and payments are processed by Stripe. Your membership renews
+                  automatically at the end of each billing period, yearly or monthly, until you
+                  cancel. You can cancel at any time from your account. Cancelling stops future
+                  charges, and your access continues through the end of the period you have
+                  already paid for. Payments are non-refundable, and we do not offer prorated
+                  refunds for unused time. Circle&rsquo;s own terms of service also apply to your
+                  use of the member community.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-['Libre_Baskerville'] text-lg text-[#3B1E08] mb-2">Member content and license</h3>
+                <p>
+                  Everything inside The Canopy, including the video lessons, the prompt cheat
+                  sheet, the starter workspaces, session recordings, starter prompts, use cases,
+                  bonus tools, and the skills and prompts in The Tool Shed, is the property of
+                  Canopy Creative Consulting LLC or its licensors. A membership is for one person.
+                  It gives you, the member, a personal, non-transferable license to use that
+                  content in your own work and business for as long as your membership is active.
+                  One membership does not cover a team or a company, and logins may not be shared.
+                  You may not copy or distribute member content to others, or resell, repackage,
+                  publish, or teach it as your own, whether for free or for a fee. What you build with it is
+                  yours: the workspaces, documents, and outputs you create from our prompts and
+                  skills for your own business belong to you. If a membership is used in breach of
+                  these terms, we may end it without a refund.
+                </p>
+              </div>
+              <div>
                 <h3 className="font-['Libre_Baskerville'] text-lg text-[#3B1E08] mb-2">Intellectual property</h3>
                 <p>
-                  All content on this site — including text, design, graphics, and logos — is the
+                  All content on this site, including text, design, graphics, and logos, is the
                   property of Canopy Creative Consulting LLC and may not be reproduced or distributed
                   without our written permission.
                 </p>
@@ -215,28 +253,27 @@ export default function LegalPage() {
                 <h3 className="font-['Libre_Baskerville'] text-lg text-[#3B1E08] mb-2">Participation</h3>
                 <p>
                   Applications are reviewed by our team, and we may approve, decline, or remove
-                  any affiliate at our discretion. You do not need to be a current student to
-                  apply. Affiliate accounts are created on our course platform, and
-                  participation is free.
+                  any affiliate at our discretion. You do not need to be a current member to
+                  apply, and participation is free.
                 </p>
               </div>
               <div>
                 <h3 className="font-['Libre_Baskerville'] text-lg text-[#3B1E08] mb-2">Commission</h3>
                 <p>
-                  Affiliates earn a 20% commission on purchases of The Roots and The Canopy
-                  made through their referral link. For The Canopy, commission applies to the
-                  referral's first annual membership payment only. Renewal payments do not
-                  generate commission, and no other products or services are eligible.
+                  Affiliates earn a 20% commission on the first membership payment of each new
+                  member of The Canopy they refer, whether that member chooses annual or monthly
+                  billing. Renewal payments do not generate commission, and no other products or
+                  services are eligible.
                 </p>
               </div>
               <div>
-                <h3 className="font-['Libre_Baskerville'] text-lg text-[#3B1E08] mb-2">Tracking</h3>
+                <h3 className="font-['Libre_Baskerville'] text-lg text-[#3B1E08] mb-2">Referrals</h3>
                 <p>
-                  Referral links do not expire. Referrals are tracked on our course platform
-                  using a browser cookie that lasts 30 days from the click. Purchases made
-                  outside that window, purchases
-                  made without the referral link, and purchases made by affiliates on their own
-                  accounts do not earn commission.
+                  Referrals are recorded by name. When someone you referred joins The Canopy,
+                  send us their name and the email address they joined with, within 30 days of
+                  their purchase, and we confirm the membership on our side. Purchases reported
+                  after that window, purchases we cannot match to a referral, and purchases made
+                  by affiliates on their own accounts do not earn commission.
                 </p>
               </div>
               <div>
@@ -263,8 +300,8 @@ export default function LegalPage() {
               <div>
                 <h3 className="font-['Libre_Baskerville'] text-lg text-[#3B1E08] mb-2">Promotion standards</h3>
                 <p>
-                  When you share your affiliate link you must clearly disclose that you earn a
-                  commission, consistent with FTC guidance. Affiliates may not make earnings or
+                  When you recommend The Canopy as an affiliate you must clearly disclose that
+                  you earn a commission, consistent with FTC guidance. Affiliates may not make earnings or
                   outcome claims on our behalf, may not run paid ads on our brand name, and may
                   not present themselves as Canopy Creative Co.
                 </p>

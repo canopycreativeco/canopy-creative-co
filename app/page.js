@@ -5,10 +5,10 @@ export const metadata = {
   title: {
     absolute: 'Canopy Creative Co',
   },
-  description: 'Canopy Creative Co teaches operators to run lean businesses with AI. Free monthly live demos, a self-paced course, an ongoing membership, and done-with-you systems work.',
+  description: 'Canopy Creative Co teaches operators to run lean businesses with AI. A free live demo every month, The Canopy membership, and The Back Office for creative businesses that would rather hand it off.',
   openGraph: {
     title: 'Canopy Creative Co',
-    description: 'Canopy Creative Co teaches operators to run lean businesses with AI. Free monthly live demos, a self-paced course, an ongoing membership, and done-with-you systems work.',
+    description: 'Canopy Creative Co teaches operators to run lean businesses with AI. A free live demo every month, The Canopy membership, and The Back Office for creative businesses that would rather hand it off.',
     url: 'https://www.canopycreativeco.com',
     siteName: 'Canopy Creative Co',
   },
@@ -143,10 +143,8 @@ export default function HomePage() {
             AI takes off your plate. Watch, ask questions, and leave with a clear picture of what it
             does in a business like yours.
           </p>
-          {/* CCC-EXPIRES-OCT14: after the series the cadence is the third Wednesday of every month. */}
           <p className="text-[13.5px] text-brown/60 leading-[1.7] mt-3 max-w-[680px]">
-            One demo a month. During the interior design series we run every other week, through
-            October 14.
+            Free, live, once a month.
           </p>
 
           {/* Look back, and look ahead */}
@@ -221,7 +219,7 @@ export default function HomePage() {
             </div>
 
             {/* ── RIGHT · WHAT'S NEXT ── */}
-            {/* CCC-EXPIRES-OCT14: swap to the next scheduled session once Oct 14 airs. */}
+            {/* Swap to the next scheduled session once Oct 14 airs. */}
             <div className="flex flex-col border-2 border-orange rounded-lg bg-[#FFFCF6] p-6 shadow-[0_6px_26px_rgba(59,30,8,0.10)] max-md:p-5">
               <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-orange mb-2">
                 Coming up &middot; Wednesday, October 14 &middot; 1pm ET
@@ -346,56 +344,33 @@ export default function HomePage() {
       </section>
 
       {/* ── WHAT WE DO ── */}
-      <section className="bg-brown py-[100px] px-[60px] relative overflow-hidden max-md:py-[70px] max-md:px-6">
-        {/* Gradient */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          aria-hidden="true"
-          style={{ background: 'radial-gradient(ellipse 60% 80% at 100% 50%, rgba(204,78,0,0.12) 0%, transparent 60%)' }}
-        />
-        <div className="max-w-[720px] mx-auto relative">
-          <h2
-            className="font-serif font-bold text-cream leading-[1.25] mb-8"
-            style={{ fontSize: 'clamp(26px, 3.5vw, 38px)' }}
-          >
-            What we <em className="text-orange italic">do.</em>
-          </h2>
-          <p className="text-[16.5px] font-light leading-[1.85]" style={{ color: 'rgba(253,246,236,0.75)' }}>
-            AI is the lever, not the product. Humans stay in the picture. We teach the methodology and show you the work we run inside real client back offices every day. We won't tell you to replace your team, promise you seven figures, or sell you the tool of the week.
-          </p>
-        </div>
-      </section>
-
-      {/* ── FINAL CTA ── */}
-      <section className="bg-orange py-[90px] px-[60px] text-center relative overflow-hidden max-md:px-6">
+      <section className="bg-orange py-[100px] px-[60px] relative overflow-hidden max-md:py-[70px] max-md:px-6">
         {/* Highlight */}
         <div
           className="absolute inset-0 pointer-events-none"
           aria-hidden="true"
           style={{ background: 'radial-gradient(ellipse 60% 100% at 50% 0%, rgba(255,255,255,0.08) 0%, transparent 60%)' }}
         />
-        <div className="relative max-w-[600px] mx-auto">
+        <div className="max-w-[720px] mx-auto relative">
           <h2
-            className="font-serif font-bold text-cream leading-[1.2] tracking-[-0.01em] mb-5"
-            style={{ fontSize: 'clamp(28px, 4vw, 46px)' }}
+            className="font-serif font-bold text-cream leading-[1.25] mb-8"
+            style={{ fontSize: 'clamp(26px, 3.5vw, 38px)' }}
           >
-            Start with a demo.
+            What we <em className="italic text-[#FFEB99]">do.</em>
           </h2>
-          <p className="text-[17px] font-light leading-[1.7] mb-10 text-balance" style={{ color: 'rgba(253,246,236,0.75)' }}>
-            If you're the bottleneck in your own business and you know it, come to the next demo. It's free, and it's the clearest picture you'll get of what AI can do in a business like yours.
+          <p className="text-[16.5px] font-light leading-[1.85]" style={{ color: 'rgba(255,225,196,0.95)' }}>
+            AI is the lever, not the product. Humans stay in the picture. We teach the methodology and show you the work we run inside real client back offices every day. We won't tell you to replace your team, promise you seven figures, or sell you the tool of the week.
           </p>
-          <div className="flex gap-[14px] justify-center flex-wrap">
-            <a
-              href={DEMO_REGISTRATION_URL}
-              target="_blank"
-              rel="noopener"
-              className="inline-block bg-cream text-orange text-[14px] font-bold tracking-[0.04em] px-8 py-[15px] rounded-full no-underline transition-all duration-200 hover:bg-[#f0e8d6] hover:-translate-y-px w-[220px] text-center"
-            >
-              Join the next demo
-            </a>
-          </div>
+          {/* The one-to-one line. It appears once on the site, here, and only links to contact. */}
+          <p className="text-[15px] leading-[1.8] mt-8" style={{ color: 'rgba(255,225,196,0.85)' }}>
+            Want it built inside your business instead? We take on a few one-to-one projects.{' '}
+            <Link href="/contact" className="text-[#FFEB99] font-semibold underline underline-offset-[3px] transition-opacity duration-200 hover:opacity-80">
+              Let&rsquo;s talk.
+            </Link>
+          </p>
         </div>
       </section>
+
     </>
   )
 }

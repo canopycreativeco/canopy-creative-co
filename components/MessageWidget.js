@@ -11,8 +11,12 @@ import MessageForm from './MessageForm'
 // Pages that already put a message form in front of the visitor
 const HIDE_ON = ['/contact', '/client-intake-form']
 
+const BASE_OFFSET = 24 // px from the viewport bottom while scrolling
+const MOBILE_OFFSET = 16
+
 export default function MessageWidget() {
   const [open, setOpen] = useState(false)
+  const [bottom, setBottom] = useState(BASE_OFFSET)
   const panelRef = useRef(null)
   const buttonRef = useRef(null)
   const pathname = usePathname()
@@ -45,10 +49,50 @@ export default function MessageWidget() {
     }
   }, [open])
 
+  /* Keep the launcher out of the footer. On desktop it rides up with the page until
+     its bottom edge meets the wordmark row ([data-pill-anchor] in Footer), so it never
+     covers the footer links. On mobile it stops just above the footer. */
+  useEffect(() => {
+    let raf = 0
+
+    function update() {
+      raf = 0
+      const vh = window.innerHeight
+      const mobile = window.innerWidth < 768
+      const base = mobile ? MOBILE_OFFSET : BASE_OFFSET
+      let next = base
+
+      if (!mobile) {
+        const anchor = document.querySelector('[data-pill-anchor]')
+        if (anchor) next = Math.max(base, vh - anchor.getBoundingClientRect().bottom)
+      } else {
+        const footer = document.querySelector('footer')
+        if (footer) next = Math.max(base, vh - footer.getBoundingClientRect().top + base)
+      }
+      setBottom(Math.round(next))
+    }
+
+    function schedule() {
+      if (!raf) raf = requestAnimationFrame(update)
+    }
+
+    update()
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', schedule)
+    return () => {
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', schedule)
+      if (raf) cancelAnimationFrame(raf)
+    }
+  }, [pathname])
+
   if (HIDE_ON.includes(pathname)) return null
 
   return (
-    <div className="fixed bottom-6 right-6 z-[210] flex flex-col items-end gap-3 max-md:bottom-4 max-md:right-4 print:hidden">
+    <div
+      className="fixed right-6 z-[210] flex flex-col items-end gap-3 max-md:right-4 print:hidden"
+      style={{ bottom }}
+    >
       {open && (
         <div
           ref={panelRef}
