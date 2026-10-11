@@ -376,14 +376,15 @@ export default function ContactForm() {
         </div>
       </div>
 
-      {/* Honeypot: people never see or reach this field, bots fill it in */}
+      {/* Honeypot: people never see or reach this field, bots fill it in.
+          Named and labeled so browser autofill has nothing to match on. */}
       <div style={honeypotStyle} aria-hidden="true">
-        <label htmlFor="contact-website">Website</label>
+        <label htmlFor="contact-hpt">Leave this field empty</label>
         <input
           ref={honeypotRef}
-          id="contact-website"
+          id="contact-hpt"
           type="text"
-          name="website"
+          name="hpt_field"
           tabIndex={-1}
           autoComplete="off"
           defaultValue=""
