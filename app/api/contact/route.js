@@ -43,7 +43,7 @@ function escapeHtml(value) {
 
 // ── Google Sheets (via Apps Script) ──────────────────────────────────────────
 
-async function logToSheet(data) {
+async function logToSheet(data, reason) {
   const {
     name, email, phone, businessName, businessWebsite,
     businessType, helpWith,
@@ -72,6 +72,8 @@ async function logToSheet(data) {
       referralName: referralName || '',
       otherSource: otherSource || '',
       anythingElse: anythingElse || '',
+      spamCheck: reason ? 'Likely bot' : 'Passed',
+      spamReason: reason || '',
     }),
   })
 }
@@ -187,8 +189,7 @@ export async function POST(request) {
     }
 
     // Fire Sheets logging — don't await, never blocks the response
-    const sheetData = reason ? { ...data, name: `[Likely bot] ${data.name}` } : data
-    logToSheet(sheetData).catch((err) => console.error('Sheets logging error:', err))
+    logToSheet(data, reason).catch((err) => console.error('Sheets logging error:', err))
 
     const { error } = await resend.emails.send({
       from: 'Canopy Creative Co <notifications@canopycreativeco.com>',
