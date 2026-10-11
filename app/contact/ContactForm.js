@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { DISCOVERY_CALL_URL } from '@/lib/site'
 
 // ── Data ──────────────────────────────────────────────────────────────────────
@@ -14,6 +14,18 @@ const REFERRAL_OPTIONS = [
 ]
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
+
+const MIN_MESSAGE_LENGTH = 10
+
+// Off-screen rather than display:none, so bots that skip hidden fields still see it
+const honeypotStyle = {
+  position: 'absolute',
+  left: '-10000px',
+  top: 'auto',
+  width: '1px',
+  height: '1px',
+  overflow: 'hidden',
+}
 
 const inputBase =
   'w-full bg-white border border-[#9A7A62] rounded-lg px-4 py-3 text-[15px] text-brown font-sans outline-none transition-colors duration-150 focus:border-orange placeholder:text-[#C4A98A]'
@@ -85,7 +97,7 @@ export default function ContactForm() {
     email: '',
     phone: '',
     businessName: '',
-    website: '',
+    businessWebsite: '',
     businessType: '',
     helpWith: '',
     howFound: '',
@@ -97,6 +109,12 @@ export default function ContactForm() {
   const [errors, setErrors] = useState({})
   const [loading, setLoading] = useState(false)
   const [submitError, setSubmitError] = useState('')
+  const honeypotRef = useRef(null)
+  const loadedAtRef = useRef(0)
+
+  useEffect(() => {
+    loadedAtRef.current = Date.now()
+  }, [])
 
   function set(key, value) {
     setFields((f) => ({ ...f, [key]: value }))
@@ -114,6 +132,11 @@ export default function ContactForm() {
     }
     if (!fields.businessName.trim()) e.businessName = 'Business name is required.'
     if (!fields.businessType.trim()) e.businessType = 'Business type is required.'
+    if (!fields.helpWith.trim()) {
+      e.helpWith = 'Please tell us what you are looking for help with.'
+    } else if (fields.helpWith.trim().length < MIN_MESSAGE_LENGTH) {
+      e.helpWith = `Please tell us a little more (at least ${MIN_MESSAGE_LENGTH} characters).`
+    }
     if (!fields.howFound) e.howFound = 'Please select an option.'
     if (fields.howFound === 'Referral' && !fields.referralName.trim())
       e.referralName = 'Please tell us who to thank.'
@@ -141,12 +164,18 @@ export default function ContactForm() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(fields),
+        body: JSON.stringify({
+          ...fields,
+          website: honeypotRef.current?.value || '',
+          loadedAt: loadedAtRef.current,
+        }),
       })
       const data = await res.json()
 
       if (data.success) {
         window.location.href = DISCOVERY_CALL_URL
+      } else if (data.field) {
+        setErrors((prev) => ({ ...prev, [data.field]: data.error }))
       } else {
         setSubmitError('Something went wrong. Please email us at hello@canopycreativeco.com')
       }
@@ -228,8 +257,8 @@ export default function ContactForm() {
           <Label>Business website</Label>
           <input
             type="text"
-            value={fields.website}
-            onChange={(e) => set('website', e.target.value)}
+            value={fields.businessWebsite}
+            onChange={(e) => set('businessWebsite', e.target.value)}
             placeholder="yourbusiness.com"
             className={inputBase}
           />
@@ -252,18 +281,21 @@ export default function ContactForm() {
         </div>
 
         {/* Help with */}
-        <div>
-          <Label>In one or two sentences, what are you looking for help with?</Label>
+        <div data-error={!!errors.helpWith || undefined}>
+          <Label required>In one or two sentences, what are you looking for help with?</Label>
           <HelperText>
-            No need to go into detail yet. We'll dig into everything on our call.
+            A sentence or two is plenty. We&apos;ll dig into everything on our call.
           </HelperText>
           <textarea
             value={fields.helpWith}
             onChange={(e) => set('helpWith', e.target.value)}
             rows={3}
+            required
+            minLength={MIN_MESSAGE_LENGTH}
             placeholder="We run an interior design firm and want help getting AI wired into our day-to-day systems. Also curious about the monthly demo."
-            className={`${inputBase} resize-none`}
+            className={`${inputBase} resize-none ${errors.helpWith ? 'border-red-500' : ''}`}
           />
+          <FieldError msg={errors.helpWith} />
         </div>
       </div>
 
@@ -331,7 +363,7 @@ export default function ContactForm() {
 
         {/* Anything else */}
         <div>
-          <Label>Is there anything else you'd like us to know before our call?</Label>
+          <Label>Is there anything else you&apos;d like us to know before our call?</Label>
           <HelperText>
             Completely optional. Share anything you think would be helpful.
           </HelperText>
@@ -342,6 +374,20 @@ export default function ContactForm() {
             className={`${inputBase} resize-none`}
           />
         </div>
+      </div>
+
+      {/* Honeypot: people never see or reach this field, bots fill it in */}
+      <div style={honeypotStyle} aria-hidden="true">
+        <label htmlFor="contact-website">Website</label>
+        <input
+          ref={honeypotRef}
+          id="contact-website"
+          type="text"
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+          defaultValue=""
+        />
       </div>
 
       {/* ── SUBMIT ── */}
