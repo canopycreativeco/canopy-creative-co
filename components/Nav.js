@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
-import { DEMO_REGISTRATION_URL } from '@/lib/site'
+import { CANOPY_URL } from '@/lib/site'
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -49,14 +49,12 @@ export default function Nav() {
             )
           })}
           <li>
-            <a
-              href={DEMO_REGISTRATION_URL}
-              target="_blank"
-              rel="noopener"
+            <Link
+              href={CANOPY_URL}
               className="bg-orange text-cream text-[13px] font-semibold tracking-[0.04em] whitespace-nowrap px-5 py-[9px] rounded-[3px] no-underline transition-colors duration-200 hover:bg-[#b04400]"
             >
-              Join the next demo
-            </a>
+              Join The Canopy
+            </Link>
           </li>
         </ul>
       </div>

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { CANOPY_URL, BACK_OFFICE_URL, DEMO_REGISTRATION_URL } from '@/lib/site'
+import { CANOPY_URL, BACK_OFFICE_URL } from '@/lib/site'
 import { IconLearning, IconHandHeart } from '@/components/Icons'
 
 export const metadata = {
@@ -185,9 +185,9 @@ export default function StartHerePage() {
             you&rsquo;ll get of what AI can do in a business like yours.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            <a href={DEMO_REGISTRATION_URL} target="_blank" rel="noopener" className={`${ctaBtn} w-[220px]`}>
-              Join the next demo
-            </a>
+            <Link href={CANOPY_URL} className={`${ctaBtn} w-[220px]`}>
+              Join The Canopy
+            </Link>
           </div>
         </div>
       </section>

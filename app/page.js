@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { DEMO_REGISTRATION_URL } from '@/lib/site'
+import { CANOPY_URL } from '@/lib/site'
 
 export const metadata = {
   title: {
@@ -75,14 +75,12 @@ export default function HomePage() {
 
           {/* Buttons */}
           <div className="flex gap-[14px] flex-wrap">
-            <a
-              href={DEMO_REGISTRATION_URL}
-              target="_blank"
-              rel="noopener"
+            <Link
+              href={CANOPY_URL}
               className={`${btnPrimary} text-center`}
             >
-              Join the next live demo. It's free.
-            </a>
+              Join The Canopy
+            </Link>
             <Link
               href="/start-here"
               className={`${btnGhost} border-cream/25 text-cream/75 hover:border-cream/60 hover:text-cream text-center`}
@@ -219,29 +217,26 @@ export default function HomePage() {
             </div>
 
             {/* ── RIGHT · WHAT'S NEXT ── */}
-            {/* Swap to the next scheduled session once Oct 14 airs. */}
+            {/* Swap in the session details once they are set. */}
             <div className="flex flex-col border-2 border-orange rounded-lg bg-[#FFFCF6] p-6 shadow-[0_6px_26px_rgba(59,30,8,0.10)] max-md:p-5">
               <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-orange mb-2">
-                Coming up &middot; Wednesday, October 14 &middot; 1pm ET
+                Coming up
               </p>
               <h3 className="font-serif font-bold text-brown text-[21px] leading-[1.3] mb-3">
-                The money coach
+                Next session: Wednesday, November 18.
               </h3>
               <p className="text-[15.5px] text-brown/80 leading-[1.75] mb-6">
-                The other half of Profit Levers. That session looked at the money coming in. This
-                one looks at the money going out: where it goes each month, what keeps creeping up,
-                and which costs are worth a second look. Built live, start to finish, with your
-                questions along the way.
+                Details coming soon.
               </p>
 
-              {/* Placeholder for the Oct 14 build graphic.
+              {/* Placeholder for the next session's build graphic.
                   Deliberately abstract: bars, not numbers, so nothing here reads as data about a
                   session that has not aired. Swap this whole block for the real dashboard preview
                   once the build exists, matching the Aug 19 markup in the left column. */}
               <div
                 className="relative rounded-lg border border-brown/10 bg-cream p-4 mb-6 overflow-hidden"
                 role="img"
-                aria-label="Placeholder for the October 14 build. The graphic is made after the session is built."
+                aria-label="Placeholder for the next session's build. The graphic is made after the session is built."
               >
                 <div className="blur-[6px] opacity-70 select-none pointer-events-none" aria-hidden="true">
                   <div className="bg-white rounded-md border border-brown/10 overflow-hidden mb-3">
@@ -290,14 +285,6 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="mt-auto pt-7 text-center">
-                <a href={DEMO_REGISTRATION_URL} target="_blank" rel="noopener" className={btnPrimary}>
-                  Save your seat for Oct 14
-                </a>
-                <p className="text-[12.5px] text-brown/60 leading-[1.6] mt-3 text-center">
-                  Free to watch. Register and show up.
-                </p>
-              </div>
             </div>
 
           </div>

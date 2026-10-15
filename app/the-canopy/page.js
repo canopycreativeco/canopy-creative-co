@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { CANOPY_CHECKOUT_URL, BACK_OFFICE_URL, DEMO_REGISTRATION_URL } from '@/lib/site'
+import { CANOPY_CHECKOUT_URL, BACK_OFFICE_URL } from '@/lib/site'
 import { IconSprout, IconCalendar, IconChecklist } from '@/components/Icons'
 
 export const metadata = {
@@ -74,7 +74,7 @@ const SESSIONS = [
   { date: 'Sep 2', aired: true, title: "Where's my stuff: the order and PO tracker", blurb: 'Every order, every vendor, one view, so the answer is one search away.' },
   { date: 'Sep 16', aired: true, title: 'Project pulse: budget, status, and the client update', blurb: 'The Monday update, drafted before Monday.' },
   { date: 'Sep 30', aired: true, title: 'The proposal and follow-up builder', blurb: 'From call notes to a proposal that goes out the same week, plus the follow-ups that keep a warm lead from going quiet.' },
-  { date: 'Oct 14', title: 'The money coach', blurb: 'The other half of Profit Levers: where the money goes each month, and which costs are worth a second look.' },
+  { date: 'Oct 14', aired: true, title: 'The money coach', blurb: 'The other half of Profit Levers: where the money goes each month, and which costs are worth a second look.' },
 ]
 
 const FAQS = [
@@ -228,21 +228,17 @@ export default function TheCanopyPage() {
             ))}
           </div>
 
-          {/* See one first. Swap the named session once Oct 14 airs. */}
+          {/* See one first. Swap in the session details once they are set. */}
           <div className="flex items-center justify-between gap-8 flex-wrap border-t border-brown/15 pt-8 max-md:flex-col max-md:items-start">
             <div className="max-w-[60ch]">
               <p className="text-[12px] font-bold tracking-[0.18em] uppercase text-orange mb-2">
                 See one first
               </p>
               <p className="text-[15.5px] text-brown/85 leading-[1.7]">
-                Every session airs live and free, once a month. The next one is{' '}
-                <strong className="font-bold">The money coach</strong>, Wednesday, October 14 at
-                1pm ET.
+                A new free session lands once a month. Next session: Wednesday, November 18.
+                Details coming soon.
               </p>
             </div>
-            <a href={DEMO_REGISTRATION_URL} target="_blank" rel="noopener" className={btnGhost}>
-              Save your seat for Oct 14
-            </a>
           </div>
         </div>
       </section>
