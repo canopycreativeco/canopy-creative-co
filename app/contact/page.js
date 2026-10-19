@@ -2,10 +2,10 @@ import ContactForm from './ContactForm'
 
 export const metadata = {
   title: 'Contact',
-  description: 'Canopy Creative Co teaches operators to run lean businesses with AI. Free monthly live demos, a self-paced course, an ongoing membership, and done-with-you systems work.',
+  description: 'Canopy Creative Co teaches operators to run lean businesses with AI. A free session every month, The Canopy membership, and The Back Office for creative businesses that would rather hand it off.',
   openGraph: {
     title: 'Contact | Canopy Creative Co',
-    description: 'Canopy Creative Co teaches operators to run lean businesses with AI. Free monthly live demos, a self-paced course, an ongoing membership, and done-with-you systems work.',
+    description: 'Canopy Creative Co teaches operators to run lean businesses with AI. A free session every month, The Canopy membership, and The Back Office for creative businesses that would rather hand it off.',
     url: 'https://www.canopycreativeco.com/contact',
     siteName: 'Canopy Creative Co',
   },

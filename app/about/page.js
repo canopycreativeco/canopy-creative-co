@@ -4,10 +4,10 @@ import SendMessageButton from '@/components/MessageModal'
 
 export const metadata = {
   title: 'About',
-  description: 'Canopy Creative Co teaches operators to run lean businesses with AI. Free monthly live demos, a self-paced course, an ongoing membership, and done-with-you systems work.',
+  description: 'Canopy Creative Co teaches operators to run lean businesses with AI. A free session every month, The Canopy membership, and The Back Office for creative businesses that would rather hand it off.',
   openGraph: {
     title: 'About | Canopy Creative Co',
-    description: 'Canopy Creative Co teaches operators to run lean businesses with AI. Free monthly live demos, a self-paced course, an ongoing membership, and done-with-you systems work.',
+    description: 'Canopy Creative Co teaches operators to run lean businesses with AI. A free session every month, The Canopy membership, and The Back Office for creative businesses that would rather hand it off.',
     url: 'https://www.canopycreativeco.com/about',
     siteName: 'Canopy Creative Co',
   },
@@ -349,7 +349,7 @@ export default function AboutPage() {
             className="text-[17px] font-light leading-[1.7] mb-10"
             style={{ color: 'rgba(253,246,236,0.75)' }}
           >
-            Start with the free monthly demo, or send a message and tell us where your business is
+            Start with the free monthly session, or send a message and tell us where your business is
             stuck. Either way, the first step is a conversation.
           </p>
           <div className="flex flex-col items-center gap-3">

@@ -1,7 +1,7 @@
 import IntakeForm from './IntakeForm'
 
 export const metadata = {
-  title: 'Client Intake — Canopy Creative Co',
+  title: 'Client Intake | Canopy Creative Co',
   description: 'Onboarding intake form for Canopy Creative Co clients.',
 }
 

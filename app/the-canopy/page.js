@@ -1,15 +1,18 @@
 import Link from 'next/link'
 import { CANOPY_CHECKOUT_URL, BACK_OFFICE_URL } from '@/lib/site'
 import { IconSprout, IconCalendar, IconChecklist } from '@/components/Icons'
+import { nextSessionLine } from '@/lib/session'
+import { CANOPY_FAQS as FAQS } from '@/lib/faqs'
+import FaqList from '@/components/FaqList'
 
 export const metadata = {
   title: 'The Canopy',
   description:
-    'The Canopy is one membership with everything inside: the foundations course, every live session, and a growing library of skills and prompts built for real operators.',
+    'The Canopy is one membership with everything inside: the foundations course, a new session every month, and a growing library of skills and prompts built for real operators.',
   openGraph: {
     title: 'The Canopy | Canopy Creative Co',
     description:
-      'One membership with everything inside: the foundations course, every live session, and a growing library of skills and prompts built for real operators.',
+      'One membership with everything inside: the foundations course, a new session every month, and a growing library of skills and prompts built for real operators.',
     url: 'https://www.canopycreativeco.com/the-canopy',
     siteName: 'Canopy Creative Co',
   },
@@ -42,23 +45,22 @@ const INSIDE = [
     ],
   },
   {
-    title: 'The live session',
+    title: 'The monthly session',
     Icon: IconCalendar,
     items: [
-      'One live session a month, with Q&A',
-      'The recording, if you miss it live',
-      'The starter prompt',
-      'Use cases that take it deeper',
-      'A bonus tool from every session',
+      'A new session every month, pre-recorded and released the third Wednesday',
+      'The replay, the starter prompt and the use cases',
+      'The session’s two tools, in The Tool Shed',
+      'The Session Library: every past session, including the ones released before you joined',
+      'Questions anytime: post a question in The Canopy and get answers from our team',
     ],
   },
   {
     title: 'The Tool Shed',
     Icon: IconChecklist,
     items: [
-      'The full library of finished skills and prompts',
+      'The full library of finished skills and prompts, 25+ tools so far',
       'New skills and prompts added regularly',
-      'Every session that aired before you joined',
       'Everything from day one',
     ],
   },
@@ -75,37 +77,6 @@ const SESSIONS = [
   { date: 'Sep 16', aired: true, title: 'Project pulse: budget, status, and the client update', blurb: 'The Monday update, drafted before Monday.' },
   { date: 'Sep 30', aired: true, title: 'The proposal and follow-up builder', blurb: 'From call notes to a proposal that goes out the same week, plus the follow-ups that keep a warm lead from going quiet.' },
   { date: 'Oct 14', aired: true, title: 'The money coach', blurb: 'The other half of Profit Levers: where the money goes each month, and which costs are worth a second look.' },
-]
-
-const FAQS = [
-  {
-    q: 'What if I miss a session live?',
-    a: 'The recording and the starters land in the library after each session. The membership promise is a live session every month, and the library is where everything lives.',
-  },
-  {
-    q: 'If the sessions are free, why pay?',
-    a: 'Because the live session is one piece. The membership is The Roots, the recording when you can’t make it live, the use cases that take each prompt further, the bonus tool from each session, and The Tool Shed with every finished skill and prompt.',
-  },
-  {
-    q: 'Annual or monthly?',
-    a: 'Both include everything. Annual is $497 a year, monthly is $65 a month, and annual saves $283 a year compared to monthly. You pick at checkout.',
-  },
-  {
-    q: 'Do I need to be technical?',
-    a: 'No. If you can paste text into Claude or ChatGPT, you can run every starter. The sessions show the full build so you understand what you are running, and the starter is written to work on day one.',
-  },
-  {
-    q: 'What do I need?',
-    a: 'One AI tool. Claude is what you will see on screen, and ChatGPT works too. We recommend a paid plan, but feel free to start on a free plan and decide when it makes sense to upgrade as you use AI more often in your work.',
-  },
-  {
-    q: 'What happens at renewal?',
-    a: 'Your membership renews automatically at the end of each period, yearly or monthly, until you cancel. The full terms are in our Terms of Use, and they are the same at checkout.',
-  },
-  {
-    q: 'How do I cancel?',
-    a: 'From your account, any time. Cancelling stops future charges, and your access runs to the end of the period you already paid for. Payments are non-refundable, and there are no prorated refunds.',
-  },
 ]
 
 function PriceCard() {
@@ -165,7 +136,8 @@ export default function TheCanopyPage() {
               Everything we teach, in one <em className="text-orange italic">place.</em>
             </h1>
             <p className="text-[17px] font-light leading-[1.75] max-w-[520px]" style={{ color: 'rgba(253,246,236,0.72)' }}>
-              The live session is free to watch. The membership is everything else.
+              Each new session is free to watch the week it comes out. The membership is
+              everything else.
             </p>
 
             {/* The three parts of the membership, as a quiet visual beside the price. */}
@@ -199,6 +171,12 @@ export default function TheCanopyPage() {
           >
             Everything inside, from <em className="text-orange italic">day one.</em>
           </h2>
+          {/* The approved positioning line. Word for word, do not edit. */}
+          <p className="text-[17px] text-brown leading-[1.75] mb-4 max-w-[70ch]">
+            Inside The Canopy, we go deeper than one-off prompts. We build AI systems with you,
+            wired into how your business runs, so the repeat work stops landing on your desk and
+            you get back to the work only you can do.
+          </p>
           <p className="text-[15.5px] text-brown/85 leading-[1.8] mb-9 max-w-[70ch]">
             Join in month one or month nine and you get all of it, for as long as your membership
             is active.
@@ -228,16 +206,21 @@ export default function TheCanopyPage() {
             ))}
           </div>
 
-          {/* See one first. Swap in the session details once they are set. */}
+          {/* See one first. The date line comes from lib/session.js. */}
           <div className="flex items-center justify-between gap-8 flex-wrap border-t border-brown/15 pt-8 max-md:flex-col max-md:items-start">
             <div className="max-w-[60ch]">
               <p className="text-[12px] font-bold tracking-[0.18em] uppercase text-orange mb-2">
                 See one first
               </p>
-              <p className="text-[15.5px] text-brown/85 leading-[1.7]">
-                A new free session lands once a month. Next session: Wednesday, November 18.
-                Details coming soon.
-              </p>
+              <p className="text-[15.5px] text-brown/85 leading-[1.7]">{nextSessionLine()}</p>
+            </div>
+            <div className="flex gap-3 flex-wrap">
+              <a href={CANOPY_CHECKOUT_URL} target="_blank" rel="noopener" className={btnPrimary}>
+                Join The Canopy
+              </a>
+              <Link href="/session/signup" className={btnGhost}>
+                Send me the session
+              </Link>
             </div>
           </div>
         </div>
@@ -318,22 +301,7 @@ export default function TheCanopyPage() {
           >
             Before you <em className="text-orange italic">join.</em>
           </h2>
-          <div>
-            {FAQS.map(({ q, a }) => (
-              <details
-                key={q}
-                className="group bg-[#FFFCF6] border border-brown/10 rounded-[6px] px-6 py-[18px] mb-3 shadow-[0_1px_6px_rgba(59,30,8,0.04)] transition-colors duration-200 hover:border-orange/40 max-md:px-5"
-              >
-                <summary className="font-serif text-[18px] font-bold text-brown cursor-pointer list-none flex justify-between items-center gap-4">
-                  {q}
-                  <span className="text-orange text-[20px] leading-none group-open:rotate-45 transition-transform duration-200" aria-hidden="true">
-                    +
-                  </span>
-                </summary>
-                <p className="text-[16px] text-brown/75 leading-[1.75] mt-3 max-w-[62ch]">{a}</p>
-              </details>
-            ))}
-          </div>
+          <FaqList items={FAQS} />
           <p className="text-[16px] text-brown/75 leading-[1.7] mt-12 text-center max-w-[60ch] mx-auto">
             The Canopy is how you learn it with us. If you would rather hand it to us,{' '}
             <Link href={BACK_OFFICE_URL} className="text-orange underline underline-offset-[3px]">

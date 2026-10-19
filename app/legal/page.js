@@ -41,7 +41,7 @@ export default function LegalPage() {
             Policies &amp; Terms
           </h1>
           <p className="text-[#9A7A62] font-['DM_Sans'] text-sm">
-            Last updated: October 8, 2026
+            Last updated: October 19, 2026
           </p>
         </div>
       </div>
@@ -83,8 +83,8 @@ export default function LegalPage() {
               <div>
                 <h3 className="font-['Libre_Baskerville'] text-lg text-[#3B1E08] mb-2">Information we collect</h3>
                 <p>
-                  When you submit a contact or intake form on this site, we collect the information
-                  you provide, such as your name, email address, phone number, and business
+                  When you submit a contact, intake, or session signup form on this site, we collect
+                  the information you provide, such as your name, email address, phone number, and business
                   details. We do not collect payment information through this website.
                 </p>
                 <p className="mt-3">
@@ -104,7 +104,7 @@ export default function LegalPage() {
                 <h3 className="font-['Libre_Baskerville'] text-lg text-[#3B1E08] mb-2">How we use your information</h3>
                 <p>
                   We use the information you submit solely to respond to your inquiry, schedule
-                  calls, and onboard you as a client. We do not sell, rent, or share your
+                  calls, onboard you as a client, and send you the sessions you sign up for. We do not sell, rent, or share your
                   information with third parties for marketing purposes.
                 </p>
               </div>
@@ -114,7 +114,9 @@ export default function LegalPage() {
                   Our site uses third-party services including form providers and scheduling
                   software. The Canopy membership runs on Circle, and membership payments are
                   processed by Stripe. These services have their own privacy policies that govern
-                  how they handle your data. We encourage you to review them.
+                  how they handle your data. We encourage you to review them. We use email,
+                  analytics, and embedded video tools from other providers, which may track link
+                  clicks or set their own cookies.
                 </p>
               </div>
               <div>
@@ -177,7 +179,8 @@ export default function LegalPage() {
                   charges, and your access continues through the end of the period you have
                   already paid for. Payments are non-refundable, and we do not offer prorated
                   refunds for unused time. Circle&rsquo;s own terms of service also apply to your
-                  use of the member community.
+                  use of the member community. Prices are in US dollars. Where sales tax applies,
+                  it may be added at checkout.
                 </p>
               </div>
               <div>
@@ -195,6 +198,11 @@ export default function LegalPage() {
                   yours: the workspaces, documents, and outputs you create from our prompts and
                   skills for your own business belong to you. If a membership is used in breach of
                   these terms, we may end it without a refund.
+                </p>
+                <p className="mt-3">
+                  The skills and prompts in The Canopy use AI tools, and AI output can be wrong or
+                  incomplete. Review anything an AI tool produces before you rely on it. It is not
+                  financial, tax, or legal advice.
                 </p>
               </div>
               <div>
@@ -217,7 +225,9 @@ export default function LegalPage() {
                 <p>
                   To the fullest extent permitted by law, Canopy Creative Consulting LLC shall not be
                   liable for any damages arising from your use of, or inability to use, this
-                  website or its content.
+                  website or its content. To the fullest extent permitted by law, our total
+                  liability for any claim is limited to the amount you paid us in the 12 months
+                  before the claim.
                 </p>
               </div>
               <div>

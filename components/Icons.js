@@ -102,3 +102,14 @@ export function IconSystems({ size = 28, className }) {
     </svg>
   )
 }
+
+/* Speech bubble with a question mark. Not in the Brand Book set yet, drawn to match it. */
+export function IconQuestion({ size = 28, className }) {
+  return (
+    <svg width={size} height={size} className={className} {...base}>
+      <path d="M21 11.5a8.4 8.4 0 0 1-12.2 7.5L3 21l2-5.4A8.4 8.4 0 1 1 21 11.5z" />
+      <path d="M10 9.2a2.2 2.2 0 1 1 3.2 2c-.8.4-1.2.9-1.2 1.8" />
+      <circle cx="12" cy="15.8" r="1.1" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}

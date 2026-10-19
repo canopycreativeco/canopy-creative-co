@@ -623,10 +623,10 @@ export default function IntakeForm() {
       if (data.success) {
         setSubmitted(true)
       } else {
-        setSubmitError('Something went wrong — please try again or email hello@canopycreativeco.com')
+        setSubmitError('Something went wrong. Please try again or email hello@canopycreativeco.com')
       }
     } catch {
-      setSubmitError('Something went wrong — please try again or email hello@canopycreativeco.com')
+      setSubmitError('Something went wrong. Please try again or email hello@canopycreativeco.com')
     } finally {
       setLoading(false)
     }
@@ -868,8 +868,8 @@ export default function IntakeForm() {
             <div className="flex flex-col gap-2">
               {[
                 { value: 'yes',          label: 'Yes' },
-                { value: 'no-recommend', label: "No — and I'd like a recommendation" },
-                { value: 'no-ok',        label: "No — and I'm all set without one" },
+                { value: 'no-recommend', label: "No, and I'd like a recommendation" },
+                { value: 'no-ok',        label: "No, and I'm all set without one" },
               ].map((opt) => (
                 <RadioPillRow
                   key={opt.value}
@@ -903,7 +903,7 @@ export default function IntakeForm() {
             <Lbl>Accounting software</Lbl>
             <select value={fields.accountingSoftware} onChange={(e) => sf('accountingSoftware', e.target.value)} className={sel}>
               <option value="">Select…</option>
-              {['QuickBooks Online','QuickBooks Desktop','Xero','FreshBooks','Wave','Spreadsheets','None — starting from scratch','Other'].map((o) => (
+              {['QuickBooks Online','QuickBooks Desktop','Xero','FreshBooks','Wave','Spreadsheets','None, starting from scratch','Other'].map((o) => (
                 <option key={o} value={o}>{o}</option>
               ))}
             </select>
@@ -1319,7 +1319,7 @@ export default function IntakeForm() {
               <Lbl>Are all accounts complete and accurate (C&A) in your accounting software?</Lbl>
               <select value={fields.advisoryAccountsAccurate} onChange={(e) => sf('advisoryAccountsAccurate', e.target.value)} className={sel}>
                 <option value="">Select…</option>
-                {['Yes','No','Not sure — we\'ll need to review'].map((o) => <option key={o} value={o}>{o}</option>)}
+                {['Yes','No','Not sure, we\'ll need to review'].map((o) => <option key={o} value={o}>{o}</option>)}
               </select>
             </div>
             <div>
@@ -1477,7 +1477,7 @@ export default function IntakeForm() {
       <SectionCard
         badge="Just for Fun"
         title="A little about you"
-        description="Totally optional — but we love getting to know the people behind the businesses we work with."
+        description="Totally optional, but we love getting to know the people behind the businesses we work with."
       >
         <div className="flex flex-col gap-4">
           <SubCard>
@@ -1538,7 +1538,7 @@ export default function IntakeForm() {
       <SectionCard
         badge="Final Thoughts"
         title="Anything else we should know?"
-        description="This is your space — share whatever context you think would be helpful before your onboarding call."
+        description="This is your space. Share whatever context you think would be helpful before your onboarding call."
       >
         <textarea
           value={fields.finalNotes}

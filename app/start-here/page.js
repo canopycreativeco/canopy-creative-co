@@ -3,10 +3,10 @@ import { CANOPY_URL, BACK_OFFICE_URL } from '@/lib/site'
 import { IconLearning, IconHandHeart } from '@/components/Icons'
 
 export const metadata = {
-  title: 'Start here',
+  title: 'Work with us',
   description: 'Two ways to work with Canopy Creative Co. Learn it with us in The Canopy, or hand it to us with The Back Office.',
   openGraph: {
-    title: 'Start here | Canopy Creative Co',
+    title: 'Work with us | Canopy Creative Co',
     description: 'Two ways to work with Canopy Creative Co. Learn it with us in The Canopy, or hand it to us with The Back Office.',
     url: 'https://www.canopycreativeco.com/start-here',
     siteName: 'Canopy Creative Co',
@@ -65,7 +65,7 @@ export default function StartHerePage() {
         />
         <div className="relative max-w-[720px] mx-auto">
           <p className="text-[12px] font-semibold tracking-[0.22em] uppercase text-orange/90 mb-6 text-balance">
-            Start here
+            Work with us
           </p>
           <h1
             className="font-serif font-bold text-cream leading-[1.2] tracking-[-0.01em] mb-7"
@@ -103,20 +103,22 @@ export default function StartHerePage() {
             </div>
             <div className={cardBody}>
               <p className="text-[15px] text-brown/85 leading-[1.75] mb-6">
-                One membership with everything inside: the foundations course, every live session,
-                and a growing library of skills and prompts built for real operators.
+                One membership with everything inside: the foundations course, a new session every
+                month, and a growing library of skills and prompts built for real operators.
               </p>
               <Bullets
                 items={[
                   'The Roots, the foundations track: the video course, the prompt cheat sheet and the starter workspaces',
-                  'A live session every month, plus its recording, starter prompt, use cases and bonus tool',
+                  'A new session every month, plus its replay, starter prompt, use cases and two tools',
+                  'The Session Library, with every past session',
+                  'Questions anytime, answered by our team',
                   'The Tool Shed, the full library of finished skills and prompts',
                   'New skills and prompts added regularly',
                   'Everything from day one, for as long as you are a member',
                 ]}
               />
               <div className="mt-auto">
-                <p className={`${kicker} text-orange`}>Watch a live session free first, then decide.</p>
+                <p className={`${kicker} text-orange`}>Watch a session free first, then decide.</p>
                 <Link href={CANOPY_URL} className={cardBtn}>
                   See The Canopy
                 </Link>
@@ -174,19 +176,20 @@ export default function StartHerePage() {
             className="font-serif font-bold text-cream leading-[1.25] mb-6"
             style={{ fontSize: 'clamp(24px, 3.5vw, 36px)' }}
           >
-            Start with a <em className="text-orange italic">demo.</em>
+            Start with a <em className="text-orange italic">session.</em>
           </h2>
           <p
             className="text-[16px] font-light leading-[1.75] mb-9"
             style={{ color: 'rgba(253,246,236,0.7)' }}
           >
-            If you&rsquo;re the bottleneck in your own business and you know it, come to the next
-            demo. It&rsquo;s free, it happens once a month, and it&rsquo;s the clearest picture
-            you&rsquo;ll get of what AI can do in a business like yours.
+            If you&rsquo;re the bottleneck in your own business and you know it, watch the next
+            session. A new one lands every month, it&rsquo;s free to watch the week it comes out,
+            and it&rsquo;s the clearest picture you&rsquo;ll get of what AI can do in a business
+            like yours.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            <Link href={CANOPY_URL} className={`${ctaBtn} w-[220px]`}>
-              Join The Canopy
+            <Link href="/session/signup" className={`${ctaBtn} w-[240px]`}>
+              Send me the session
             </Link>
           </div>
         </div>

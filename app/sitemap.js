@@ -1,5 +1,5 @@
 export default function sitemap() {
-  const lastModified = '2026-10-08'
+  const lastModified = '2026-10-19'
   return [
     {
       url: 'https://www.canopycreativeco.com',
@@ -24,6 +24,12 @@ export default function sitemap() {
       lastModified,
       changeFrequency: 'monthly',
       priority: 0.9,
+    },
+    {
+      url: 'https://www.canopycreativeco.com/session/signup',
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.8,
     },
     {
       url: 'https://www.canopycreativeco.com/about',

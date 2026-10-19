@@ -25,16 +25,16 @@ export const metadata = {
     default: 'Canopy Creative Co',
     template: '%s | Canopy Creative Co',
   },
-  description: 'Canopy Creative Co teaches operators to run lean businesses with AI. Free monthly live demos, a self-paced course, an ongoing membership, and done-with-you systems work.',
+  description: 'Canopy Creative Co teaches operators to run lean businesses with AI. A free session every month, The Canopy membership, and The Back Office for creative businesses that would rather hand it off.',
   icons: { icon: '/favicon.svg' },
   openGraph: {
     type: 'website',
     siteName: 'Canopy Creative Co',
-    description: 'Canopy Creative Co teaches operators to run lean businesses with AI. Free monthly live demos, a self-paced course, an ongoing membership, and done-with-you systems work.',
+    description: 'Canopy Creative Co teaches operators to run lean businesses with AI. A free session every month, The Canopy membership, and The Back Office for creative businesses that would rather hand it off.',
   },
   twitter: {
     card: 'summary_large_image',
-    description: 'Canopy Creative Co teaches operators to run lean businesses with AI. Free monthly live demos, a self-paced course, an ongoing membership, and done-with-you systems work.',
+    description: 'Canopy Creative Co teaches operators to run lean businesses with AI. A free session every month, The Canopy membership, and The Back Office for creative businesses that would rather hand it off.',
   },
   robots: {
     index: true,
@@ -58,7 +58,7 @@ export default function RootLayout({ children }) {
               '@type': 'ProfessionalService',
               name: 'Canopy Creative Co',
               url: 'https://www.canopycreativeco.com',
-              description: 'Canopy Creative Co teaches operators to run lean businesses with AI. Free monthly live demos, a self-paced course, an ongoing membership, and done-with-you systems work.',
+              description: 'Canopy Creative Co teaches operators to run lean businesses with AI. A free session every month, The Canopy membership, and The Back Office for creative businesses that would rather hand it off.',
               areaServed: 'US',
               serviceType: ['AI education for business operators', 'Business operations advisory'],
             }),
