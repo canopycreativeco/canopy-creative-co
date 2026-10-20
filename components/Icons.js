@@ -103,6 +103,24 @@ export function IconSystems({ size = 28, className }) {
   )
 }
 
+/* Sparkle pair, after the Tool Shed cover art: an orange star and a small brown star,
+   outlines only. Fixed brand colors, so it ignores currentColor. */
+export function IconSparkle({ size = 28, className }) {
+  return (
+    <svg width={size} height={size} className={className} {...base} strokeWidth={1.9}>
+      <path
+        d="M9.5 5Q10.9 12.6 18.5 14Q10.9 15.4 9.5 23Q8.1 15.4 .5 14Q8.1 12.6 9.5 5Z"
+        stroke="#CC4E00"
+      />
+      <path
+        d="M18.6 2Q19.3 4.8 22.1 5.5Q19.3 6.2 18.6 9Q17.9 6.2 15.1 5.5Q17.9 4.8 18.6 2Z"
+        stroke="#3B1E08"
+        strokeWidth={1.4}
+      />
+    </svg>
+  )
+}
+
 /* Speech bubble with a question mark. Not in the Brand Book set yet, drawn to match it. */
 export function IconQuestion({ size = 28, className }) {
   return (

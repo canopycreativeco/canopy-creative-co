@@ -131,15 +131,14 @@ export default function AboutPage() {
 
               <p className="text-[16px] text-brown leading-[1.85] mb-4" style={{ opacity: 0.82 }}>
                 Before Canopy Creative Co, Dave Altshul spent years in corporate finance and
-                internal audit at the highest level, solving operational problems for organizations
-                with no room for error.
+                internal audit, including a seat on the leadership team of a Fortune 500 media
+                company&rsquo;s global compliance program, where he helped take it from manual and
+                fragmented to streamlined and automated.
               </p>
               <p className="text-[16px] text-brown leading-[1.85] mb-4" style={{ opacity: 0.82 }}>
                 Dave's specialty, then and now: take a complex process, identify efficiencies, and
-                streamline it with as little disruption to the business as possible. At a Fortune
-                500 media company, that meant leading the global compliance program's shift from
-                manual and fragmented to streamlined and automated. The scale was different. The
-                method is the same one he brings to his clients' businesses.
+                streamline it with as little disruption to the business as possible. The scale was
+                different. The method is the same one he brings to his clients' businesses.
               </p>
               <p className="text-[16px] text-brown leading-[1.85]" style={{ opacity: 0.82 }}>
                 Dave's financial foundation came earlier, in a leadership development program at a
@@ -171,7 +170,7 @@ export default function AboutPage() {
               </h2>
               <p className="text-[16px] text-brown leading-[1.85] mb-6" style={{ opacity: 0.82 }}>
                 Dave holds a Project Management Professional (PMP) certification, a deliberate
-                investment in knowing how implementations actually succeed. When you're building a
+                investment in knowing how implementations succeed. When you're building a
                 business's operational infrastructure, what connects to what, and in what order,
                 matters enormously. It shows up in every engagement.
               </p>
@@ -230,7 +229,7 @@ export default function AboutPage() {
                 change something.
               </p>
               <p className="text-[16px] text-brown leading-[1.85]" style={{ opacity: 0.82 }}>
-                So he left. He and his husband relocated to Tampa, and Canopy Creative Co was born.
+                So he left. He relocated to Tampa, and Canopy Creative Co was born.
               </p>
             </div>
 
@@ -257,13 +256,12 @@ export default function AboutPage() {
                 <em className="text-orange italic">he picked off a list.</em>
               </h2>
               <p className="text-[16px] text-brown leading-[1.85]" style={{ opacity: 0.82 }}>
-                Dave's entry into working with creative businesses wasn't accidental. His husband
-                owns an interior design firm, and watching him run it up close showed Dave that
-                this space needed better support. Canopy Creative Co goes deepest with interior
+                Dave's entry into working with creative businesses wasn't accidental. Working
+                inside interior design firms showed Dave that this space needed better support. Canopy Creative Co goes deepest with interior
                 design firms, because that's where it started and where Dave has spent the most
                 time inside the back office. The same principles run through professional
                 services, trades, ecommerce, and every operator-run business. The problems are
-                consistent, and the fix starts the same way: understand what's actually there
+                consistent, and the fix starts the same way: understand what's there
                 before you touch anything.
               </p>
             </div>

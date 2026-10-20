@@ -113,8 +113,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── WHAT'S INSIDE ── */}
-      <section className="bg-cream-dark py-[100px] px-[60px] max-md:py-[70px] max-md:px-6">
+      {/* Soft hairline between the two cream sections above the tan run */}
+      <div className="bg-cream px-[60px] max-md:px-6" aria-hidden="true">
+        <div
+          className="max-w-[1080px] mx-auto h-px"
+          style={{ background: 'linear-gradient(to right, transparent, rgba(59,30,8,0.18), transparent)' }}
+        />
+      </div>
+
+      {/* ── WHAT'S INSIDE ── cream field so the tan panel reads as a filled card */}
+      <section className="bg-cream py-[100px] px-[60px] max-md:py-[70px] max-md:px-6">
         <div className="max-w-[1080px] mx-auto">
           <p className={eyebrow}>What&rsquo;s inside The Canopy</p>
           <h2 className="font-serif font-bold text-brown leading-[1.25] tracking-[-0.01em] mb-5" style={h2Size}>
@@ -131,7 +139,7 @@ export default function HomePage() {
       </section>
 
       {/* ── WHAT A SESSION BUILDS ── the Aug 19 build, as the picture of what a session is */}
-      <section className="bg-cream py-[100px] px-[60px] max-md:py-[70px] max-md:px-6">
+      <section className="bg-cream-dark py-[100px] px-[60px] max-md:py-[70px] max-md:px-6">
         <div className="max-w-[1080px] mx-auto grid grid-cols-[1fr_1.05fr] gap-14 items-center max-md:grid-cols-1 max-md:gap-10">
           <div>
             <p className={eyebrow}>What a session builds</p>
@@ -198,7 +206,7 @@ export default function HomePage() {
       </section>
 
       {/* ── PROOF ── Approved copy, do not edit the quotes. Same two as The Canopy page. */}
-      <section className="bg-cream-dark py-[90px] px-[60px] max-md:py-[64px] max-md:px-6">
+      <section className="bg-cream py-[90px] px-[60px] max-md:py-[64px] max-md:px-6">
         <div className="max-w-[880px] mx-auto">
           <p className={eyebrow}>In their words</p>
           <h2 className="font-serif font-bold text-brown leading-[1.25] mb-10" style={h2Size}>
@@ -253,11 +261,12 @@ export default function HomePage() {
             <div className="space-y-5 text-[16px] font-light leading-[1.8]" style={{ color: 'rgba(253,246,236,0.75)' }}>
               <p>
                 Before Canopy Creative Co, Dave Altshul spent years in corporate finance and
-                internal audit, including leading a Fortune 500 media company&rsquo;s global
-                compliance program from manual and fragmented to streamlined and automated.
+                internal audit, including a seat on the leadership team of a Fortune 500 media
+                company&rsquo;s global compliance program, where he helped take it from manual and
+                fragmented to streamlined and automated.
               </p>
               <p>
-                Then he watched his husband run an interior design firm up close. Same kind of
+                Then he started working inside design firms. Same kind of
                 problems, a much smaller team, and nobody to hand the repeat work to. The owner
                 was doing all of it.
               </p>
