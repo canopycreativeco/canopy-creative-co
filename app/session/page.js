@@ -93,8 +93,8 @@ function BetweenView() {
           </h1>
           <p className="text-[17px] font-light leading-[1.75] mb-10" style={{ color: 'rgba(253,246,236,0.72)' }}>
             {label
-              ? 'Free to watch through the end of the week.'
-              : 'Free to watch through the end of its release week.'}{' '}
+              ? 'Free to watch through Friday.'
+              : 'Free to watch through the Friday of release week.'}{' '}
             Leave your email and we will send you the link on release day.
           </p>
           <SessionSignupForm dark />

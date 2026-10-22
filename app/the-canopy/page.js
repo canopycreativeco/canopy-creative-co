@@ -48,7 +48,7 @@ const INSIDE = [
     title: 'The monthly session',
     Icon: IconCalendar,
     items: [
-      'A new session every month, pre-recorded and released the third Wednesday',
+      'A new session every month, pre-recorded',
       'The replay, the starter prompt and the use cases',
       'The session’s two tools, in The Tool Shed',
       'The Session Library: every past session, including the ones released before you joined',

@@ -26,7 +26,7 @@ const PARTS = [
     key: 'session',
     tab: 'The monthly session',
     title: 'One real workflow, built start to finish.',
-    body: 'A new session every third Wednesday. We take one job off your plate and wire it in, step by step.',
+    body: 'A new session every month. We take one job off your plate and wire it in, step by step.',
     items: ['Watch on your schedule', 'The starter prompt and use cases', 'Two new tools in The Tool Shed'],
     image: {
       src: '/images/canopy/monthly-session.png',
