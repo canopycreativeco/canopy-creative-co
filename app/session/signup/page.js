@@ -16,9 +16,8 @@ export const metadata = {
   },
 }
 
-/* [TO SET] One line on what people walk away with. Dave writes it once the November topic
-   is locked (October 21). Swap the placeholder below for the line, then delete the box. */
-const WALK_AWAY_LINE = null
+// Set at each monthly topic lock (Platform Playbook).
+const WALK_AWAY_LINE = 'Walk away with a setup that teaches AI how your business runs, once, so you stop explaining it from scratch.'
 
 export default function SessionSignupPage() {
   return (
@@ -46,11 +45,6 @@ export default function SessionSignupPage() {
           {WALK_AWAY_LINE ? (
             <p className="text-[18px] font-light leading-[1.75] mb-4" style={{ color: 'rgba(253,246,236,0.8)' }}>
               {WALK_AWAY_LINE}
-            </p>
-          ) : process.env.NODE_ENV === 'development' ? (
-            // Local preview only. The live site shows nothing here until the line is set.
-            <p className="text-[15px] font-semibold leading-[1.6] mb-4 text-[#FFEB99] border-2 border-dashed border-[#FFEB99]/60 rounded-[6px] px-4 py-3">
-              [TO SET: one line on what people walk away with, once the November topic is locked]
             </p>
           ) : null}
 
