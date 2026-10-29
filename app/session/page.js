@@ -54,7 +54,7 @@ function WatchView() {
           {/* Always visible, so the call to action is there even if the end screen fails. */}
           <div className="flex items-center justify-between gap-8 flex-wrap mt-8 max-md:flex-col max-md:items-start">
             <p className="text-[16px] font-light leading-[1.7] max-w-[56ch]" style={{ color: 'rgba(253,246,236,0.75)' }}>
-              The replay, the starter prompt, the use cases and the session&rsquo;s two tools live
+              The replay, the starter prompt, the use cases and the session&rsquo;s tools live
               in The Canopy.
             </p>
             <a href={CANOPY_CHECKOUT_URL} target="_blank" rel="noopener" className={btnPrimary}>

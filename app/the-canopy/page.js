@@ -50,7 +50,7 @@ const INSIDE = [
     items: [
       'A new session every month, pre-recorded',
       'The replay, the starter prompt and the use cases',
-      'The session’s two tools, in The Tool Shed',
+      'The session’s tools, in The Tool Shed',
       'The Session Library: every past session, including the ones released before you joined',
       'Questions anytime: post a question in The Canopy and get answers from our team',
     ],

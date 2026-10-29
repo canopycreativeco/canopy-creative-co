@@ -43,7 +43,7 @@ export default function HomeSession({ initialLabel }) {
         <SessionPlayer videoId={SESSION.videoId} title="The monthly session from Canopy Creative Co" />
         <div className="flex items-center justify-between gap-8 flex-wrap mt-8 max-md:flex-col max-md:items-start">
           <p className="text-[15.5px] text-brown/80 leading-[1.7] max-w-[56ch]">
-            The replay, the starter prompt, the use cases and the session&rsquo;s two tools live in
+            The replay, the starter prompt, the use cases and the session&rsquo;s tools live in
             The Canopy.
           </p>
           <a href={CANOPY_CHECKOUT_URL} target="_blank" rel="noopener" className={btnPrimary}>
@@ -76,7 +76,7 @@ export default function HomeSession({ initialLabel }) {
         </h2>
         <p className="text-[16.5px] text-brown/80 leading-[1.8] max-w-[560px]">
           Every month we take one real workflow and build it start to finish, so you can see what
-          AI takes off your plate. It&rsquo;s free to watch through the end of the release week.
+          AI takes off your plate. It&rsquo;s free to watch through the Friday of release week.
           Missed it? The replay lives in The Canopy.
         </p>
       </div>

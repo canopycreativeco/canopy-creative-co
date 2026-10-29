@@ -109,7 +109,7 @@ export default function StartHerePage() {
               <Bullets
                 items={[
                   'The Roots, the foundations track: the video course, the prompt cheat sheet and the starter workspaces',
-                  'A new session every month, plus its replay, starter prompt, use cases and two tools',
+                  'A new session every month, plus its replay, starter prompt, use cases and tools',
                   'The Session Library, with every past session',
                   'Questions anytime, answered by our team',
                   'The Tool Shed, the full library of finished skills and prompts',
