@@ -58,7 +58,7 @@ export default function SessionWatchCard({ session, line = null, eyebrowText = '
   return (
     <div className="bg-[#FFFCF6] rounded-[16px] border-2 border-brown overflow-hidden shadow-[0_14px_32px_rgba(59,30,8,0.12)] md:grid md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
       {/* The thumbnail keeps its 16:9 shape, framed on brown, so nothing gets cropped. */}
-      <div className="bg-brown flex items-center px-7 py-7 max-md:px-0 max-md:py-0">
+      <div className="bg-brown-dark flex items-center px-7 py-7 max-md:px-0 max-md:py-0">
         <Link
           href="/session"
           className="group relative block w-full aspect-video rounded-[10px] overflow-hidden bg-brown-dark shadow-[0_12px_30px_rgba(0,0,0,0.3)] max-md:rounded-none max-md:shadow-none"

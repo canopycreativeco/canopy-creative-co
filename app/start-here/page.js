@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { CANOPY_URL, BACK_OFFICE_URL } from '@/lib/site'
-import { IconLearning, IconHandHeart } from '@/components/Icons'
+import { IconLearning, IconSystems } from '@/components/Icons'
 
 export const metadata = {
   title: 'Work with us',
@@ -135,7 +135,7 @@ export default function StartHerePage() {
                 <p className="text-[15px] font-bold text-[#FFEB99] mt-2">Starts with a conversation</p>
               </div>
               <span className={iconRing}>
-                <IconHandHeart size={28} />
+                <IconSystems size={28} />
               </span>
             </div>
             <div className={cardBody}>

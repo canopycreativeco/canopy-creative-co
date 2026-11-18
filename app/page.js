@@ -123,19 +123,16 @@ export default function HomePage() {
       </section>
 
       {/* ── THIS MONTH'S SESSION ── the watch card all month, with an optional signup under it */}
-      <section className="bg-cream py-[100px] px-[60px] max-md:py-[70px] max-md:px-6">
-        <div className="max-w-[1080px] mx-auto">
+      <section className="bg-brown py-[100px] px-[60px] relative overflow-hidden max-md:py-[70px] max-md:px-6">
+        <div
+          className="absolute inset-0 pointer-events-none"
+          aria-hidden="true"
+          style={{ background: 'radial-gradient(ellipse 70% 60% at 80% 20%, rgba(204,78,0,0.18) 0%, transparent 60%)' }}
+        />
+        <div className="relative max-w-[1080px] mx-auto">
           <HomeSession initialSession={currentSession()} initialLabel={nextSessionLabel()} />
         </div>
       </section>
-
-      {/* Soft hairline between the two cream sections above the tan run */}
-      <div className="bg-cream px-[60px] max-md:px-6" aria-hidden="true">
-        <div
-          className="max-w-[1080px] mx-auto h-px"
-          style={{ background: 'linear-gradient(to right, transparent, rgba(59,30,8,0.18), transparent)' }}
-        />
-      </div>
 
       {/* ── WHAT'S INSIDE ── cream field so the tan panel reads as a filled card */}
       <section className="bg-cream py-[100px] px-[60px] max-md:py-[70px] max-md:px-6">
@@ -155,7 +152,7 @@ export default function HomePage() {
       </section>
 
       {/* ── PROOF ── Approved copy, do not edit the quotes. Same two as The Canopy page. */}
-      <section className="bg-cream py-[90px] px-[60px] max-md:py-[64px] max-md:px-6">
+      <section className="bg-cream-dark py-[90px] px-[60px] max-md:py-[64px] max-md:px-6">
         <div className="max-w-[880px] mx-auto">
           <p className={eyebrow}>In their words</p>
           <h2 className="font-serif font-bold text-brown leading-[1.25] mb-10" style={h2Size}>

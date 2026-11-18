@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { CANOPY_URL, BACK_OFFICE_URL } from '@/lib/site'
-import { IconLearning, IconHandHeart } from '@/components/Icons'
+import { IconLearning, IconSystems } from '@/components/Icons'
 
 /* "Work with us" on the homepage. The two doors from /start-here, slimmed down to scan in
    a few seconds: badge, name, one line, three short points, button. No price here, the
@@ -45,7 +45,7 @@ const DOORS = [
     ],
     button: 'See The Back Office',
     href: BACK_OFFICE_URL,
-    Icon: IconHandHeart,
+    Icon: IconSystems,
   },
 ]
 

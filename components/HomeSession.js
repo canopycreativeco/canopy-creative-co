@@ -5,7 +5,7 @@ import { currentSession, nextSessionLabel } from '@/lib/session'
 import SessionWatchCard from '@/components/SessionWatchCard'
 import SessionSignupForm from '@/components/SessionSignupForm'
 
-/* "This month's session" on the homepage. The homepage is a static page, so the build
+/* "This month's session" on the homepage, on the dark brown section like /session. The homepage is a static page, so the build
    renders whichever session was current at build time and the browser re-checks the time
    (against Eastern time, from lib/session.js) on load. The watch card for the current
    session shows all month, until the next session's showAt, with an optional signup under
@@ -34,7 +34,7 @@ export default function HomeSession({ initialSession, initialLabel }) {
           This month&rsquo;s session
         </p>
         <h2
-          className="font-serif font-bold text-brown leading-[1.25] tracking-[-0.01em] mb-8"
+          className="font-serif font-bold text-cream leading-[1.25] tracking-[-0.01em] mb-8"
           style={{ fontSize: 'clamp(26px, 3.5vw, 38px)' }}
         >
           {label ? (
@@ -51,11 +51,11 @@ export default function HomeSession({ initialSession, initialLabel }) {
         <SessionWatchCard session={session} eyebrowText={null} />
 
         {/* Optional, never a gate. */}
-        <div className="mt-10 pt-8 border-t border-brown/10 max-w-[560px]">
-          <p className="text-[15px] text-brown/70 leading-[1.7] mb-4">
+        <div className="mt-10 pt-8 border-t border-cream/10 max-w-[560px]">
+          <p className="text-[15px] leading-[1.7] mb-4" style={{ color: 'rgba(253,246,236,0.7)' }}>
             Want next month&rsquo;s session in your inbox?
           </p>
-          <SessionSignupForm />
+          <SessionSignupForm dark />
         </div>
       </div>
     )
@@ -68,7 +68,7 @@ export default function HomeSession({ initialSession, initialLabel }) {
           The monthly session
         </p>
         <h2
-          className="font-serif font-bold text-brown leading-[1.25] tracking-[-0.01em] mb-5"
+          className="font-serif font-bold text-cream leading-[1.25] tracking-[-0.01em] mb-5"
           style={{ fontSize: 'clamp(26px, 3.5vw, 38px)' }}
         >
           {label ? (
@@ -81,7 +81,7 @@ export default function HomeSession({ initialSession, initialLabel }) {
             </>
           )}
         </h2>
-        <p className="text-[16.5px] text-brown/80 leading-[1.8] max-w-[560px]">
+        <p className="text-[16.5px] leading-[1.8] max-w-[560px]" style={{ color: 'rgba(253,246,236,0.75)' }}>
           Every month we take one real workflow and build it start to finish, so you can see what
           AI takes off your plate. Each one is free to watch until the next one drops. Missed
           one? The replay lives in The Canopy.
