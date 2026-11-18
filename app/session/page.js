@@ -1,17 +1,19 @@
 import { connection } from 'next/server'
 import { CANOPY_CHECKOUT_URL, MEMBER_LOGIN_URL } from '@/lib/site'
-import { SESSION, sessionState, nextSessionLabel } from '@/lib/session'
+import { SESSIONS, currentSession, nextSessionLabel } from '@/lib/session'
 import SessionPlayer from '@/components/SessionPlayer'
 import SessionSignupForm from '@/components/SessionSignupForm'
+import SessionInside from '@/components/SessionInside'
 
-/* One permanent URL for the monthly session. The video and dates live in lib/session.js.
-   This page renders on every request (connection() below), so it switches between the
-   video and the between-sessions view on its own at showAt and hideAt. No deploy needed. */
+/* One permanent URL for the monthly session. The videos and dates live in lib/session.js.
+   This page renders on every request (connection() below), so the current session plays
+   until the next session's showAt, then the next video takes over on its own. No deploy
+   needed on release day. The between-sessions view only shows if no session is up. */
 
 export const metadata = {
   title: 'The monthly session',
-  description: 'The monthly session from Canopy Creative Co, free to watch the week it comes out.',
-  robots: { index: false, follow: false },
+  description: 'The monthly session from Canopy Creative Co, free to watch until the next one drops.',
+  robots: { index: true, follow: true },
   alternates: {
     canonical: 'https://www.canopycreativeco.com/session',
   },
@@ -33,7 +35,8 @@ function HeroGlow() {
   )
 }
 
-function WatchView() {
+function WatchView({ session }) {
+  const label = nextSessionLabel()
   return (
     <>
       <section className="bg-brown pt-[120px] pb-[72px] px-[60px] relative overflow-hidden max-md:px-6 max-md:pt-[100px] max-md:pb-[56px]">
@@ -46,10 +49,25 @@ function WatchView() {
             className="font-serif font-bold text-cream leading-[1.15] tracking-[-0.01em] mb-10"
             style={{ fontSize: 'clamp(30px, 4vw, 46px)' }}
           >
-            Free to watch through <em className="text-orange italic">Friday.</em>
+            {label ? (
+              <>
+                Free to watch until the next session drops,{' '}
+                <em className="text-orange italic">{label}.</em>
+              </>
+            ) : (
+              <>
+                Free to watch until the next session <em className="text-orange italic">drops.</em>
+              </>
+            )}
           </h1>
 
-          <SessionPlayer videoId={SESSION.videoId} title="The monthly session from Canopy Creative Co" />
+          <SessionPlayer
+            key={session.videoId}
+            videoId={session.videoId}
+            title={session.title || 'The monthly session from Canopy Creative Co'}
+          />
+
+          <SessionInside inside={session.inside} />
 
           {/* Always visible, so the call to action is there even if the end screen fails. */}
           <div className="flex items-center justify-between gap-8 flex-wrap mt-8 max-md:flex-col max-md:items-start">
@@ -60,6 +78,14 @@ function WatchView() {
             <a href={CANOPY_CHECKOUT_URL} target="_blank" rel="noopener" className={btnPrimary}>
               Join The Canopy
             </a>
+          </div>
+
+          {/* Optional, never a gate. */}
+          <div className="mt-12 pt-8 border-t border-cream/10 max-w-[560px] max-md:mt-10">
+            <p className="text-[15px] font-light leading-[1.7] mb-4" style={{ color: 'rgba(253,246,236,0.7)' }}>
+              Want next month&rsquo;s session in your inbox?
+            </p>
+            <SessionSignupForm dark />
           </div>
         </div>
       </section>
@@ -92,10 +118,7 @@ function BetweenView() {
             )}
           </h1>
           <p className="text-[17px] font-light leading-[1.75] mb-10" style={{ color: 'rgba(253,246,236,0.72)' }}>
-            {label
-              ? 'Free to watch through Friday.'
-              : 'Free to watch through the Friday of release week.'}{' '}
-            Leave your email and we will send you the link on release day.
+            Each session is free to watch until the next one drops. Leave your email and we will send you the link on release day.
           </p>
           <SessionSignupForm dark />
         </div>
@@ -127,11 +150,14 @@ export default async function SessionPage({ searchParams }) {
   await connection()
 
   // Local preview only: /session?preview=watch or ?preview=between forces a state.
-  let state = sessionState()
+  let session = currentSession()
   if (process.env.NODE_ENV === 'development') {
     const { preview } = await searchParams
-    if (preview === 'watch' || preview === 'between') state = preview
+    if (preview === 'between') session = null
+    // Falls back to the first session with a video, so the watch view previews even
+    // before its showAt.
+    if (preview === 'watch' && !session) session = SESSIONS.find((s) => s.title) || null
   }
 
-  return state === 'watch' ? <WatchView /> : <BetweenView />
+  return session ? <WatchView session={session} /> : <BetweenView />
 }

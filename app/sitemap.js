@@ -26,6 +26,12 @@ export default function sitemap() {
       priority: 0.9,
     },
     {
+      url: 'https://www.canopycreativeco.com/session',
+      lastModified: '2026-11-18',
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
       url: 'https://www.canopycreativeco.com/session/signup',
       lastModified,
       changeFrequency: 'monthly',

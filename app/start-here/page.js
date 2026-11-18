@@ -183,7 +183,7 @@ export default function StartHerePage() {
             style={{ color: 'rgba(253,246,236,0.7)' }}
           >
             If you&rsquo;re the bottleneck in your own business and you know it, watch the next
-            session. A new one lands every month, it&rsquo;s free to watch the week it comes out,
+            session. A new one lands every month, it&rsquo;s free to watch until the next one drops,
             and it&rsquo;s the clearest picture you&rsquo;ll get of what AI can do in a business
             like yours.
           </p>

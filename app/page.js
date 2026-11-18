@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { CANOPY_CHECKOUT_URL, BACK_OFFICE_URL } from '@/lib/site'
-import { nextSessionLabel } from '@/lib/session'
+import { currentSession, nextSessionLabel } from '@/lib/session'
 import { HOME_FAQS } from '@/lib/faqs'
 import HomeSession from '@/components/HomeSession'
 import InsideTabs from '@/components/InsideTabs'
@@ -33,7 +33,7 @@ const h2Size = { fontSize: 'clamp(26px, 3.5vw, 38px)' }
 /* What's inside, as the hero checklist. Same parts, same order as the cards below. */
 const HERO_LIST = [
   'The Roots, the foundations track',
-  'A new session every month, free to watch the week it comes out',
+  'A new session every month, free to watch until the next one drops',
   'The Session Library, with every past session',
   'Questions anytime, answered by our team',
   'The Tool Shed, 25+ finished skills and prompts',
@@ -106,10 +106,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── THIS MONTH'S SESSION ── the video during the free week, the signup the rest of the month */}
+      {/* ── THIS MONTH'S SESSION ── the current video all month, with an optional signup under it */}
       <section className="bg-cream py-[100px] px-[60px] max-md:py-[70px] max-md:px-6">
         <div className="max-w-[1080px] mx-auto">
-          <HomeSession initialLabel={nextSessionLabel()} />
+          <HomeSession initialSession={currentSession()} initialLabel={nextSessionLabel()} />
         </div>
       </section>
 

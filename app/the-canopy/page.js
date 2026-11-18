@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import { CANOPY_CHECKOUT_URL, BACK_OFFICE_URL } from '@/lib/site'
 import { IconSprout, IconCalendar, IconChecklist } from '@/components/Icons'
-import { nextSessionLine } from '@/lib/session'
+import { currentSession, nextSessionLine } from '@/lib/session'
+import SessionWatchCard from '@/components/SessionWatchCard'
 import { CANOPY_FAQS as FAQS } from '@/lib/faqs'
 import FaqList from '@/components/FaqList'
 
@@ -23,9 +24,6 @@ export const metadata = {
 
 const btnPrimary =
   'inline-block bg-orange text-cream text-[14px] font-semibold tracking-[0.04em] px-8 py-[15px] rounded-full no-underline transition-all duration-200 hover:bg-[#b04400] hover:-translate-y-px text-center'
-
-const btnGhost =
-  'inline-block bg-[#FFFCF6] text-orange text-[14px] font-semibold tracking-[0.04em] px-8 py-[14px] border-[1.5px] border-orange rounded-full no-underline transition-all duration-200 hover:bg-orange hover:text-cream hover:-translate-y-px text-center'
 
 /* Tan panel on a cream section, with a heavy orange edge. Same object as the menu panel
    on The Back Office page, so the two doors read as siblings. */
@@ -136,7 +134,7 @@ export default function TheCanopyPage() {
               Everything we teach, in one <em className="text-orange italic">place.</em>
             </h1>
             <p className="text-[17px] font-light leading-[1.75] max-w-[520px]" style={{ color: 'rgba(253,246,236,0.72)' }}>
-              Each new session is free to watch the week it comes out. The membership is
+              Each new session is free to watch until the next one drops. The membership is
               everything else.
             </p>
 
@@ -206,22 +204,9 @@ export default function TheCanopyPage() {
             ))}
           </div>
 
-          {/* See one first. The date line comes from lib/session.js. */}
-          <div className="flex items-center justify-between gap-8 flex-wrap border-t border-brown/15 pt-8 max-md:flex-col max-md:items-start">
-            <div className="max-w-[60ch]">
-              <p className="text-[12px] font-bold tracking-[0.18em] uppercase text-orange mb-2">
-                See one first
-              </p>
-              <p className="text-[15.5px] text-brown/85 leading-[1.7]">{nextSessionLine()}</p>
-            </div>
-            <div className="flex gap-3 flex-wrap">
-              <a href={CANOPY_CHECKOUT_URL} target="_blank" rel="noopener" className={btnPrimary}>
-                Join The Canopy
-              </a>
-              <Link href="/session/signup" className={btnGhost}>
-                Send me the session
-              </Link>
-            </div>
+          {/* See one first. The watch card reads everything from lib/session.js. */}
+          <div className="border-t border-brown/15 pt-8">
+            <SessionWatchCard initialSession={currentSession()} initialLine={nextSessionLine()} />
           </div>
         </div>
       </section>

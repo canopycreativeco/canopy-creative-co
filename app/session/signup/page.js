@@ -4,10 +4,10 @@ import SessionSignupForm from '@/components/SessionSignupForm'
 
 export const metadata = {
   title: 'Send me the session',
-  description: 'Get the monthly session from Canopy Creative Co by email on release day. Free to watch through Friday.',
+  description: 'Get the monthly session from Canopy Creative Co by email on release day. Free to watch until the next one drops.',
   openGraph: {
     title: 'Send me the session | Canopy Creative Co',
-    description: 'Get the monthly session from Canopy Creative Co by email on release day. Free to watch through Friday.',
+    description: 'Get the monthly session from Canopy Creative Co by email on release day. Free to watch until the next one drops.',
     url: 'https://www.canopycreativeco.com/session/signup',
     siteName: 'Canopy Creative Co',
   },
