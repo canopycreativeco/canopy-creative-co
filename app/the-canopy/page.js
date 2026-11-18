@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { CANOPY_CHECKOUT_URL, BACK_OFFICE_URL } from '@/lib/site'
+import { CANOPY_CHECKOUT_URL } from '@/lib/site'
 import { IconSprout, IconCalendar, IconChecklist } from '@/components/Icons'
 import { SESSION_PROMISE, currentSession } from '@/lib/session'
 import CurrentWatchCard from '@/components/CurrentWatchCard'
@@ -299,13 +299,6 @@ export default function TheCanopyPage() {
             Before you <em className="text-orange italic">join.</em>
           </h2>
           <FaqList items={FAQS} />
-          <p className="text-[16px] text-brown/75 leading-[1.7] mt-12 text-center max-w-[60ch] mx-auto">
-            The Canopy is how you learn it with us. If you would rather hand it to us,{' '}
-            <Link href={BACK_OFFICE_URL} className="text-orange underline underline-offset-[3px]">
-              The Back Office
-            </Link>{' '}
-            runs finance and operations for creative businesses.
-          </p>
         </div>
       </section>
 

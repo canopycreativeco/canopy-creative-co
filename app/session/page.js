@@ -37,6 +37,12 @@ function HeroGlow() {
 
 function WatchView({ session }) {
   const label = nextSessionLabel()
+  const hasInside = Boolean(session.inside?.items?.length)
+  const joinButton = (
+    <a href={CANOPY_CHECKOUT_URL} target="_blank" rel="noopener" className={btnPrimary}>
+      Join The Canopy
+    </a>
+  )
   return (
     <>
       <section className="bg-brown pt-[120px] pb-[72px] px-[60px] relative overflow-hidden max-md:px-6 max-md:pt-[100px] max-md:pb-[56px]">
@@ -67,25 +73,28 @@ function WatchView({ session }) {
             title={session.title || 'The monthly session from Canopy Creative Co'}
           />
 
-          <SessionInside inside={session.inside} />
+          {/* The Join button sits beside the "New in The Canopy" label and intro. If a
+              session has no inside items yet, it falls back to its own row under the
+              replay line. Always visible, so the call to action is there even if the end
+              screen fails. */}
+          <SessionInside inside={session.inside} action={hasInside ? joinButton : null} />
 
-          {/* Always visible, so the call to action is there even if the end screen fails. */}
-          <div className="flex items-center justify-between gap-8 flex-wrap mt-8 max-md:flex-col max-md:items-start">
-            <p className="text-[16px] font-light leading-[1.7] max-w-[56ch]" style={{ color: 'rgba(253,246,236,0.75)' }}>
+          <div className="flex items-center justify-between gap-8 flex-wrap mt-6 max-md:flex-col max-md:items-start">
+            <p className="text-[16px] font-light leading-[1.7]" style={{ color: 'rgba(253,246,236,0.75)' }}>
               The replay, the starter prompt, the use cases and the session&rsquo;s tools live
               in The Canopy.
             </p>
-            <a href={CANOPY_CHECKOUT_URL} target="_blank" rel="noopener" className={btnPrimary}>
-              Join The Canopy
-            </a>
+            {hasInside ? null : joinButton}
           </div>
 
           {/* Optional, never a gate. */}
-          <div className="mt-12 pt-8 border-t border-cream/10 max-w-[560px] max-md:mt-10">
+          <div className="mt-12 pt-8 border-t border-cream/10 max-md:mt-10">
             <p className="text-[15px] font-light leading-[1.7] mb-4" style={{ color: 'rgba(253,246,236,0.7)' }}>
               Want next month&rsquo;s session in your inbox?
             </p>
-            <SessionSignupForm dark />
+            <div className="max-w-[560px]">
+              <SessionSignupForm dark />
+            </div>
           </div>
         </div>
       </section>

@@ -7,7 +7,7 @@
 
 export const INSIDE_LABEL = 'New in The Canopy from this session'
 
-export default function SessionInside({ inside, compact = false }) {
+export default function SessionInside({ inside, compact = false, action = null }) {
   if (!inside || !inside.items?.length) return null
 
   if (compact) {
@@ -40,14 +40,21 @@ export default function SessionInside({ inside, compact = false }) {
 
   return (
     <div className="mt-12 max-md:mt-10">
-      <p className="text-[12px] font-semibold tracking-[0.24em] uppercase text-orange mb-3">
-        {INSIDE_LABEL}
-      </p>
-      {inside.intro ? (
-        <p className="text-[16px] font-light leading-[1.7] mb-7 max-w-[60ch]" style={{ color: 'rgba(253,246,236,0.75)' }}>
-          {inside.intro}
-        </p>
-      ) : null}
+      {/* The label and intro on the left, `action` (the Join button on /session) filling
+          the space on the right. On phones the button drops under the intro. */}
+      <div className="flex items-end justify-between gap-8 mb-7 max-md:flex-col max-md:items-start max-md:gap-5">
+        <div>
+          <p className="text-[12px] font-semibold tracking-[0.24em] uppercase text-orange mb-3">
+            {INSIDE_LABEL}
+          </p>
+          {inside.intro ? (
+            <p className="text-[16px] font-light leading-[1.7] max-w-[60ch]" style={{ color: 'rgba(253,246,236,0.75)' }}>
+              {inside.intro}
+            </p>
+          ) : null}
+        </div>
+        {action ? <div className="shrink-0">{action}</div> : null}
+      </div>
       <ul className="list-none m-0 p-0 grid grid-cols-3 gap-5 max-md:grid-cols-1 max-md:gap-4">
         {inside.items.map(({ emoji, name, line }) => (
           <li
@@ -65,7 +72,7 @@ export default function SessionInside({ inside, compact = false }) {
         ))}
       </ul>
       {inside.more ? (
-        <p className="text-[14.5px] leading-[1.7] mt-6 max-w-[64ch]" style={{ color: 'rgba(253,246,236,0.65)' }}>
+        <p className="text-[14.5px] leading-[1.7] mt-6" style={{ color: 'rgba(253,246,236,0.65)' }}>
           {inside.more}
         </p>
       ) : null}

@@ -102,8 +102,7 @@ export default function TheBackOfficePage() {
               Finance and operations for creative businesses, from the monthly books to the
               systems behind them. Our team does the work.
             </p>
-            <p className="text-[15px] font-bold text-orange mt-7">Starts with a conversation</p>
-            <Link href="/contact" className={`${btnPrimary} mt-4`}>
+            <Link href="/contact" className={`${btnPrimary} mt-7`}>
               Start a conversation
             </Link>
           </div>
