@@ -4,7 +4,6 @@ import { MEMBER_LOGIN_URL, CANOPY_URL, BACK_OFFICE_URL } from '@/lib/site'
 /* No Contact link on purpose: the contact page books a discovery call, which is only for
    The Back Office, so it is reached from The Back Office page. */
 const footerLinks = [
-  { href: '/start-here', label: 'Work with us' },
   { href: CANOPY_URL, label: 'The Canopy' },
   { href: BACK_OFFICE_URL, label: 'The Back Office' },
   { href: '/about', label: 'About' },

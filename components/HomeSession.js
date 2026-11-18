@@ -1,19 +1,16 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { CANOPY_CHECKOUT_URL } from '@/lib/site'
 import { currentSession, nextSessionLabel } from '@/lib/session'
-import SessionPlayer from '@/components/SessionPlayer'
+import SessionWatchCard from '@/components/SessionWatchCard'
 import SessionSignupForm from '@/components/SessionSignupForm'
 
 /* "This month's session" on the homepage. The homepage is a static page, so the build
    renders whichever session was current at build time and the browser re-checks the time
-   (against Eastern time, from lib/session.js) on load. The current video shows all month,
-   until the next session's showAt, with an optional signup under it. The signup-only view
+   (against Eastern time, from lib/session.js) on load. The watch card for the current
+   session shows all month, until the next session's showAt, with an optional signup under
+   it. The signup-only view
    is a safety net for when no session is up. */
-
-const btnPrimary =
-  'inline-block bg-orange text-cream text-[14px] font-semibold tracking-[0.04em] px-8 py-[15px] rounded-full no-underline transition-all duration-200 hover:bg-[#b04400] hover:-translate-y-px text-center'
 
 // initialSession and initialLabel are worked out at build time and passed in, so the first
 // browser render matches the server HTML. The effect then updates them to the visitor's
@@ -51,20 +48,7 @@ export default function HomeSession({ initialSession, initialLabel }) {
             </>
           )}
         </h2>
-        <SessionPlayer
-          key={session.videoId}
-          videoId={session.videoId}
-          title={session.title || 'The monthly session from Canopy Creative Co'}
-        />
-        <div className="flex items-center justify-between gap-8 flex-wrap mt-8 max-md:flex-col max-md:items-start">
-          <p className="text-[15.5px] text-brown/80 leading-[1.7] max-w-[56ch]">
-            The replay, the starter prompt, the use cases and the session&rsquo;s tools live in
-            The Canopy.
-          </p>
-          <a href={CANOPY_CHECKOUT_URL} target="_blank" rel="noopener" className={btnPrimary}>
-            Join The Canopy
-          </a>
-        </div>
+        <SessionWatchCard session={session} eyebrowText={null} />
 
         {/* Optional, never a gate. */}
         <div className="mt-10 pt-8 border-t border-brown/10 max-w-[560px]">

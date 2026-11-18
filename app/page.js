@@ -1,9 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { CANOPY_CHECKOUT_URL, BACK_OFFICE_URL } from '@/lib/site'
+import { CANOPY_URL, CANOPY_CHECKOUT_URL, BACK_OFFICE_URL } from '@/lib/site'
 import { currentSession, nextSessionLabel } from '@/lib/session'
 import { HOME_FAQS } from '@/lib/faqs'
 import HomeSession from '@/components/HomeSession'
+import TwoDoors from '@/components/TwoDoors'
 import InsideTabs from '@/components/InsideTabs'
 import FaqList from '@/components/FaqList'
 
@@ -100,13 +101,28 @@ export default function HomePage() {
             ))}
           </ul>
 
-          <a href={CANOPY_CHECKOUT_URL} target="_blank" rel="noopener" className={`${btnPrimary} text-center`}>
-            Join The Canopy
-          </a>
+          <Link href={CANOPY_URL} className={`${btnPrimary} text-center`}>
+            See what&rsquo;s inside
+          </Link>
         </div>
       </section>
 
-      {/* ── THIS MONTH'S SESSION ── the current video all month, with an optional signup under it */}
+      {/* ── WORK WITH US ── the two doors, slimmed down from /start-here */}
+      <section className="bg-cream-dark py-[90px] px-[60px] max-md:py-[64px] max-md:px-6">
+        <div className="max-w-[720px] mx-auto text-center mb-12 max-md:mb-9">
+          <p className={eyebrow}>Work with us</p>
+          <h2 className="font-serif font-bold text-brown leading-[1.25] tracking-[-0.01em] mb-5" style={h2Size}>
+            Two ways to work <em className="text-orange italic">together.</em>
+          </h2>
+          <p className="text-[16.5px] text-brown/80 leading-[1.75] max-w-[540px] mx-auto">
+            We teach operators to run lean businesses with AI, and we run the back office for
+            creative businesses that would rather hand it off.
+          </p>
+        </div>
+        <TwoDoors />
+      </section>
+
+      {/* ── THIS MONTH'S SESSION ── the watch card all month, with an optional signup under it */}
       <section className="bg-cream py-[100px] px-[60px] max-md:py-[70px] max-md:px-6">
         <div className="max-w-[1080px] mx-auto">
           <HomeSession initialSession={currentSession()} initialLabel={nextSessionLabel()} />
@@ -135,73 +151,6 @@ export default function HomePage() {
             you get back to the work only you can do.
           </p>
           <InsideTabs />
-        </div>
-      </section>
-
-      {/* ── WHAT A SESSION BUILDS ── the Aug 19 build, as the picture of what a session is */}
-      <section className="bg-cream-dark py-[100px] px-[60px] max-md:py-[70px] max-md:px-6">
-        <div className="max-w-[1080px] mx-auto grid grid-cols-[1fr_1.05fr] gap-14 items-center max-md:grid-cols-1 max-md:gap-10">
-          <div>
-            <p className={eyebrow}>What a session builds</p>
-            <h2 className="font-serif font-bold text-brown leading-[1.25] tracking-[-0.01em] mb-5" style={h2Size}>
-              Profit Levers: am I <em className="text-orange italic">charging enough</em>
-            </h2>
-            <p className="text-[16px] text-brown/80 leading-[1.8] mb-4">
-              A fictional Florida design studio with eight years of books. Claude read the whole
-              workspace and turned it into a live pricing dashboard, then came the dials. Change a
-              markup, change a fee, watch what it does to the year.
-            </p>
-            <p className="text-[13.5px] text-brown/60 leading-[1.6]">
-              From the August 19 session. The firm is fictional, so we could show everything with
-              nothing to hide.
-            </p>
-          </div>
-
-          {/* A peek at the dashboard built in the session */}
-          <div className="rounded-lg border border-brown/10 bg-[#FFFCF6] p-5 shadow-[0_6px_26px_rgba(59,30,8,0.10)]" aria-label="A preview of the pricing dashboard built in the session">
-            <div className="bg-white rounded-md border border-brown/10 overflow-hidden mb-3">
-              <p className="text-[9.5px] font-bold tracking-[0.14em] uppercase text-cream bg-orange px-4 py-2">
-                Sample data &middot; Fictional demo firm
-              </p>
-              <div className="p-4">
-                <div className="flex justify-between gap-4 text-[12.5px] text-brown/85 py-[3px]">
-                  <span>What clients paid you</span><span className="font-semibold">$2,901,645</span>
-                </div>
-                <div className="flex justify-between gap-4 text-[12px] text-brown/60 py-[3px] pl-3">
-                  <span>Less what you paid vendors</span><span>&minus;$1,600,000</span>
-                </div>
-                <div className="flex justify-between gap-4 text-[12px] text-brown/60 py-[3px] pl-3">
-                  <span>Less freight and receiving</span><span>&minus;$85,000</span>
-                </div>
-                <div className="flex justify-between items-baseline gap-4 border-t border-brown/15 mt-2 pt-2.5">
-                  <span className="text-[13px] font-semibold text-brown">What you keep before overhead</span>
-                  <span className="font-serif font-bold text-brown text-[21px]">$996,645</span>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white rounded-md border border-brown/10 border-l-[3px] border-l-orange p-4 mb-3">
-              <p className="text-[9.5px] font-bold tracking-[0.14em] uppercase text-orange mb-1.5">Finding 1 of 3</p>
-              <p className="font-serif font-bold text-brown text-[15.5px] leading-[1.35]">
-                You scaled the team and the volume. You never scaled the pricing.
-              </p>
-            </div>
-            <div className="bg-white rounded-md border border-brown/10 p-4">
-              <div className="flex justify-between gap-4 text-[12.5px] font-semibold text-brown mb-2">
-                <span>Product markup, on landed cost</span><span>18.7%</span>
-              </div>
-              <div className="relative h-[16px]">
-                <div className="absolute top-[4px] h-[8px] rounded-full bg-[#D5E7DC]" style={{ left: '75%', width: '13.6%' }}></div>
-                <div className="absolute top-[4px] h-[8px] rounded-full bg-[#F6DFC8]" style={{ left: '88.6%', right: 0 }}></div>
-                <div className="absolute top-[6.5px] h-[3px] rounded-full bg-brown/10 inset-x-0"></div>
-                <div className="absolute top-[6.5px] h-[3px] rounded-full bg-orange" style={{ width: '46.75%' }}></div>
-                <div className="absolute top-[1.5px] w-[13px] h-[13px] rounded-full bg-orange border-2 border-white" style={{ left: 'calc(46.75% - 6px)' }}></div>
-              </div>
-              <div className="flex justify-between items-center gap-4 mt-1.5">
-                <span className="text-[10.5px] font-semibold text-brown/70 bg-cream rounded-full px-2.5 py-[3px]">below typical</span>
-                <span className="text-[11px] text-brown/50">$315,090 a year</span>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 

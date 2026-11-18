@@ -1,14 +1,12 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
-import { currentSession, nextSessionLine } from '@/lib/session'
 import SessionInside from '@/components/SessionInside'
 
-/* "See one first" on /the-canopy. Everything on it reads from lib/session.js, so when next
-   month's video takes over the card follows on its own, no edit to this page. The page is
-   static, so the build renders the session current at build time and the browser re-checks
-   the time on load, same as the homepage. */
+/* The watch card for this month's session, on the homepage. Thumbnail, title, what the
+   session added to The Canopy, and a button to /session. Everything reads from the session
+   object in lib/session.js. */
 
 const btnPrimary =
   'inline-block bg-orange text-cream text-[14px] font-semibold tracking-[0.04em] px-8 py-[15px] rounded-full no-underline transition-all duration-200 hover:bg-[#b04400] hover:-translate-y-px text-center'
@@ -50,32 +48,10 @@ function PlayBadge() {
   )
 }
 
-export default function SessionWatchCard({ initialSession, initialLine }) {
-  const [session, setSession] = useState(initialSession)
-  const [line, setLine] = useState(initialLine)
-
-  useEffect(() => {
-    const now = new Date()
-    // Deliberate: the time check has to run after hydration, in the visitor's browser.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setSession(currentSession(now))
-    setLine(nextSessionLine(now))
-  }, [])
-
-  // Safety net, no session up: the old line and the email signup.
-  if (!session) {
-    return (
-      <div className="flex items-center justify-between gap-8 flex-wrap max-md:flex-col max-md:items-start">
-        <div className="max-w-[60ch]">
-          <p className={eyebrow}>See one first</p>
-          <p className="text-[15.5px] text-brown/85 leading-[1.7]">{line}</p>
-        </div>
-        <Link href="/session/signup" className={btnPrimary}>
-          Send me the session
-        </Link>
-      </div>
-    )
-  }
+// Presentational. The caller works out the current session (see HomeSession), so the
+// card always follows lib/session.js and never needs a monthly edit.
+export default function SessionWatchCard({ session, line = null, eyebrowText = 'This month’s session' }) {
+  if (!session) return null
 
   const title = session.title || 'This month’s session'
 
@@ -95,11 +71,11 @@ export default function SessionWatchCard({ initialSession, initialLine }) {
       </div>
 
       <div className="px-8 py-8 max-md:px-6 max-md:py-7">
-        <p className={eyebrow}>See one first</p>
+        {eyebrowText ? <p className={eyebrow}>{eyebrowText}</p> : null}
         <p className="font-serif text-[24px] font-bold text-brown leading-[1.25] mb-2 max-md:text-[21px]">
           {title}
         </p>
-        <p className="text-[14.5px] text-brown/75 leading-[1.65] mb-6">{line}</p>
+        {line ? <p className="text-[14.5px] text-brown/75 leading-[1.65] mb-6">{line}</p> : <div className="mb-5" />}
 
         {session.inside ? (
           <div className="mb-7">
@@ -110,14 +86,6 @@ export default function SessionWatchCard({ initialSession, initialLine }) {
         <Link href="/session" className={btnPrimary}>
           Watch it free
         </Link>
-        <p className="mt-4">
-          <Link
-            href="/session/signup"
-            className="text-[13.5px] text-brown/65 underline underline-offset-[3px] hover:text-orange"
-          >
-            Send me the session
-          </Link>
-        </p>
       </div>
     </div>
   )

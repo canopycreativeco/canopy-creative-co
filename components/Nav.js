@@ -5,10 +5,11 @@ import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { CANOPY_CHECKOUT_URL, MEMBER_LOGIN_URL } from '@/lib/site'
 
-/* Minimal header: the logo, one link to the page where people choose between the two
-   doors, and Login + Join Now (straight to Circle checkout). About lives in the footer. Contact is reached only from
-   The Back Office page. */
-const navLinks = [{ href: '/start-here', label: 'Work with us' }]
+/* Minimal header: the logo, Login and Join Now (straight to Circle checkout). The two
+   doors live on the homepage now. /start-here stays live for search but is not linked
+   from the site. About lives in the footer. Contact is reached only from The Back Office
+   page. Add a { href, label } here to bring a text link back. */
+const navLinks = []
 
 const btnLogin =
   'bg-transparent text-brown text-[12.5px] font-semibold uppercase tracking-[0.1em] whitespace-nowrap px-5 py-[8px] border-[1.5px] border-brown/70 rounded-[8px] no-underline transition-colors duration-200 hover:bg-brown hover:text-cream'

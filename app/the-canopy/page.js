@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { CANOPY_CHECKOUT_URL, BACK_OFFICE_URL } from '@/lib/site'
 import { IconSprout, IconCalendar, IconChecklist } from '@/components/Icons'
-import { currentSession, nextSessionLine } from '@/lib/session'
-import SessionWatchCard from '@/components/SessionWatchCard'
+import { SESSION_PROMISE } from '@/lib/session'
+import SessionSignupForm from '@/components/SessionSignupForm'
 import { CANOPY_FAQS as FAQS } from '@/lib/faqs'
 import FaqList from '@/components/FaqList'
 
@@ -204,9 +204,23 @@ export default function TheCanopyPage() {
             ))}
           </div>
 
-          {/* See one first. The watch card reads everything from lib/session.js. */}
-          <div className="border-t border-brown/15 pt-8">
-            <SessionWatchCard initialSession={currentSession()} initialLine={nextSessionLine()} />
+          {/* See one first. Watch now, or get next month's session by email right here. */}
+          <div className="border-t border-brown/15 pt-8 grid grid-cols-[1fr_1fr] gap-10 items-start max-md:grid-cols-1 max-md:gap-8">
+            <div>
+              <p className="text-[12px] font-bold tracking-[0.18em] uppercase text-orange mb-2">
+                See one first
+              </p>
+              <p className="text-[15.5px] text-brown/85 leading-[1.7] mb-5 max-w-[46ch]">{SESSION_PROMISE}</p>
+              <Link href="/session" className={btnPrimary}>
+                Watch it free
+              </Link>
+            </div>
+            <div>
+              <p className="text-[15px] text-brown/80 leading-[1.7] mb-4">
+                Want next month&rsquo;s session in your inbox?
+              </p>
+              <SessionSignupForm stacked />
+            </div>
           </div>
         </div>
       </section>
