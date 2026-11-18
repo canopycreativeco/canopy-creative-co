@@ -51,11 +51,13 @@ export default function HomeSession({ initialSession, initialLabel }) {
         <SessionWatchCard session={session} eyebrowText={null} />
 
         {/* Optional, never a gate. */}
-        <div className="mt-10 pt-8 border-t border-cream/10 max-w-[560px]">
+        <div className="mt-10 pt-8 border-t border-cream/10">
           <p className="text-[15px] leading-[1.7] mb-4" style={{ color: 'rgba(253,246,236,0.7)' }}>
             Want next month&rsquo;s session in your inbox?
           </p>
-          <SessionSignupForm dark />
+          <div className="max-w-[560px]">
+            <SessionSignupForm dark />
+          </div>
         </div>
       </div>
     )

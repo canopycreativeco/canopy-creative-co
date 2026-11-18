@@ -31,23 +31,6 @@ const btnPrimary =
 const eyebrow = 'text-[12px] font-semibold tracking-[0.22em] uppercase text-orange/85 mb-5'
 const h2Size = { fontSize: 'clamp(26px, 3.5vw, 38px)' }
 
-/* What's inside, as the hero checklist. Same parts, same order as the cards below. */
-const HERO_LIST = [
-  'The Roots, the foundations track',
-  'A new session every month, free to watch until the next one drops',
-  'The Session Library, with every past session',
-  'Questions anytime, answered by our team',
-  'The Tool Shed, 25+ finished skills and prompts',
-]
-
-function Check() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="shrink-0 mt-[5px] text-orange">
-      <path d="M4 12.5 9.5 18 20 6" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
-
 export default function HomePage() {
   return (
     <>
@@ -88,18 +71,9 @@ export default function HomePage() {
             <em className="text-orange italic">themselves.</em>
           </h1>
 
-          <p className="text-[18px] font-light max-w-[560px] leading-[1.75] mb-8" style={{ color: 'rgba(253,246,236,0.65)' }}>
+          <p className="text-[18px] font-light max-w-[560px] leading-[1.75] mb-10" style={{ color: 'rgba(253,246,236,0.65)' }}>
             We teach operators how to design the systems that do the work, so the work only you can do finally gets the time it deserves. AI is the lever, not the product.
           </p>
-
-          <ul className="list-none m-0 p-0 mb-10 max-w-[560px]" aria-label="What's inside The Canopy">
-            {HERO_LIST.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-[15.5px] leading-[1.6] py-[5px]" style={{ color: 'rgba(253,246,236,0.85)' }}>
-                <Check />
-                {item}
-              </li>
-            ))}
-          </ul>
 
           <Link href={CANOPY_URL} className={`${btnPrimary} text-center`}>
             See what&rsquo;s inside
@@ -142,7 +116,7 @@ export default function HomePage() {
             One membership, everything <em className="text-orange italic">inside.</em>
           </h2>
           {/* The approved positioning line. Word for word, do not edit. */}
-          <p className="text-[16.5px] text-brown/80 leading-[1.8] max-w-[680px] mb-10">
+          <p className="text-[16.5px] text-brown/80 leading-[1.8] mb-10">
             Inside The Canopy, we go deeper than one-off prompts. We build AI systems with you,
             wired into how your business runs, so the repeat work stops landing on your desk and
             you get back to the work only you can do.
@@ -223,7 +197,7 @@ export default function HomePage() {
             </div>
             <Link
               href="/about"
-              className="inline-block mt-8 text-[14px] font-semibold text-[#FFEB99] underline underline-offset-[3px] transition-opacity duration-200 hover:opacity-80"
+              className="inline-block mt-8 text-[14px] font-semibold tracking-[0.04em] text-orange no-underline px-7 py-[12px] border-[1.5px] border-orange rounded-full bg-transparent transition-colors duration-200 hover:bg-orange hover:text-cream"
             >
               More about Dave
             </Link>

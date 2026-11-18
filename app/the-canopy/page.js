@@ -171,7 +171,7 @@ export default function TheCanopyPage() {
             Everything inside, from <em className="text-orange italic">day one.</em>
           </h2>
           {/* The approved positioning line. Word for word, do not edit. */}
-          <p className="text-[17px] text-brown leading-[1.75] mb-4 max-w-[70ch]">
+          <p className="text-[17px] text-brown leading-[1.75] mb-4">
             Inside The Canopy, we go deeper than one-off prompts. We build AI systems with you,
             wired into how your business runs, so the repeat work stops landing on your desk and
             you get back to the work only you can do.
