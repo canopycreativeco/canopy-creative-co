@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { CANOPY_URL, CANOPY_CHECKOUT_URL, BACK_OFFICE_URL } from '@/lib/site'
+import { CANOPY_URL, CANOPY_CHECKOUT_URL } from '@/lib/site'
 import { currentSession, nextSessionLabel } from '@/lib/session'
 import { HOME_FAQS } from '@/lib/faqs'
 import HomeSession from '@/components/HomeSession'
@@ -248,13 +248,6 @@ export default function HomePage() {
             Before you <em className="text-orange italic">join.</em>
           </h2>
           <FaqList items={HOME_FAQS} />
-          <p className="text-[16px] text-brown/75 leading-[1.7] mt-12 text-center max-w-[60ch] mx-auto">
-            Rather hand it to us?{' '}
-            <Link href={BACK_OFFICE_URL} className="text-orange underline underline-offset-[3px]">
-              The Back Office
-            </Link>{' '}
-            runs finance and operations for creative businesses.
-          </p>
         </div>
       </section>
 

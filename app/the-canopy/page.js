@@ -76,6 +76,7 @@ const SESSIONS = [
   { date: 'Sep 16', aired: true, title: 'Project pulse: budget, status, and the client update', blurb: 'The Monday update, drafted before Monday.' },
   { date: 'Sep 30', aired: true, title: 'The proposal and follow-up builder', blurb: 'From call notes to a proposal that goes out the same week, plus the follow-ups that keep a warm lead from going quiet.' },
   { date: 'Oct 14', aired: true, title: 'The money coach', blurb: 'The other half of Profit Levers: where the money goes each month, and which costs are worth a second look.' },
+  { date: 'Nov 18', aired: true, title: 'Projects: Your business, built in', blurb: 'Teach AI how your business runs once, in one Project, so you and your team stop explaining it from scratch.' },
 ]
 
 function PriceCard() {

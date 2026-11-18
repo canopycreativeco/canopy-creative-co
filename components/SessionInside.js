@@ -42,7 +42,7 @@ export default function SessionInside({ inside, compact = false, action = null }
     <div className="mt-12 max-md:mt-10">
       {/* The label and intro on the left, `action` (the Join button on /session) filling
           the space on the right. On phones the button drops under the intro. */}
-      <div className="flex items-end justify-between gap-8 mb-7 max-md:flex-col max-md:items-start max-md:gap-5">
+      <div className="flex items-start justify-between gap-8 mb-7 max-md:flex-col max-md:items-start max-md:gap-5">
         <div>
           <p className="text-[12px] font-semibold tracking-[0.24em] uppercase text-orange mb-3">
             {INSIDE_LABEL}
