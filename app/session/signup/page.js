@@ -17,7 +17,7 @@ export const metadata = {
 }
 
 // Set at each monthly topic lock (Platform Playbook).
-const WALK_AWAY_LINE = 'Walk away with a setup that teaches AI how your business runs, once, so you stop explaining it from scratch.'
+const WALK_AWAY_LINE = 'One page about how you decide, hand off and get stuck, so the help you get back fits the way you work.'
 
 export default function SessionSignupPage() {
   return (
