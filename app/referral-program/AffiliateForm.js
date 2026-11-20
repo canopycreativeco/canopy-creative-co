@@ -106,7 +106,7 @@ export default function AffiliateForm() {
       <div className="bg-white border border-[#9A7A62]/40 rounded-lg p-8">
         <p className="font-serif font-bold text-brown text-[20px] mb-3">Application received.</p>
         <p className="text-[15px] text-brown/75 leading-[1.7]">
-          A confirmation is on its way to your inbox, and you'll hear back from us within 2
+          A confirmation is on its way to your inbox, and you&apos;ll hear back from us within 2
           business days.
         </p>
       </div>
@@ -132,7 +132,7 @@ export default function AffiliateForm() {
       <div data-error={!!errors.email || undefined}>
         <Label required>Email address</Label>
         <HelperText>
-          If you're a current member, use the email on your membership account.
+          If you&apos;re a current member, use the email on your membership account.
         </HelperText>
         <input
           type="email"

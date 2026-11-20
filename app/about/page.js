@@ -129,12 +129,12 @@ export default function AboutPage() {
                 fragmented to streamlined and automated.
               </p>
               <p className="text-[16px] text-brown leading-[1.85] mb-4" style={{ opacity: 0.82 }}>
-                Dave's specialty, then and now: take a complex process, identify efficiencies, and
+                Dave&apos;s specialty, then and now: take a complex process, identify efficiencies, and
                 streamline it with as little disruption to the business as possible. The scale was
-                different. The method is the same one he brings to his clients' businesses.
+                different. The method is the same one he brings to his clients&apos; businesses.
               </p>
               <p className="text-[16px] text-brown leading-[1.85]" style={{ opacity: 0.82 }}>
-                Dave's financial foundation came earlier, in a leadership development program at a
+                Dave&apos;s financial foundation came earlier, in a leadership development program at a
                 leading financial data firm.
               </p>
             </div>
@@ -163,8 +163,8 @@ export default function AboutPage() {
               </h2>
               <p className="text-[16px] text-brown leading-[1.85] mb-6" style={{ opacity: 0.82 }}>
                 Dave holds a Project Management Professional (PMP) certification, a deliberate
-                investment in knowing how implementations succeed. When you're building a
-                business's operational infrastructure, what connects to what, and in what order,
+                investment in knowing how implementations succeed. When you&apos;re building a
+                business&apos;s operational infrastructure, what connects to what, and in what order,
                 matters enormously. It shows up in every engagement.
               </p>
 
@@ -186,7 +186,7 @@ export default function AboutPage() {
                 >
                   Dave approaches every engagement the way an architect approaches a building:
                   foundation first. Before anything gets built or changed, he maps what exists,
-                  identifies what's missing, and determines what needs to happen in what order.
+                  identifies what&apos;s missing, and determines what needs to happen in what order.
                   Nothing gets patched. Everything gets built with intention.
                 </p>
               </div>
@@ -244,17 +244,17 @@ export default function AboutPage() {
                 className="font-serif font-bold text-brown leading-[1.25] tracking-[-0.01em] mb-5"
                 style={{ fontSize: 'clamp(22px, 3vw, 30px)' }}
               >
-                This isn't a niche
+                This isn&apos;t a niche
                 <br />
                 <em className="text-orange italic">he picked off a list.</em>
               </h2>
               <p className="text-[16px] text-brown leading-[1.85]" style={{ opacity: 0.82 }}>
-                Dave's entry into working with creative businesses wasn't accidental. Working
+                Dave&apos;s entry into working with creative businesses wasn&apos;t accidental. Working
                 inside interior design firms showed Dave that this space needed better support. Canopy Creative Co goes deepest with interior
-                design firms, because that's where it started and where Dave has spent the most
+                design firms, because that&apos;s where it started and where Dave has spent the most
                 time inside the back office. The same principles run through professional
                 services, trades, ecommerce, and every operator-run business. The problems are
-                consistent, and the fix starts the same way: understand what's there
+                consistent, and the fix starts the same way: understand what&apos;s there
                 before you touch anything.
               </p>
             </div>
@@ -283,8 +283,8 @@ export default function AboutPage() {
             </h2>
             <p className="text-[16px] text-brown leading-[1.85]" style={{ opacity: 0.82 }}>
               Dave previously lived in Chicago and New York City, where he built a career in the
-              world's most demanding professional environments. He was taught to move fast, think
-              clearly, and never waste anyone's time, a skillset he now brings to every
+              world&apos;s most demanding professional environments. He was taught to move fast, think
+              clearly, and never waste anyone&apos;s time, a skillset he now brings to every
               engagement.
             </p>
           </div>

@@ -18,12 +18,12 @@ export default function ContactPage() {
           className="font-serif font-bold text-brown leading-[1.2] tracking-[-0.01em] mb-5"
           style={{ fontSize: 'clamp(32px, 5vw, 48px)' }}
         >
-          Let's figure out
+          Let&apos;s figure out
           <br />
           the right&nbsp;fit.
         </h1>
         <p className="text-[17px] text-brown/75 leading-[1.7] mb-12">
-          Fill out the form below and let's get started with a free discovery call.
+          Fill out the form below and let&apos;s get started with a free discovery call.
         </p>
 
         <ContactForm />

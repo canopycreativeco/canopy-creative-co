@@ -375,7 +375,7 @@ function SoftwareBlock({ data, onChange }) {
         <input type="text" value={data.password} onChange={(e) => onChange('password', e.target.value)} className={inp} />
       </div>
       <div className="sm:col-span-2">
-        <Lbl>What it's used for</Lbl>
+        <Lbl>What it&apos;s used for</Lbl>
         <input type="text" value={data.purpose} onChange={(e) => onChange('purpose', e.target.value)} className={inp} />
       </div>
     </div>
@@ -801,7 +801,7 @@ export default function IntakeForm() {
           <Divider />
 
           <div>
-            <Lbl opt>Services I'm interested in down the road</Lbl>
+            <Lbl opt>Services I&apos;m interested in down the road</Lbl>
             <Hint>Not signing on for a service today but want to flag interest for later? Add a note here.</Hint>
             <textarea value={fields.futureServices} onChange={(e) => sf('futureServices', e.target.value)} rows={3} className={ta} />
           </div>
@@ -938,7 +938,7 @@ export default function IntakeForm() {
                 {fields.accountingSoftwareOther} access
               </p>
               <p className="text-[12px] text-muted italic mb-3">
-                If your software is cloud-based, please provide login credentials below. Skip this if it's desktop software or doesn't require a login.
+                If your software is cloud-based, please provide login credentials below. Skip this if it&apos;s desktop software or doesn&apos;t require a login.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
@@ -1243,7 +1243,7 @@ export default function IntakeForm() {
               </div>
             </div>
             <NotePill>
-              We'll use your checking and savings account access (collected above) to review payments. Please ensure those are filled in.
+              We&apos;ll use your checking and savings account access (collected above) to review payments. Please ensure those are filled in.
             </NotePill>
             <div>
               <Lbl opt>Anything else you would like to share about your 1099 situation?</Lbl>
@@ -1341,7 +1341,7 @@ export default function IntakeForm() {
                 <option value="accounting">In my accounting software (by client, project, or class)</option>
                 <option value="operational">In an operational software</option>
                 <option value="both">Both</option>
-                <option value="none">We don't track by project yet</option>
+                <option value="none">We don&apos;t track by project yet</option>
               </select>
             </div>
             {showProjectAccounting && (
@@ -1396,7 +1396,7 @@ export default function IntakeForm() {
         <SectionCard badge="Implementation" title="Software discovery, selection & implementation">
           <div className="flex flex-col gap-4">
             <div>
-              <Lbl opt>Any background you'd like to share ahead of the call?</Lbl>
+              <Lbl opt>Any background you&apos;d like to share ahead of the call?</Lbl>
               <textarea value={fields.implementationBackground} onChange={(e) => sf('implementationBackground', e.target.value)} rows={3} className={ta} />
             </div>
             <Divider />
@@ -1551,7 +1551,7 @@ export default function IntakeForm() {
       {/* ── 20: CLOSING CARD ── */}
       <div className="bg-brown rounded-xl p-8 text-center">
         <h2 className="font-serif font-bold text-cream text-[22px] leading-[1.25] mb-8">
-          That's everything we need to get started!
+          That&apos;s everything we need to get started!
         </h2>
         <div className="flex flex-col items-center gap-3">
           {loading ? (
@@ -1573,7 +1573,7 @@ export default function IntakeForm() {
                 />
               </svg>
               <p className="text-[13px] leading-[1.7] max-w-[360px]" style={{ color: 'rgba(253,246,236,0.65)' }}>
-                Almost there! Don't close or refresh this page.
+                Almost there! Don&apos;t close or refresh this page.
               </p>
             </div>
           ) : (

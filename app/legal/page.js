@@ -78,7 +78,7 @@ export default function LegalPage() {
             </h2>
             <div className="space-y-6 text-base leading-relaxed text-[#3B1E08]/80">
               <p>
-                Canopy Creative Consulting LLC, doing business as Canopy Creative Co ("we," "us," or "our") operates this website at canopycreativeco.com. This policy explains what information we collect, how we use it, and your rights with respect to it.
+                Canopy Creative Consulting LLC, doing business as Canopy Creative Co (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) operates this website at canopycreativeco.com. This policy explains what information we collect, how we use it, and your rights with respect to it.
               </p>
               <div>
                 <h3 className="font-['Libre_Baskerville'] text-lg text-[#3B1E08] mb-2">Information we collect</h3>

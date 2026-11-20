@@ -10,6 +10,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Gitignored working notes and drafts, not site code.
+    "Claude outputs/**",
   ]),
 ]);
 
