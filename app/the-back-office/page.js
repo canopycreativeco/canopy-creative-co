@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { IconLedger, IconFinance, IconSystems } from '@/components/Icons'
 import { pageMetadata } from '@/lib/metadata'
@@ -53,6 +54,14 @@ const MENU = [
       'Business launch support',
     ],
   },
+]
+
+/* Intuit certifications held by the team, shown in this order. 408px source files in
+   public/images/badges, served resized by next/image. */
+const BADGES = [
+  { src: '/images/badges/intuit-quickbooks-level-2.png', alt: 'Intuit QuickBooks Online Certification, Level 2' },
+  { src: '/images/badges/intuit-bookkeeping.png', alt: 'Intuit Bookkeeping Certification' },
+  { src: '/images/badges/intuit-quickbooks-workforce.png', alt: 'QuickBooks Workforce Certification' },
 ]
 
 const HOW_IT_STARTS = [
@@ -184,6 +193,21 @@ export default function TheBackOfficePage() {
           >
             Start a conversation
           </Link>
+        </div>
+
+        {/* Credentials strip. Sits under the panel that explains how the work runs. Badges are not links. */}
+        <div className="max-w-[1080px] mx-auto mt-14 text-center max-md:mt-10">
+          <p className="text-[15.5px] text-brown/85 leading-[1.8] max-w-[62ch] mx-auto mb-7">
+            Your books are in certified hands. Our team holds Intuit certifications in QuickBooks
+            Online, Bookkeeping, and QuickBooks Workforce.
+          </p>
+          <ul className="list-none m-0 p-0 w-fit mx-auto grid grid-cols-3 gap-x-10 justify-items-center max-md:gap-x-8">
+            {BADGES.map(({ src, alt }) => (
+              <li key={src}>
+                <Image src={src} alt={alt} width={88} height={88} className="block w-[88px] h-auto max-md:w-[72px]" />
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
