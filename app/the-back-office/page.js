@@ -201,10 +201,11 @@ export default function TheBackOfficePage() {
             Your books are in certified hands. Our team holds Intuit certifications in QuickBooks
             Online, Bookkeeping, and QuickBooks Workforce.
           </p>
-          <ul className="list-none m-0 p-0 w-fit mx-auto grid grid-cols-3 gap-x-10 justify-items-center max-md:gap-x-8">
+          {/* Sized so the badge lettering is readable. Phones wrap to two over one. */}
+          <ul className="list-none m-0 p-0 max-w-[600px] mx-auto flex flex-wrap justify-center gap-x-12 gap-y-6 max-md:gap-x-8">
             {BADGES.map(({ src, alt }) => (
               <li key={src}>
-                <Image src={src} alt={alt} width={88} height={88} className="block w-[88px] h-auto max-md:w-[72px]" />
+                <Image src={src} alt={alt} width={160} height={160} className="block w-[160px] h-auto max-md:w-[124px]" />
               </li>
             ))}
           </ul>
