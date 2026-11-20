@@ -1,20 +1,13 @@
 import Link from 'next/link'
 import { CANOPY_URL, BACK_OFFICE_URL } from '@/lib/site'
 import { IconLearning, IconSystems } from '@/components/Icons'
+import { pageMetadata } from '@/lib/metadata'
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Work with us',
   description: 'Two ways to work with Canopy Creative Co. Learn it with us in The Canopy, or hand it to us with The Back Office.',
-  openGraph: {
-    title: 'Work with us | Canopy Creative Co',
-    description: 'Two ways to work with Canopy Creative Co. Learn it with us in The Canopy, or hand it to us with The Back Office.',
-    url: 'https://www.canopycreativeco.com/start-here',
-    siteName: 'Canopy Creative Co',
-  },
-  alternates: {
-    canonical: 'https://www.canopycreativeco.com/start-here',
-  },
-}
+  path: '/start-here',
+})
 
 /* The whole card is the click target. The button carries a stretched ::after overlay
    so there is one real link per card and no nested anchors. */

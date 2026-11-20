@@ -6,22 +6,18 @@ import CurrentWatchCard from '@/components/CurrentWatchCard'
 import SessionSignupForm from '@/components/SessionSignupForm'
 import { CANOPY_FAQS as FAQS } from '@/lib/faqs'
 import FaqList from '@/components/FaqList'
+import { pageMetadata } from '@/lib/metadata'
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'The Canopy',
   description:
     'The Canopy is one membership with everything inside: the foundations course, a new session every month, and a growing library of skills and prompts built for real operators.',
-  openGraph: {
-    title: 'The Canopy | Canopy Creative Co',
-    description:
-      'One membership with everything inside: the foundations course, a new session every month, and a growing library of skills and prompts built for real operators.',
-    url: 'https://www.canopycreativeco.com/the-canopy',
-    siteName: 'Canopy Creative Co',
-  },
-  alternates: {
-    canonical: 'https://www.canopycreativeco.com/the-canopy',
-  },
-}
+  ogDescription:
+    'One membership with everything inside: the foundations course, a new session every month, and a growing library of skills and prompts built for real operators.',
+  path: '/the-canopy',
+  ownImage: true,
+  imageAlt: 'The Canopy, one membership with everything inside, from Canopy Creative Co',
+})
 
 const btnPrimary =
   'inline-block bg-orange text-cream text-[14px] font-semibold tracking-[0.04em] px-8 py-[15px] rounded-full no-underline transition-all duration-200 hover:bg-[#b04400] hover:-translate-y-px text-center'

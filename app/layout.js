@@ -26,14 +26,20 @@ export const metadata = {
     template: '%s | Canopy Creative Co',
   },
   description: 'Canopy Creative Co teaches operators to run lean businesses with AI. A free session every month, The Canopy membership, and The Back Office for creative businesses that would rather hand it off.',
-  icons: { icon: '/favicon.svg' },
+  // Icons come from the file conventions: app/favicon.ico, app/icon.png, app/apple-icon.png
+  // (rebuild with scripts/build-icons.mjs). Share images come from app/opengraph-image.js and
+  // twitter-image.js, plus per-page ones on /session, /the-canopy and /the-back-office.
   openGraph: {
     type: 'website',
     siteName: 'Canopy Creative Co',
+    locale: 'en_US',
+    title: 'Canopy Creative Co',
     description: 'Canopy Creative Co teaches operators to run lean businesses with AI. A free session every month, The Canopy membership, and The Back Office for creative businesses that would rather hand it off.',
+    url: 'https://www.canopycreativeco.com',
   },
   twitter: {
     card: 'summary_large_image',
+    title: 'Canopy Creative Co',
     description: 'Canopy Creative Co teaches operators to run lean businesses with AI. A free session every month, The Canopy membership, and The Back Office for creative businesses that would rather hand it off.',
   },
   robots: {

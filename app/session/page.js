@@ -4,6 +4,7 @@ import { SESSIONS, currentSession, nextSessionLabel } from '@/lib/session'
 import SessionPlayer from '@/components/SessionPlayer'
 import SessionSignupForm from '@/components/SessionSignupForm'
 import SessionInside from '@/components/SessionInside'
+import { pageMetadata } from '@/lib/metadata'
 
 /* One permanent URL for the monthly session. The videos and dates live in lib/session.js.
    This page renders on every request (connection() below), so the current session plays
@@ -11,12 +12,15 @@ import SessionInside from '@/components/SessionInside'
    needed on release day. The between-sessions view only shows if no session is up. */
 
 export const metadata = {
-  title: 'The monthly session',
-  description: 'The monthly session from Canopy Creative Co, free to watch until the next one drops.',
+  ...pageMetadata({
+    title: 'The monthly session',
+    description:
+      'The monthly session from Canopy Creative Co. A new session every month, free to watch until the next one drops.',
+    path: '/session',
+    ownImage: true,
+    imageAlt: 'The monthly session from Canopy Creative Co',
+  }),
   robots: { index: true, follow: true },
-  alternates: {
-    canonical: 'https://www.canopycreativeco.com/session',
-  },
 }
 
 const btnPrimary =

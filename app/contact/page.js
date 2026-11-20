@@ -1,18 +1,11 @@
 import ContactForm from './ContactForm'
+import { pageMetadata } from '@/lib/metadata'
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Contact',
   description: 'Canopy Creative Co teaches operators to run lean businesses with AI. A free session every month, The Canopy membership, and The Back Office for creative businesses that would rather hand it off.',
-  openGraph: {
-    title: 'Contact | Canopy Creative Co',
-    description: 'Canopy Creative Co teaches operators to run lean businesses with AI. A free session every month, The Canopy membership, and The Back Office for creative businesses that would rather hand it off.',
-    url: 'https://www.canopycreativeco.com/contact',
-    siteName: 'Canopy Creative Co',
-  },
-  alternates: {
-    canonical: 'https://www.canopycreativeco.com/contact',
-  },
-}
+  path: '/contact',
+})
 
 export default function ContactPage() {
   return (

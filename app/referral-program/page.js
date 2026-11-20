@@ -1,21 +1,12 @@
 import Link from 'next/link'
 import AffiliateForm from './AffiliateForm'
+import { pageMetadata } from '@/lib/metadata'
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Become an Affiliate',
-  description:
-    'Share The Canopy with others you know and earn a 20% commission on every referral. Apply to the Canopy Creative Co affiliate program.',
-  openGraph: {
-    title: 'Become an Affiliate | Canopy Creative Co',
-    description:
-      'Share The Canopy with others you know and earn a 20% commission on every referral. Apply to the Canopy Creative Co affiliate program.',
-    url: 'https://www.canopycreativeco.com/referral-program',
-    siteName: 'Canopy Creative Co',
-  },
-  alternates: {
-    canonical: 'https://www.canopycreativeco.com/referral-program',
-  },
-}
+  description: 'Share The Canopy with others you know and earn a 20% commission on every referral. Apply to the Canopy Creative Co affiliate program.',
+  path: '/referral-program',
+})
 
 const steps = [
   'Apply below. We review each application and reply within 2 business days.',

@@ -1,20 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import SendMessageButton from '@/components/MessageModal'
+import { pageMetadata } from '@/lib/metadata'
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'About',
   description: 'Canopy Creative Co teaches operators to run lean businesses with AI. A free session every month, The Canopy membership, and The Back Office for creative businesses that would rather hand it off.',
-  openGraph: {
-    title: 'About | Canopy Creative Co',
-    description: 'Canopy Creative Co teaches operators to run lean businesses with AI. A free session every month, The Canopy membership, and The Back Office for creative businesses that would rather hand it off.',
-    url: 'https://www.canopycreativeco.com/about',
-    siteName: 'Canopy Creative Co',
-  },
-  alternates: {
-    canonical: 'https://www.canopycreativeco.com/about',
-  },
-}
+  path: '/about',
+})
 
 export default function AboutPage() {
   return (

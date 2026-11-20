@@ -1,9 +1,11 @@
 import IntakeForm from './IntakeForm'
+import { pageMetadata } from '@/lib/metadata'
 
-export const metadata = {
-  title: 'Client Intake | Canopy Creative Co',
+export const metadata = pageMetadata({
+  title: 'Client Intake',
   description: 'Onboarding intake form for Canopy Creative Co clients.',
-}
+  path: '/client-intake-form',
+})
 
 export default function ClientIntakePage() {
   return (

@@ -7,22 +7,15 @@ import HomeSession from '@/components/HomeSession'
 import TwoDoors from '@/components/TwoDoors'
 import InsideTabs from '@/components/InsideTabs'
 import FaqList from '@/components/FaqList'
+import { pageMetadata } from '@/lib/metadata'
 
-export const metadata = {
-  title: {
-    absolute: 'Canopy Creative Co',
-  },
-  description: 'Canopy Creative Co teaches operators to run lean businesses with AI. A free session every month, The Canopy membership, and The Back Office for creative businesses that would rather hand it off.',
-  openGraph: {
-    title: 'Canopy Creative Co',
-    description: 'Canopy Creative Co teaches operators to run lean businesses with AI. A free session every month, The Canopy membership, and The Back Office for creative businesses that would rather hand it off.',
-    url: 'https://www.canopycreativeco.com',
-    siteName: 'Canopy Creative Co',
-  },
-  alternates: {
-    canonical: 'https://www.canopycreativeco.com',
-  },
-}
+export const metadata = pageMetadata({
+  title: 'Canopy Creative Co',
+  absoluteTitle: true,
+  description:
+    'Canopy Creative Co teaches operators to run lean businesses with AI. A free session every month, The Canopy membership, and The Back Office for creative businesses that would rather hand it off.',
+  path: '/',
+})
 
 /* ── Shared button styles ── */
 const btnPrimary =

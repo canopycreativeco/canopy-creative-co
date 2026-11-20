@@ -1,20 +1,13 @@
 import { MEMBER_LOGIN_URL } from '@/lib/site'
 import { nextSessionLine } from '@/lib/session'
 import SessionSignupForm from '@/components/SessionSignupForm'
+import { pageMetadata } from '@/lib/metadata'
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Send me the session',
   description: 'Get the monthly session from Canopy Creative Co by email on release day. Free to watch until the next one drops.',
-  openGraph: {
-    title: 'Send me the session | Canopy Creative Co',
-    description: 'Get the monthly session from Canopy Creative Co by email on release day. Free to watch until the next one drops.',
-    url: 'https://www.canopycreativeco.com/session/signup',
-    siteName: 'Canopy Creative Co',
-  },
-  alternates: {
-    canonical: 'https://www.canopycreativeco.com/session/signup',
-  },
-}
+  path: '/session/signup',
+})
 
 // Set at each monthly topic lock (Platform Playbook).
 const WALK_AWAY_LINE = 'One page about how you decide, hand off and get stuck, so the help you get back fits the way you work.'

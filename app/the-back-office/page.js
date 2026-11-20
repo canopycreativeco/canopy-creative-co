@@ -1,21 +1,17 @@
 import Link from 'next/link'
 import { IconLedger, IconFinance, IconSystems } from '@/components/Icons'
+import { pageMetadata } from '@/lib/metadata'
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'The Back Office',
   description:
     'The Back Office is finance and operations for creative businesses, from the monthly books to the systems behind them. Our team does the work, and it starts with a conversation.',
-  openGraph: {
-    title: 'The Back Office | Canopy Creative Co',
-    description:
-      'Finance and operations for creative businesses, from the monthly books to the systems behind them. Our team does the work.',
-    url: 'https://www.canopycreativeco.com/the-back-office',
-    siteName: 'Canopy Creative Co',
-  },
-  alternates: {
-    canonical: 'https://www.canopycreativeco.com/the-back-office',
-  },
-}
+  ogDescription:
+    'Finance and operations for creative businesses, from the monthly books to the systems behind them. Our team does the work.',
+  path: '/the-back-office',
+  ownImage: true,
+  imageAlt: 'The Back Office, finance and operations for creative businesses, from Canopy Creative Co',
+})
 
 const btnPrimary =
   'inline-block bg-orange text-cream text-[14px] font-semibold tracking-[0.04em] px-8 py-[15px] rounded-full no-underline transition-all duration-200 hover:bg-[#b04400] hover:-translate-y-px text-center'
